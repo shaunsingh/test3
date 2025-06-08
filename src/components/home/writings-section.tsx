@@ -54,13 +54,13 @@ interface BlogPostCardProps {
 
 function BlogPostCard({ image, title, description, date, link }: BlogPostCardProps) {
   return (
-    <Link href={link} className="block bg-background p-4 hover:bg-background/50 transition-colors group">
+    <Link href={link} className="block bg-bg3 p-4 hover:bg-bg3/70 transition-colors group">
       <div className="relative w-full h-68 mb-4">
         <Image src={image} alt={title} layout="fill" objectFit="cover" />
       </div>
-      <h3 className="text-xl font-mono text-white mb-2 leading-tight">{title}</h3>
-      <p className="text-sm text-gray-400 mb-4">{description}</p>
-      <p className="text-xs text-gray-500">{date}</p>
+      <h3 className="text-xl font-mono text-fg2 mb-2 leading-tight">{title}</h3>
+      <p className="text-sm text-fg1 mb-4">{description}</p>
+      <p className="text-xs text-fg1">{date}</p>
     </Link>
   );
 } 

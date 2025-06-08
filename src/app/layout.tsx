@@ -19,9 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`antialiased dark`}
-      >
+      <body className="antialiased dark">
         <Header />
         <main className="pt-20">
           {children}

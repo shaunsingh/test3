@@ -48,6 +48,23 @@
   --shadow-lg: 0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 4px 6px -1px hsl(0 0% 0% / 0.10);
   --shadow-xl: 0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 8px 10px -1px hsl(0 0% 0% / 0.10);
   --shadow-2xl: 0 1px 3px 0px hsl(0 0% 0% / 0.25);
+  /* Oxocarbon Light Palette */
+  --bg1: #ffffff;
+  --bg2: #f2f2f2;
+  --bg3: #d0d0d0;
+  --bg4: #161616;
+  --fg1: #37474F;
+  --fg2: #90A4AE;
+  --fg3: #525252;
+  --accent1: #673AB7;
+  --accent2: #ff7eb6;
+  --blue1: #ee5396;
+  --blue2: #FFAB91;
+  --blue3: #0f62fe;
+  --blue4: #08bdba;
+  --purple: #be95ff;
+  --negative: #FF6F00;
+  --positive: #42be65;
 }
 
 .dark {
@@ -95,6 +112,23 @@
   --shadow-lg: 0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 4px 6px -1px hsl(0 0% 0% / 0.10);
   --shadow-xl: 0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 8px 10px -1px hsl(0 0% 0% / 0.10);
   --shadow-2xl: 0 1px 3px 0px hsl(0 0% 0% / 0.25);
+  /* Oxocarbon Dark Palette */
+  --bg1: #161616;
+  --bg2: #262626;
+  --bg3: #393939;
+  --bg4: #525252;
+  --fg1: #dde1e6;
+  --fg2: #f2f4f8;
+  --fg3: #ffffff;
+  --accent1: #ff7eb6;
+  --accent2: #3ddbd9;
+  --blue1: #78a9ff;
+  --blue2: #82cfff;
+  --blue3: #33b1ff;
+  --blue4: #08bdba;
+  --purple: #be95ff;
+  --negative: #ee5396;
+  --positive: #42be65;
 }
 
 @theme inline {
@@ -130,6 +164,24 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Custom Color Palette */
+  --color-bg1: var(--bg1);
+  --color-bg2: var(--bg2);
+  --color-bg3: var(--bg3);
+  --color-bg4: var(--bg4);
+  --color-fg1: var(--fg1);
+  --color-fg2: var(--fg2);
+  --color-fg3: var(--fg3);
+  --color-accent1: var(--accent1);
+  --color-accent2: var(--accent2);
+  --color-blue1: var(--blue1);
+  --color-blue2: var(--blue2);
+  --color-blue3: var(--blue3);
+  --color-blue4: var(--blue4);
+  --color-purple: var(--purple);
+  --color-negative: var(--negative);
+  --color-positive: var(--positive);
 
   --font-sans: var(--font-sans);
   --font-mono: var(--font-mono);
