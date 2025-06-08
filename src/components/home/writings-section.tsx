@@ -18,21 +18,21 @@ export function WritingsSection() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <BlogPostCard
-            image="/post-image.png" // Placeholder image
+            image="/heatmap.png" // Placeholder image
             title="TTILE - Title Title Title Word Word Word Word Word"
             description="Lorem ipsum dolor sit amet, consectetur elit Lorem ipsum dolor sit amet, consectetur elit Lorem ipsum dolor sit amet, consectetur"
             date="June 07, 2025"
             link="#"
           />
           <BlogPostCard
-            image="/post-image.png" // Placeholder image
+            image="/heatmap.png" // Placeholder image
             title="TTILE - Title Title Title Word Word Word Word Word"
             description="Lorem ipsum dolor sit amet, consectetur elit Lorem ipsum dolor sit amet, consectetur elit Lorem ipsum dolor sit amet, consectetur"
             date="June 07, 2025"
             link="#"
           />
           <BlogPostCard
-            image="/post-image.png" // Placeholder image
+            image="/heatmap.png" // Placeholder image
             title="TTILE - Title Title Title Word Word Word Word Word"
             description="Lorem ipsum dolor sit amet, consectetur elit Lorem ipsum dolor sit amet, consectetur elit Lorem ipsum dolor sit amet, consectetur"
             date="June 07, 2025"
@@ -55,7 +55,7 @@ interface BlogPostCardProps {
 function BlogPostCard({ image, title, description, date, link }: BlogPostCardProps) {
   return (
     <Link href={link} className="block bg-background p-4 hover:bg-background/50 transition-colors group">
-      <div className="relative w-full h-48 mb-4">
+      <div className="relative w-full h-68 mb-4">
         <Image src={image} alt={title} layout="fill" objectFit="cover" />
       </div>
       <h3 className="text-xl font-mono text-white mb-2 leading-tight">{title}</h3>
