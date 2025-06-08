@@ -11,7 +11,7 @@ interface BlogPostCardProps {
 
 export function BlogPageCard({ image, title, description, date, link }: BlogPostCardProps) {
   return (
-    <Link href={link} className="block bg-card border border-gray-800 hover:bg-gray-900 transition-colors group">
+    <Link href={link} className="block bg-card  hover:bg-card/80 transition-colors group">
       <div className="relative w-full h-48 mb-4">
         <Image src={image} alt={title} layout="fill" objectFit="cover" />
       </div>

@@ -44,7 +44,7 @@ interface ProjectCardProps {
 
 function ProjectCard({ title, description, link }: ProjectCardProps) {
   return (
-    <Link href={link} className="bg-background p-6 border border-gray-800 flex flex-col justify-between hover:bg-gray-900 transition-colors group">
+    <Link href={link} className="bg-background p-6 flex flex-col justify-between hover:bg-background/50 transition-colors group">
       <div>
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center">
@@ -65,7 +65,7 @@ interface GithubCardProps {
 
 function GithubCard({ link }: GithubCardProps) {
   return (
-    <Link href={link} className="bg-background p-6 border border-gray-800 flex items-center justify-center hover:bg-gray-900 transition-colors">
+    <Link href={link} className="bg-background p-6 flex items-center justify-center hover:bg-background/50 transition-colors">
       <Github className="h-6 w-6 mr-2 text-white" />
       <span className="text-white font-medium">GITHUB</span>
     </Link>

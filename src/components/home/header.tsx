@@ -14,7 +14,7 @@ export function Header() {
           </div>
 
           <div className="hidden md:flex items-center space-x-4">
-            <NavItem label="Projects" number="01" active />
+            <NavItem label="Projects" number="01" />
             <NavItem label="Research" number="02" />
             <NavItem label="Solutions" number="03" />
           </div>
@@ -47,7 +47,7 @@ function NavItem({ label, number, active = false }: { label: string; number: str
   return (
     <Link
       href={`/${label.toLowerCase()}`}
-      className={`px-4 py-3 flex items-center bg-card ${active ? "bg-card" : "hover:bg-gray-900"}`}
+      className={"px-4 py-3 flex items-center bg-card hover:bg-muted/50"}
     >
       <span className="mr-8">{label}</span>
       <span className="text-gray-500">{number}</span>

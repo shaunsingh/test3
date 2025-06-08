@@ -54,7 +54,7 @@ interface BlogPostCardProps {
 
 function BlogPostCard({ image, title, description, date, link }: BlogPostCardProps) {
   return (
-    <Link href={link} className="block bg-background p-4 border border-gray-800 hover:bg-gray-900 transition-colors group">
+    <Link href={link} className="block bg-background p-4 hover:bg-background/50 transition-colors group">
       <div className="relative w-full h-48 mb-4">
         <Image src={image} alt={title} layout="fill" objectFit="cover" />
       </div>
