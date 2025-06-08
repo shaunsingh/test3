@@ -9,8 +9,7 @@ export function Header() {
         <div className="flex gap-6">
           <div className="flex items-center">
             <Link href="/">
-              <Image src="/logo.png" alt="Nyoom Engineering logo" width={200} height={60}>
-              </Image>
+              <Image src="/logo.png" alt="Nyoom Engineering logo" width={200} height={60} />
             </Link>
           </div>
 
