@@ -43,37 +43,23 @@ export default function BlogPostSlugPage() {
         </div>
 
         <div className="container mx-auto px-4 py-8 lg:py-12">
-          {/* Author, Category, Date */}
-          <div className="flex justify-between items-center text-gray-400 text-sm mb-6">
-            <div>
-              <div className="uppercase">Authors</div>
-              <div>{post.author}</div>
-            </div>
-            <div className="text-right">
-              <div className="uppercase">{post.category}</div>
-              <div>{post.date}</div>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-            {/* Sidebar (TOC) */}
-            <div className="lg:col-span-1">
-              <div className="text-sm text-gray-400 mb-4">Table of Contents</div>
-              <ul className="space-y-2 text-gray-400 text-sm">
-                {post.sidebarLinks.map((item, index) => (
-                  <li key={index}>
-                    <Link href={item.link} className="hover:text-white">
-                      {item.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+          <div className="max-w-4xl mx-auto">
+            {/* Author, Category, Date */}
+            <div className="flex justify-between items-center text-gray-400 text-sm mb-6">
+              <div>
+                <div className="uppercase">Authors</div>
+                <div>{post.author}</div>
+              </div>
+              <div className="text-right">
+                <div className="uppercase">{post.category}</div>
+                <div>{post.date}</div>
+              </div>
             </div>
 
             {/* Main Content */}
-            <div className="lg:col-span-3">
+            <div>
               {/* Title */}
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold font-mono text-white mb-8">
+              <h1 className="text-3xl lg:text-4xl font-bold font-mono text-white mb-8">
                 {post.title}
               </h1>
               <div className="text-gray-300 space-y-6 text-lg leading-relaxed">
