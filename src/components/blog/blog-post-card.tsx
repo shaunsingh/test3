@@ -49,7 +49,7 @@ function Dropdown() {
       <DropdownMenuTrigger asChild>
         <Button
           variant="default"
-          className="bg-bg4 hover:bg-bg4/80 text-white mb-2 h-8 w-8"
+          className="bg-bg4 hover:bg-bg4/50 text-white mb-2 h-8 w-8"
         >
           <MoreVertical className="w-4 h-4" />
         </Button>

@@ -47,10 +47,10 @@ function NavItem({ label, number }: { label: string; number: string; }) {
   return (
     <Link
       href={`/${label.toLowerCase()}`}
-      className={"px-4 py-3 flex items-center bg-bg3 hover:bg-bg4/80 transition-all"}
+      className={"px-4 py-3 flex items-center bg-bg3 hover:bg-bg4 transition-all"}
     >
       <span className="mr-8">{label}</span>
-      <span className="text-gray-500">{number}</span>
+      <span className="text-gray-400">{number}</span>
     </Link>
   )
 }
