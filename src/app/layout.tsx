@@ -21,7 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="antialiased dark">
         <Header />
-        <main className="pt-20">
+        <main className="pt-18">
           {children}
         </main>
         <Footer />
