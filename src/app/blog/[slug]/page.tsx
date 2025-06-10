@@ -1,6 +1,9 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { Github } from "lucide-react";
+import { useEffect } from "react";
 
 export default function BlogPostSlugPage() {
   // For now, we'll hardcode the content, ignoring the slug
@@ -28,11 +31,40 @@ export default function BlogPostSlugPage() {
     ],
   };
 
+  useEffect(() => {
+    const header = document.querySelector('header') as HTMLElement;
+    const heroImage = document.getElementById('hero-image');
+    if (!header || !heroImage) return;
+
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const heroHeight = heroImage.offsetHeight;
+      const headerHeight = header.offsetHeight;
+
+      if (scrollY > heroHeight - headerHeight) {
+        header.style.position = 'absolute';
+        header.style.top = `${heroHeight - headerHeight}px`;
+      } else {
+        header.style.position = 'fixed';
+        header.style.top = '0';
+      }
+    };
+
+    // Call once to set initial state
+    handleScroll();
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <div className="flex flex-col bg-background">
       <main className="flex-grow">
         {/* Top Image */}
-        <div className="relative w-full h-[400px] sm:h-[500px] md:h-[600px] lg:h-[700px] overflow-hidden">
+        <div 
+          id="hero-image"
+          className="relative w-full h-[400px] sm:h-[500px] md:h-[600px] lg:h-[700px] overflow-hidden"
+        >
           <Image
             src={post.image}
             alt={post.title}
