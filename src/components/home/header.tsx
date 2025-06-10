@@ -1,6 +1,8 @@
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import Image from "next/image";
+import { ContactDialog } from "../contact-dialog";
+import { Button } from "../ui/button";
 
 export function Header() {
   return (
@@ -34,9 +36,11 @@ export function Header() {
               Oxocarbon
             </Link>
           </div>
-          <Link href="/contact" className="bg-white text-black px-2 py-2  font-medium flex items-center">
-            CONTACT US <ArrowRight className="ml-2 h-4 w-4" />
-          </Link>
+          <ContactDialog>
+            <Button className="bg-white text-black px-2 py-2  font-medium flex items-center">
+              CONTACT US <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+          </ContactDialog>
         </div>
       </div>
     </header>

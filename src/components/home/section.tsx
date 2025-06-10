@@ -1,6 +1,7 @@
-import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import Image from "next/image"
+import { ContactDialog } from "../contact-dialog"
+import { Button } from "../ui/button"
 
 export function Section() {
   return (
@@ -31,12 +32,11 @@ export function Section() {
             ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum do
           </p>
           <div>
-            <Link
-              href="/contact"
-              className="bg-white text-black px-4 py-2 text-sm font-medium inline-flex items-center"
-            >
-              CONTACT US <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
+            <ContactDialog>
+              <Button className="bg-white text-black px-2 py-2  font-medium flex items-center">
+                CONTACT US <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </ContactDialog>
           </div>
         </div>
       </div>

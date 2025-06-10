@@ -1,5 +1,7 @@
+import { ArrowRight } from "lucide-react"
 import Image from "next/image"
-import Link from "next/link"
+import { ContactDialog } from "../contact-dialog"
+import { Button } from "../ui/button"
 
 export function BigMedia() {
   return (
@@ -26,12 +28,11 @@ export function BigMedia() {
 
           {/* Right Column: Contact Button */}
           <div className="flex items-start lg:items-center">
-            <Link
-              href="/contact"
-              className="bg-white text-black px-4 py-2 text-sm font-medium flex items-center whitespace-nowrap"
-            >
-              CONTACT US <span className="ml-2">&rarr;</span>
-            </Link>
+            <ContactDialog>
+              <Button className="bg-white text-black px-2 py-2  font-medium flex items-center">
+                CONTACT US <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </ContactDialog>
           </div>
         </div>
 
