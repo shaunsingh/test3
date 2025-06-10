@@ -6,7 +6,6 @@ import {
   Command,
   CommandEmpty,
   CommandGroup,
-  CommandInput,
   CommandItem,
   CommandList,
 } from "@/components/ui/command";
@@ -23,56 +22,56 @@ const blogPosts = [
     image: "/heatmap.png",
     title: "Blog Post Title 1",
     description: "This is a short description for blog post 1. It gives a brief overview of the content.",
-    date: "June 10, 2025",
+    date: new Date("2025-06-10"),
     link: "/blog/post-1",
   },
   {
     image: "/heatmap.png",
     title: "Blog Post Title 2",
     description: "This is a short description for blog post 2. It gives a brief overview of the content.",
-    date: "June 15, 2025",
+    date: new Date("2025-06-15"),
     link: "/blog/post-2",
   },
   {
     image: "/heatmap.png",
     title: "Blog Post Title 3",
     description: "This is a short description for blog post 3. It gives a brief overview of the content.",
-    date: "June 20, 2025",
+    date: new Date("2025-06-20"),
     link: "/blog/post-3",
   },
   {
     image: "/heatmap.png",
     title: "Blog Post Title 4",
     description: "This is a short description for blog post 4. It gives a brief overview of the content.",
-    date: "June 25, 2025",
+    date: new Date("2025-06-25"),
     link: "/blog/post-4",
   },
   {
     image: "/heatmap.png",
     title: "Blog Post Title 5",
     description: "This is a short description for blog post 1. It gives a brief overview of the content.",
-    date: "June 10, 2025",
+    date: new Date("2025-06-10"),
     link: "/blog/post-5",
   },
   {
     image: "/heatmap.png",
     title: "Blog Post Title 6",
     description: "This is a short description for blog post 2. It gives a brief overview of the content.",
-    date: "June 15, 2025",
+    date: new Date("2025-06-15"),
     link: "/blog/post-6",
   },
   {
     image: "/heatmap.png",
     title: "Blog Post Title 7",
     description: "This is a short description for blog post 3. It gives a brief overview of the content.",
-    date: "June 20, 2025",
+    date: new Date("2025-06-20"),
     link: "/blog/post-7",
   },
   {
     image: "/heatmap.png",
     title: "Blog Post Title 8",
     description: "This is a short description for blog post 4. It gives a brief overview of the content.",
-    date: "June 25, 2025",
+    date: new Date("2025-06-25"),
     link: "/blog/post-8",
   },
 ];
@@ -147,6 +146,7 @@ export default function BlogPage() {
               image={post.image}
               title={post.title}
               description={post.description}
+              date={post.date}
               link={post.link}
             />
           ))}
