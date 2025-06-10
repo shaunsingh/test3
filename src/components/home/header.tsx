@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export function Header() {
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-bg1/80 backdrop-blur-sm border-b h-20">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-bg1/80 backdrop-blur-xl backdrop-saturate-150 border-b border-white/10 h-20 shadow-lg shadow-black/5">
       <div className="container mx-auto flex items-center justify-between px-4 py-2">
         <div className="flex gap-6">
           <div className="flex items-center">
@@ -47,7 +47,7 @@ function NavItem({ label, number }: { label: string; number: string; }) {
   return (
     <Link
       href={`/${label.toLowerCase()}`}
-      className={"px-4 py-3 flex items-center bg-bg3 hover:bg-bg3/80"}
+      className={"px-4 py-3 flex items-center bg-bg3 hover:bg-bg4/80 transition-all"}
     >
       <span className="mr-8">{label}</span>
       <span className="text-gray-500">{number}</span>
