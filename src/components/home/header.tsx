@@ -7,7 +7,7 @@ import { Button } from "../ui/button";
 export function Header() {
   return (
     <header className="flex fixed top-0 left-0 right-0 z-50 bg-bg1/80 backdrop-blur-xl items-center backdrop-saturate-150 border-b border-white/10 h-16 shadow-lg shadow-black/5">
-      <div className="container mx-auto flex justify-between">
+      <div className="max-container w-full flex justify-between">
         <div className="flex gap-4">
           <div className="flex items-center">
             <Link href="/">

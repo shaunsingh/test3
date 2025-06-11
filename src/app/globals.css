@@ -213,8 +213,8 @@
   }
 }
 
-/* TODO FIXME*/
-.container {
-  width: 100%;
-  max-width: calc(100vw - 40px);
+@layer utilities {
+  .max-container {
+    @apply max-w-[1440px] mx-auto;
+  }
 }
