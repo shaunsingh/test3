@@ -23,7 +23,7 @@ export function BlogPageCard({
   });
 
   return (
-    <div className="block bg-bg2 hover:bg-bg3/70 transition-colors group relative">
+    <div className="block bg-bg2 hover:bg-bg3 transition-colors group relative">
 
       <Link href={link}>
         <div className="relative w-full h-48 bg-black">

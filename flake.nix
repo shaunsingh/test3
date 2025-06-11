@@ -49,6 +49,11 @@
           packages = with pkgsFor.${system}; [
             bun
 
+            # CL
+            (sbcl.withPackages (p: with p; [
+              cl-ppcre 
+            ]))
+
             # Add the bun2nix binary to our devshell
             bun2nix.packages.${system}.default
           ];

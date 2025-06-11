@@ -37,14 +37,14 @@ export function ViewCombobox({ view, onViewChange }: ViewComboboxProps) {
         <Button
           role="combobox"
           aria-expanded={open}
-          className="w-[200px] justify-between border-none bg-bg3 hover:bg-bg3/70 text-white"
+          className="w-[200px] justify-between border-none bg-bg2 hover:bg-bg3 text-white"
         >
           {currentView?.label || "Choose a view"}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent sideOffset={0} className="w-[200px] p-0">
-        <Command className="bg-bg3">
+        <Command className="bg-bg2">
           <CommandList>
             <CommandEmpty>No view found.</CommandEmpty>
             <CommandGroup>

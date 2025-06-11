@@ -19,9 +19,9 @@ export function Section() {
         </div>
 
         {/* Text content on the right */}
-        <div className="bg-card p-8 lg:p-16 flex flex-col justify-center">
+        <div className="bg-card p-4 lg:p-4 flex flex-col justify-center">
           <div className="text-gray-400 mb-4">Nyoom Engineering</div>
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-mono mb-6">
+          <h1 className="text-2xl md:text-3xl lg:text-4xl font-mono mb-6">
             Functional Design for
             <br />
             the Modern age
@@ -33,7 +33,7 @@ export function Section() {
           </p>
           <div>
             <ContactDialog>
-              <Button className="bg-white text-black px-2 py-2  font-medium flex items-center">
+              <Button className="bg-white text-black px-4 py-2  font-medium flex items-center">
                 CONTACT US <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </ContactDialog>

@@ -6,15 +6,15 @@ import { Button } from "../ui/button"
 export function BigMedia() {
   return (
     <section className="w-full text-white">
-      <div className="container bg-card mx-auto">
+      <div className="container bg-card mx-auto border-16 border-bg2">
         {/* Top Info Bar */}
-        <div className="flex flex-col lg:flex-row justify-between px-6 py-8 gap-6 items-start lg:items-center">
+        <div className="flex flex-col lg:flex-row justify-between pb-4 items-start lg:items-center">
           {/* Left Column: Text Content */}
           <div className="flex flex-col gap-2 max-w-lg">
             <div className="text-xs text-gray-400 font-mono uppercase tracking-widest">
               EXAMPLE IMG
             </div>
-            <h1 className="text-2xl sm:text-3xl md:text-4xl font-mono leading-snug">
+            <h1 className="text-2xl sm:text-3xl md:text-3xl font-mono leading-snug">
               Functional Design<br />for the Modern Age
             </h1>
           </div>

@@ -65,6 +65,7 @@
   --purple: #be95ff;
   --negative: #FF6F00;
   --positive: #42be65;
+  --ignore: #8d8d8d;
 }
 
 .dark {
@@ -129,6 +130,7 @@
   --purple: #be95ff;
   --negative: #ee5396;
   --positive: #42be65;
+  --ignore: #8d8d8d;
 }
 
 @theme inline {
@@ -209,4 +211,10 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* TODO FIXME*/
+.container {
+  width: 100%;
+  max-width: calc(100vw - 40px);
 }

@@ -6,9 +6,9 @@ export function Hero() {
   return (
     <section className="w-full">
       <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-0">
-        <div className="bg-card p-8 lg:p-16 flex flex-col justify-center">
+        <div className="bg-card p-4 lg:p-4 flex flex-col justify-center">
           <div className="text-gray-400 mb-4">Nyoom Engineering</div>
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-mono mb-6">
+          <h1 className="text-2xl md:text-3xl lg:text-4xl font-mono mb-6">
             Functional Design for
             <br />
             the Modern age
