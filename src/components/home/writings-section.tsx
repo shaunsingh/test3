@@ -4,7 +4,7 @@ import { ArrowRight } from "lucide-react";
 
 export function WritingsSection() {
   return (
-    <section className="w-full max-container padding-container text-white">
+    <section id="writings" className="scroll-mt-16 pt-4 w-full max-container padding-container text-white">
       <div className="bg-card p-4">
         <div className="flex justify-between items-center mb-8">
           <div>

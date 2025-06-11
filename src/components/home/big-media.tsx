@@ -5,7 +5,7 @@ import { Button } from "../ui/button"
 
 export function BigMedia() {
   return (
-    <section className="w-full max-container padding-container text-white">
+    <section id="big-media" className="scroll-mt-16 pt-4 w-full max-container padding-container text-white">
       <div className="bg-card border-16 border-bg2">
         {/* Top Info Bar */}
         <div className="flex flex-col lg:flex-row justify-between pb-4 items-start lg:items-center">
