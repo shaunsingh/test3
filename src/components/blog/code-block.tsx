@@ -143,6 +143,12 @@ interface CodeBlockProps {
 export function CodeBlock({ code, language = "rust" }: CodeBlockProps) {
   const editorRef = useRef<any>(null);
 
+  // Calculate dynamic height based on number of lines
+  const fontSize = 15;
+  const lineCount = code.split("\n").length;
+  const padding = 24; // extra space for padding/borders
+  const height = fontSize * 1.5 * lineCount + padding;
+
   const handleCopy = () => {
     navigator.clipboard.writeText(code);
   };
@@ -221,11 +227,11 @@ export function CodeBlock({ code, language = "rust" }: CodeBlockProps) {
         value={code}
         name="codeblock"
         readOnly={false}
-        fontSize={15}
+        fontSize={fontSize}
         width="100%"
-        height="320px"
+        height={`${height}px`}
         showPrintMargin={true}
-        showGutter={false}
+        showGutter={true}
         highlightActiveLine={true}
         wrapEnabled={true}
         keyboardHandler="vim"
