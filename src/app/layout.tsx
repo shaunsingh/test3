@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Header } from "@/components/home/header";
-import { Footer } from "@/components/home/footer";
+import { LayoutScrollWrapper } from "@/components/layout-scroll-wrapper";
 
 export const metadata: Metadata = {
   title: {
@@ -20,11 +19,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="antialiased dark">
-        <Header />
-        <main className="pt-16">
+        <LayoutScrollWrapper>
           {children}
-        </main>
-        <Footer />
+        </LayoutScrollWrapper>
       </body>
     </html>
   );
