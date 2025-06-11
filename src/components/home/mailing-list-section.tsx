@@ -3,8 +3,8 @@ import { ArrowRight } from "lucide-react";
 
 export function MailingListSection() {
   return (
-    <section className="w-full">
-      <div className="max-container bg-card p-4 flex justify-between items-center">
+    <section className="w-full max-container padding-container text-white">
+      <div className="bg-card p-4 flex justify-between items-center">
         <div>
           <h2 className="text-xl font-mono text-white mb-2">Merchandise Coming Soon</h2>
           <p className="text-sm text-gray-400">Sign up for Notifications</p>

@@ -6,7 +6,7 @@ import { Button } from "../ui/button"
 export function Section() {
   return (
     <section className="w-full">
-      <div className="max-container grid grid-cols-1 lg:grid-cols-2 gap-0">
+      <div className="max-container padding-container grid grid-cols-1 lg:grid-cols-2 gap-0">
         {/* Image on the left */}
         <div className="bg-black h-[400px] lg:h-auto relative overflow-hidden">
           <Image

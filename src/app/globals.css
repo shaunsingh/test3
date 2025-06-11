@@ -217,4 +217,8 @@
   .max-container {
     @apply max-w-[1440px] mx-auto;
   }
+  
+  .padding-container {
+    @apply px-5;
+  }
 }

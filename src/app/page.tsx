@@ -7,7 +7,7 @@ import { MailingListSection } from "@/components/home/mailing-list-section";
 
 export default function Home() {
   return (
-    <div className="flex flex-col gap-8 p-8">
+    <div className="flex flex-col gap-5 py-5">
       <Hero />
       <Section />
       <BigMedia />

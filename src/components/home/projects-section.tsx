@@ -4,8 +4,8 @@ import { Button } from "../ui/button";
 
 export function ProjectsSection() {
   return (
-    <section className="w-full">
-      <div className="max-container bg-card p-4">
+    <section className="w-full max-container padding-container text-white">
+      <div className="bg-card p-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           {/* Project Cards */}
           <div className="md:col-span-3 grid grid-cols-1 md:grid-cols-3 gap-4">
