@@ -31,8 +31,8 @@ export function Hero() {
           <Image
             src="/planet.png"
             alt="planet"
-            layout="fill"
-            objectFit="cover"
+            fill
+            className="object-cover"
             priority={true}
           />
         </div>

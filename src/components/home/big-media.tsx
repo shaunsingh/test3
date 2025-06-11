@@ -41,8 +41,8 @@ export function BigMedia() {
           <Image
             src="/lasers.png"
             alt="Abstract Lasers"
-            layout="fill"
-            objectFit="cover"
+            fill
+            className="object-cover"
             priority
           />
         </div>

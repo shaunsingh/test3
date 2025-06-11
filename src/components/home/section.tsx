@@ -12,8 +12,8 @@ export function Section() {
           <Image
             src="/heatmap.png"
             alt="lasers"
-            layout="fill"
-            objectFit="cover"
+            fill
+            className="object-cover"
             priority={true}
           />
         </div>

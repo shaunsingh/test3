@@ -27,7 +27,7 @@ export function BlogPageCard({
 
       <Link href={link}>
         <div className="relative w-full h-48 bg-black">
-          <Image src={image} alt={title} layout="fill" objectFit="cover" />
+          <Image src={image} alt={title} fill className="object-cover" />
         </div>
         <div className="p-4">
           <h3 className="text-fg3 mb-2">{title}</h3>
