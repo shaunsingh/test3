@@ -270,18 +270,18 @@ while !particle_system.is_stable() {
         </div>
 
         <div className="h-1/2 bg-background flex items-center">
-          <div className="max-container padding-container w-full">
-            <div className="max-w-4xl mx-auto py-12">
+          <div className="max-container padding-container w-full flex justify-center">
+            <div className="max-w-[80ch] w-full mx-auto py-12">
               <div className="text-fg3 text-sm font-medium mb-2">
                 {post.category}
               </div>
               <div className="text-fg1 text-sm mb-8">
                 {post.date}
               </div>
-              <h1 className="text-4xl lg:text-5xl font-bold text-fg3 mb-8 leading-tight">
+              <h1 className="text-4xl lg:text-5xl font-bold text-fg3 mb-8 leading-tight max-w-[80ch] mx-auto">
                 {post.title}
               </h1>
-              <p className="text-xl lg:text-2xl text-fg2 leading-relaxed">
+              <p className="text-xl lg:text-2xl text-fg2 leading-relaxed max-w-[80ch] mx-auto">
                 {post.subtitle}
               </p>
             </div>
@@ -298,8 +298,8 @@ while !particle_system.is_stable() {
       />
 
       {/* Main Content */}
-      <div ref={contentRef} className="max-container padding-container py-16">
-        <div className="max-w-4xl mx-auto">
+      <div ref={contentRef} className="max-container padding-container py-16 flex justify-center">
+        <div className="w-full max-w-[80ch] mx-auto">
           {/* First paragraph */}
           <div className="text-fg1 space-y-6 leading-relaxed mb-16">
             <p>{post.content[0]}</p>
@@ -323,7 +323,7 @@ while !particle_system.is_stable() {
                 alt={`Gallery image ${currentImageIndex + 1}`}
                 width={800}
                 height={500}
-                className="w-full h-auto"
+                className="w-full h-auto max-w-[80ch] mx-auto"
               />
             </div>
             <div className="text-fg1 text-base mt-6 text-center max-w-3xl mx-auto">
@@ -363,7 +363,7 @@ while !particle_system.is_stable() {
           </div>
 
           {/* Code Block */}
-          <div className="my-16">
+          <div className="my-16 max-w-[80ch] mx-auto">
             <CodeBlock code={post.codeExample} language="rust" />
           </div>
 
@@ -384,7 +384,7 @@ while !particle_system.is_stable() {
           </div>
 
           {/* Acknowledgements */}
-          <div className="mt-12 p-6 bg-bg2 border-l-4 border-accent1">
+          <div className="mt-12 p-6 bg-bg2 border-l-4 border-accent1 max-w-[80ch] mx-auto">
             <h3 className="text-fg3 font-medium mb-3">Acknowledgements</h3>
             <p className="text-sm text-fg1 leading-relaxed">
               {post.acknowledgements}
