@@ -9,10 +9,10 @@ interface BlogPostPageProps {
 export default async function Page({ params }: BlogPostPageProps) {
   const { slug } = await params;
 
-  // Get metadata from filesystem
-  const metadata = getBlogPostBySlug(slug);
+  // Get blog post with content from filesystem
+  const blogPost = getBlogPostBySlug(slug);
 
-  if (!metadata) {
+  if (!blogPost) {
     notFound();
   }
 
@@ -26,7 +26,7 @@ export default async function Page({ params }: BlogPostPageProps) {
   const MDXContent = mdxModule.default;
 
   return (
-    <BlogPostClient metadata={metadata}>
+    <BlogPostClient metadata={blogPost}>
       <MDXContent />
     </BlogPostClient>
   );

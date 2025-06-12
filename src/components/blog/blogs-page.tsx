@@ -3,7 +3,7 @@
 import { BlogPageCard } from "@/components/blog/grid-card";
 import { BlogListItem } from "@/components/blog/list-item";
 import { ViewCombobox, ViewType } from "@/components/blog/view-switch";
-import { BlogPostMetadata } from "@/lib/blog";
+import { BlogPost } from "@/lib/blog";
 import { useState } from "react";
 
 export function BlogPage({ posts }: { posts: BlogPostMetadata[] }) {
