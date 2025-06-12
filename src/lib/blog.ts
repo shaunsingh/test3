@@ -39,6 +39,13 @@ export function getBlogPostBySlug(slug: string): BlogPost | null {
     return null;
   }
 
+  // Strip import statements from content for next-mdx-remote
+  const cleanContent = content
+    .split('\n')
+    .filter(line => !line.trim().startsWith('import '))
+    .join('\n')
+    .trim();
+
   return {
     slug: realSlug,
     title: data.title,
@@ -48,20 +55,11 @@ export function getBlogPostBySlug(slug: string): BlogPost | null {
     category: data.category || "",
     author: data.author || "",
     tags: Array.isArray(data.tags) ? data.tags : [],
-    content,
+    content: cleanContent,
   };
 }
 
-// Function to dynamically import MDX file at build time
-export async function importBlogPost(slug: string) {
-  try {
-    const module = await import(`@/markdown/${slug}.mdx`);
-    return module;
-  } catch (error) {
-    console.warn(`Failed to import MDX file for slug: ${slug}`, error);
-    return null;
-  }
-}
+
 
 export function getAllBlogPosts(): BlogPost[] {
   const slugs = getBlogPostSlugs();

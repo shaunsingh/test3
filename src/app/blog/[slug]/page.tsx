@@ -1,6 +1,10 @@
 import { notFound } from "next/navigation";
-import { getBlogPostSlugs, getBlogPostBySlug, importBlogPost } from "@/lib/blog";
+import { getBlogPostSlugs, getBlogPostBySlug } from "@/lib/blog";
 import BlogPostClient from "@/components/blog/blog-post-client";
+import { MDXRemote } from "next-mdx-remote/rsc";
+import { useMDXComponents } from "@/mdx-components";
+import { ImageGallery } from "@/components/blog/image-gallery";
+import { CodeBlock } from "@/components/blog/code-block";
 
 interface BlogPostPageProps {
   params: Promise<{ slug: string }>;
@@ -16,18 +20,14 @@ export default async function Page({ params }: BlogPostPageProps) {
     notFound();
   }
 
-  // Import the MDX component at build time
-  const mdxModule = await importBlogPost(slug);
-
-  if (!mdxModule) {
-    notFound();
-  }
-
-  const MDXContent = mdxModule.default;
+  const components = useMDXComponents({
+    ImageGallery,
+    CodeBlock,
+  });
 
   return (
     <BlogPostClient metadata={blogPost}>
-      <MDXContent />
+      <MDXRemote source={blogPost.content} components={components} />
     </BlogPostClient>
   );
 }

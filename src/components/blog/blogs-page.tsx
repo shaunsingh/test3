@@ -6,7 +6,7 @@ import { ViewCombobox, ViewType } from "@/components/blog/view-switch";
 import { BlogPost } from "@/lib/blog";
 import { useState } from "react";
 
-export function BlogPage({ posts }: { posts: BlogPostMetadata[] }) {
+export function BlogPage({ posts }: { posts: BlogPost[] }) {
 
   const [view, setView] = useState<ViewType>("grid");
   return (

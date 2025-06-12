@@ -211,7 +211,7 @@ export default function BlogPostClient({ metadata, children }: BlogPostClientPro
           </div>
 
           {/* Author info */}
-          <div className="mt-12 p-6 bg-bg2 border-l-4 border-accent1 max-w-[80ch] mx-auto">
+          <div className="my-12 p-6 bg-bg2 border-l-4 border-accent1 max-w-[80ch] mx-auto">
             <h3 className="text-fg3 font-medium mb-3">About the Author</h3>
             <p className="text-sm text-fg1 leading-relaxed">
               Written by {metadata.author} on {metadata.date.toLocaleDateString("en-US", {
