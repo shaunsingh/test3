@@ -1,10 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { Github, Twitter, Linkedin } from "lucide-react";
+import { Github, Twitter, Linkedin, LucideIcon } from "lucide-react";
 import { useEffect, useState, useRef, useCallback, memo } from "react";
 
-// Types
 interface Section {
   id: string;
   label: string;
@@ -26,214 +25,217 @@ interface BlogPostClientProps {
   children: React.ReactNode;
 }
 
-// Reusable components
-const ShareButton = memo(({ icon: Icon, label }: { icon: any; label: string }) => (
-  <button
-    className="p-2 border border-bg3 text-fg1 hover:text-fg3 hover:border-fg1 transition-all"
-    aria-label={label}
-  >
-    <Icon className="h-5 w-5" />
-  </button>
-));
+const ShareButton = memo(
+  ({ icon: Icon, label, href }: { icon: LucideIcon; label: string; href: string }) => (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={label}
+      className="p-2 border border-bg3 text-fg1 hover:text-fg3 hover:border-fg1 transition-colors"
+    >
+      <Icon className="h-5 w-5" />
+    </a>
+  )
+);
 
-const TableOfContents = memo(({
-  sections,
-  activeSection,
-  showToc,
-  tocTranslateY
-}: {
-  sections: Section[];
-  activeSection: string;
-  showToc: boolean;
-  tocTranslateY: number;
-}) => (
-  <div
-    className={`fixed left-4 top-0 h-full w-48 flex flex-col justify-center transition-opacity duration-500 ${showToc ? 'opacity-100' : 'opacity-0 pointer-events-none'
-      }`}
-    style={{ zIndex: 40, transform: `translateY(-${tocTranslateY}px)` }}
-  >
-    <div className="flex flex-col h-full" style={{ position: 'sticky', top: 32 }}>
-      <nav className="flex-1 flex items-center">
-        <ul className="space-y-2 w-full">
-          {sections.map((section) => (
-            <li key={section.id}>
-              <a
-                href={`#${section.id}`}
-                className={`block py-2 px-4 text-sm transition-all ${activeSection === section.id
-                  ? 'bg-bg2 text-fg3 font-medium'
-                  : 'text-fg1 hover:text-fg2'
-                  }`}
-              >
-                {section.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </nav>
+const TableOfContents = memo(
+  ({
+    sections,
+    active,
+    visible,
+    offsetY,
+  }: {
+    sections: Section[];
+    active: string;
+    visible: boolean;
+    offsetY: number;
+  }) => (
+    <aside
+      className={`fixed left-4 top-0 h-full w-48 flex flex-col justify-center transition-opacity ${visible ? "opacity-100" : "opacity-0 pointer-events-none"
+        }`}
+      style={{ zIndex: 40, transform: `translateY(-${offsetY}px)` }}
+    >
+      <div className="flex flex-col h-full sticky top-8">
+        <nav className="flex-1">
+          <ul className="space-y-2">
+            {sections.map(({ id, label }) => (
+              <li key={id}>
+                <a
+                  href={`#${id}`}
+                  className={`block py-1.5 px-3 text-sm transition-colors ${active === id ? "bg-bg2 text-fg3 font-medium" : "text-fg1 hover:text-fg2"
+                    }`}
+                >
+                  {label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
 
-      <div className="mt-auto flex flex-col items-start pl-4 mb-4">
-        <div className="mb-2">
-          <div className="text-ignore mb-1 font-normal text-xs" style={{ letterSpacing: 0 }}>contact</div>
-          <a href="mailto:contact@nyoom.engineering" className="text-fg1 hover:text-fg3 transition-colors block font-normal text-xs">
+        <div className="mt-auto pl-3 pb-4">
+          <div className="text-xs mb-1 opacity-60">contact</div>
+          <a
+            href="mailto:contact@nyoom.engineering"
+            className="text-fg1 hover:text-fg3 text-xs transition"
+          >
             contact@nyoom.engineering
           </a>
         </div>
       </div>
-    </div>
-  </div>
-));
+    </aside>
+  )
+);
 
 export default function BlogPostClient({ metadata, children }: BlogPostClientProps) {
-  // State
-  const [showToc, setShowToc] = useState(false);
+  const [tocVisible, setTocVisible] = useState(false);
   const [activeSection, setActiveSection] = useState("");
-  const [tocTranslateY, setTocTranslateY] = useState(0);
+  const [tocOffsetY, setTocOffsetY] = useState(0);
 
-  // Refs
   const heroRef = useRef<HTMLDivElement>(null);
   const footerRef = useRef<HTMLElement | null>(null);
+  const headingsRef = useRef<HTMLElement[]>([]);
 
-  // Mock sections - in a real implementation, these could be extracted from MDX
+  /* sections list is static / mocked */
   const sections: Section[] = [
-    { id: "introduction", label: "Introduction to Natural Beauty" },
-    { id: "gallery", label: "Image Gallery" },
-    { id: "science", label: "The Science Behind Nature's Beauty" },
-    { id: "creativity", label: "How Nature Inspires Creativity" },
-    { id: "tips", label: "Tips for Connecting with Nature" },
+    { id: "introduction", label: "Introduction" },
+    { id: "gallery", label: "Gallery" },
+    { id: "science", label: "Science" },
+    { id: "creativity", label: "Creativity" },
+    { id: "tips", label: "Tips" },
     { id: "conclusion", label: "Conclusion" },
   ];
 
-  // Handlers
   const handleScroll = useCallback(() => {
     const scrollY = window.scrollY;
-    let heroBottom = 0;
+    const viewportBottom = scrollY + window.innerHeight;
 
-    if (heroRef.current) {
-      heroBottom = heroRef.current.getBoundingClientRect().bottom + window.scrollY;
+    /* show TOC after hero */
+    const heroBottom = heroRef.current
+      ? heroRef.current.getBoundingClientRect().bottom + scrollY
+      : 0;
+    setTocVisible(scrollY > heroBottom - 80);
+
+    /* highlight active heading */
+    for (const el of headingsRef.current) {
+      const rect = el.getBoundingClientRect();
+      if (rect.top <= 100 && rect.bottom >= 100) {
+        setActiveSection(el.id);
+        break;
+      }
     }
 
-    setShowToc(scrollY > heroBottom - 80);
-
-    const sections = document.querySelectorAll('section[id], h2[id]');
-    sections.forEach((section) => {
-      const rect = section.getBoundingClientRect();
-      if (rect.top <= 100 && rect.bottom >= 100) {
-        setActiveSection(section.id);
-      }
-    });
-
+    /* push TOC up when footer overlaps */
     if (footerRef.current) {
-      const footerRect = footerRef.current.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-      const footerVisibleHeight = Math.max(0, windowHeight - footerRect.top);
-      setTocTranslateY(footerVisibleHeight);
+      const footerTop = footerRef.current.offsetTop;
+      const overlap = Math.max(0, viewportBottom - footerTop);
+      setTocOffsetY(overlap);
+    } else {
+      setTocOffsetY(0);
     }
   }, []);
 
-  // Effects
   useEffect(() => {
-    const footer = document.querySelector('footer');
-    footerRef.current = footer as HTMLElement;
+    footerRef.current = document.querySelector("footer");
+    headingsRef.current = Array.from(
+      document.querySelectorAll<HTMLElement>("section[id], h2[id]")
+    );
 
+    /* initial calculation */
     handleScroll();
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('resize', handleScroll);
 
-    const observer = new ResizeObserver(handleScroll);
-    observer.observe(document.body);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll);
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', handleScroll);
-      observer.disconnect();
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
     };
   }, [handleScroll]);
 
   return (
     <div className="flex flex-col bg-background min-h-screen">
-      {/* Hero Section */}
-      <div ref={heroRef} className="h-screen flex flex-col">
+      <header ref={heroRef} className="h-screen flex flex-col">
         <div className="relative h-1/2">
-          <Image
-            src={metadata.image}
-            alt={metadata.title}
-            fill
-            className="object-cover"
-            priority
-          />
+          <Image src={metadata.image} alt={metadata.title} fill priority className="object-cover" />
         </div>
 
-        <div className="h-1/2 bg-background flex items-center">
-          <div className="max-container padding-container w-full flex justify-center">
-            <div className="max-w-[80ch] w-full mx-auto ">
-              <div className="text-fg3 font-medium mb-2">
-                {metadata.category}
-              </div>
-              <div className="text-[#8d8d8d] mb-6">
-                {metadata.date.toLocaleDateString("en-US", {
-                  year: "numeric",
-                  month: "long",
-                  day: "2-digit",
-                })}
-              </div>
-              <h1 className="text-3xl lg:text-4xl font-medium text-fg3 mb-4 leading-tight max-w-[80ch] mx-auto">
-                {metadata.title}
-              </h1>
-              <p className="text-xl lg:text-2xl text-fg2 mb-8 leading-relaxed max-w-[80ch] mx-auto">
-                {metadata.description}
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Table of Contents */}
-      <TableOfContents
-        sections={sections}
-        activeSection={activeSection}
-        showToc={showToc}
-        tocTranslateY={tocTranslateY}
-      />
-
-      {/* Main Content */}
-      <div className="max-container padding-container flex justify-center">
-        <div className="w-full max-w-[80ch] mx-auto">
-          {children}
-
-          {/* Share Section */}
-          <div className="mt-16 pt-8 border-t border-bg3">
-            <h3 className="text-sm uppercase text-fg2 mb-4 tracking-wider">Share Article</h3>
-            <div className="flex gap-4">
-              <ShareButton icon={Github} label="Share on GitHub" />
-              <ShareButton icon={Twitter} label="Share on Twitter" />
-              <ShareButton icon={Linkedin} label="Share on LinkedIn" />
-            </div>
-          </div>
-
-          {/* Author info */}
-          <div className="my-12 p-6 bg-bg2 border-l-4 border-accent1 max-w-[80ch] mx-auto">
-            <h3 className="text-fg3 font-medium mb-3">About the Author</h3>
-            <p className="text-sm text-fg1 leading-relaxed">
-              Written by {metadata.author} on {metadata.date.toLocaleDateString("en-US", {
+        <div className="h-1/2 flex items-center bg-background">
+          <div className="w-full max-w-[80ch] mx-auto px-4">
+            <span className="text-fg3 font-medium">{metadata.category}</span>
+            <span className="block text-sm opacity-60 mb-4">
+              {metadata.date.toLocaleDateString("en-US", {
                 year: "numeric",
                 month: "long",
                 day: "2-digit",
               })}
-            </p>
-            {metadata.tags && (
-              <div className="mt-4">
-                <div className="flex flex-wrap gap-2">
-                  {metadata.tags.map((tag) => (
-                    <span key={tag} className="px-2 py-1 bg-bg3 text-fg2 text-xs rounded">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            )}
+            </span>
+            <h1 className="text-3xl lg:text-4xl font-medium text-fg3 mb-3 leading-tight">
+              {metadata.title}
+            </h1>
+            <p className="text-lg lg:text-xl text-fg2 leading-relaxed">{metadata.description}</p>
           </div>
         </div>
-      </div>
+      </header>
+
+      {/* TOC */}
+      <TableOfContents
+        sections={sections}
+        active={activeSection}
+        visible={tocVisible}
+        offsetY={tocOffsetY}
+      />
+
+      {/* Main */}
+      <main className="w-full max-w-[80ch] mx-auto px-4">
+        {children}
+
+        {/* Share */}
+        <h3 className="text-sm text-fg2 mt-12 mb-3">Share Article</h3>
+        <div className="flex gap-3">
+          <ShareButton
+            icon={Github}
+            label="Share on GitHub"
+            href={`https://github.com/nyoom-engineering/${metadata.slug}`}
+          />
+          <ShareButton
+            icon={Twitter}
+            label="Share on Twitter"
+            href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(
+              `https://nyoom.engineering/blog/${metadata.slug}`
+            )}&text=${encodeURIComponent(metadata.title)}`}
+          />
+          <ShareButton
+            icon={Linkedin}
+            label="Share on LinkedIn"
+            href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
+              `https://nyoom.engineering/blog/${metadata.slug}`
+            )}`}
+          />
+        </div>
+
+        {/* Author */}
+        <section className="my-12 p-6 bg-bg2 border-l-4 border-accent1">
+          <h3 className="text-fg3 font-medium mb-2">About the Author</h3>
+          <p className="text-sm text-fg1">
+            Written by {metadata.author} on{" "}
+            {metadata.date.toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "long",
+              day: "2-digit",
+            })}
+          </p>
+          {metadata.tags?.length && (
+            <ul className="flex flex-wrap gap-2 mt-3">
+              {metadata.tags.map((tag) => (
+                <li key={tag} className="px-2 py-1 bg-bg3 text-fg2 text-xs">
+                  {tag}
+                </li>
+              ))}
+            </ul>
+          )}
+        </section>
+      </main>
     </div>
   );
 }

@@ -43,7 +43,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       </em>
     ),
     code: ({ children, ...props }) => (
-      <code className="bg-bg2 text-fg3 px-2 py-1 rounded text-sm font-mono" {...props}>
+      <code className="bg-bg2 text-fg3 px-2 py-1 text-sm font-mono" {...props}>
         {children}
       </code>
     ),

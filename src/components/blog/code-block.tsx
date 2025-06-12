@@ -208,14 +208,14 @@ export function CodeBlock({ code, language = "rust" }: CodeBlockProps) {
       <div className="absolute top-2 right-2 flex gap-2 z-10">
         <button
           onClick={handleCopy}
-          className="p-2 rounded hover:bg-bg3 text-fg1 hover:text-fg3 transition-colors"
+          className="p-2 hover:bg-bg3 text-fg1 hover:text-fg3 transition-colors"
           aria-label="Copy code"
         >
           <Copy className="h-4 w-4" />
         </button>
         <button
           onClick={handleOpenInNewTab}
-          className="p-2 rounded hover:bg-bg3 text-fg1 hover:text-fg3 transition-colors"
+          className="p-2 hover:bg-bg3 text-fg1 hover:text-fg3 transition-colors"
           aria-label="Open in new tab"
         >
           <ExternalLink className="h-4 w-4" />
