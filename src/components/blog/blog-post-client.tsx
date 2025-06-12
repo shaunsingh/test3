@@ -166,20 +166,20 @@ export default function BlogPostClient({ metadata, children }: BlogPostClientPro
         <div className="h-1/2 bg-background flex items-center">
           <div className="max-container padding-container w-full flex justify-center">
             <div className="max-w-[80ch] w-full mx-auto ">
-              <div className="text-fg3 text-sm font-medium mb-2">
+              <div className="text-fg3 font-medium mb-2">
                 {metadata.category}
               </div>
-              <div className="text-fg1 text-sm mb-8">
+              <div className="text-[#8d8d8d] mb-6">
                 {metadata.date.toLocaleDateString("en-US", {
                   year: "numeric",
                   month: "long",
                   day: "2-digit",
                 })}
               </div>
-              <h1 className="text-4xl lg:text-5xl font-bold text-fg3 mb-8 leading-tight max-w-[80ch] mx-auto">
+              <h1 className="text-3xl lg:text-4xl font-medium text-fg3 mb-4 leading-tight max-w-[80ch] mx-auto">
                 {metadata.title}
               </h1>
-              <p className="text-xl lg:text-2xl text-fg2 leading-relaxed max-w-[80ch] mx-auto">
+              <p className="text-xl lg:text-2xl text-fg2 mb-8 leading-relaxed max-w-[80ch] mx-auto">
                 {metadata.description}
               </p>
             </div>

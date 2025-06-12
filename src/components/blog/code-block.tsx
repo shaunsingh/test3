@@ -11,9 +11,8 @@ import "ace-builds/src-noconflict/mode-python";
 import "ace-builds/src-noconflict/mode-typescript";
 import "ace-builds/src-noconflict/mode-c_cpp";
 import "ace-builds/src-noconflict/mode-json";
+import "ace-builds/src-noconflict/mode-ocaml";
 import "ace-builds/src-noconflict/mode-markdown";
-import "ace-builds/src-noconflict/ext-searchbox";
-import "ace-builds/src-noconflict/ext-language_tools";
 import "ace-builds/src-noconflict/keybinding-vim";
 
 // Register custom oxocarbon theme

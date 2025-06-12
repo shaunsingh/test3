@@ -1,5 +1,5 @@
-import type { Metadata } from "next";
 import "./globals.css";
+import type { Metadata } from "next";
 import { LayoutScrollWrapper } from "@/components/layout-scroll-wrapper";
 
 export const metadata: Metadata = {

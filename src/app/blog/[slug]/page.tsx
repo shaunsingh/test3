@@ -1,8 +1,8 @@
-import { notFound } from "next/navigation";
 import { getBlogPostSlugs, getBlogPostBySlug } from "@/lib/blog";
-import BlogPostClient from "@/components/blog/blog-post-client";
+import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { useMDXComponents } from "@/mdx-components";
+import BlogPostClient from "@/components/blog/blog-post-client";
 import { ImageGallery } from "@/components/blog/image-gallery";
 import { CodeBlock } from "@/components/blog/code-block";
 

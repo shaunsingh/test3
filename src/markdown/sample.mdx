@@ -1,0 +1,79 @@
+---
+title: "This is my Title and its clearly the best title of all time I’ll have you know"
+description: "This is my Subtitle and its clearly the best title of all time I’ll have you know"
+image: "/blog-banner.jpg"
+date: "2025-06-08"
+category: "Automotive"
+author: "Nyoom Engineering Team"
+slug: "lorem-ipsum-dolor"
+tags: ["automotive"]
+---
+
+import { ImageGallery } from '@/components/blog/image-gallery'
+import { CodeBlock } from '@/components/blog/code-block'
+
+## Body
+
+"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?""Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur,
+
+<ImageGallery
+  images={[
+    { 
+      src: '/heatmap.png', 
+      alt: 'Heatmap of forest canopy',
+      caption: 'A thermal heatmap showing the temperature distribution across a forest canopy, revealing the intricate patterns of heat absorption and reflection.'
+    },
+    { 
+      src: '/lasers.png', 
+      alt: 'Laser light in a cave',
+      caption: 'Stunning laser light patterns illuminating the darkness of a cave, creating an otherworldly atmosphere.'
+    },
+    { 
+      src: '/planet.png', 
+      alt: 'Planet Earth from space',
+      caption: 'Our beautiful planet Earth as seen from space, showcasing the blue marble that is our home.'
+    },
+  ]}
+/>
+
+
+"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam
+
+<CodeBlock
+  code={`
+(* canonical string for a pitch‑class set and its inversion *)
+let canon pcs =
+  let sort = List.sort_uniq compare in
+  let s   = sort pcs
+  and inv = sort (List.map (fun p -> (12 - p) mod 12) pcs) in
+  String.concat "," (List.map string_of_int (if s < inv then s else inv))
+
+let add pcs set = S.add (canon pcs) set
+
+(* generate every transposition & inversion (rotations) of each interval pattern *)
+let gen patterns =
+  let roots  = List.init 12 (fun r -> r) in
+  let rot xs i =
+    let n = List.length xs in
+    List.init n (fun k -> List.nth xs ((i + k) mod n))
+  in
+  List.concat_map (fun ints ->
+    List.concat_map (fun r ->
+      List.init (List.length ints) (fun i ->
+        List.map (fun x -> (r + x) mod 12) (rot ints i)
+      )
+    ) roots
+  ) patterns
+`}
+  language="ocaml"
+/>
+
+"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam
+
+Latin is an ancient Indo-European language that originated in Latium, the area around modern-day Rome, Italy. It was the language of 
+
+- standard image
+
+"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam
+
+Latin is an ancient Indo-European language that originated in Latium, the area around modern-day Rome, Italy. It was the language of 
