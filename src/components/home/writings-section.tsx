@@ -34,7 +34,7 @@ export function WritingsSection() {
               link={`/blog/${post.slug}`}
             />
           ))}
-          
+
           {/* Fill remaining slots with placeholder if needed */}
           {Array.from({ length: Math.max(0, 3 - recentPosts.length) }).map((_, index) => (
             <BlogPostCard
