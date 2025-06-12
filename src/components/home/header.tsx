@@ -11,7 +11,7 @@ export function Header() {
         <div className="flex gap-4">
           <div className="flex items-center">
             <Link href="/">
-              <Image src="/logo.png" alt="Nyoom Engineering logo" width={160} height={53} />
+              <Image src="/logo-baked.svg" alt="Nyoom Engineering logo" width={160} height={53} priority />
             </Link>
           </div>
 

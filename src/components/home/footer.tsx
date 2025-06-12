@@ -13,7 +13,7 @@ export function Footer() {
             {/* Logo and Made With Section */}
             <div className="lg:col-span-1">
               <Link href="/" className="inline-block mb-2">
-                <Image src="/logo.png" alt="Nyoom Engineering" width={180} height={50} />
+                <Image src="/logo-baked.svg" alt="Nyoom Engineering" width={180} height={50} />
               </Link>
               <div className="ml-1 pl-2">
                 <p className="text-xs text-fg2 mb-2">Made With</p>
