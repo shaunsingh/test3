@@ -11,7 +11,7 @@ export function BlogPage({ posts }: { posts: BlogPost[] }) {
   const [view, setView] = useState<ViewType>("grid");
   return (
     <div className="flex flex-col ">
-      <div className="flex-grow max-container px-4 py-8">
+      <div className="max-container px-4 py-8 w-full">
         <div className="flex items-center justify-between mb-8">
           <h1 className="text-4xl font-bold">Blog</h1>
           <ViewCombobox view={view} onViewChange={setView} />
