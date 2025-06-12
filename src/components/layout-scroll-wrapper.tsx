@@ -17,6 +17,13 @@ export function LayoutScrollWrapper({ children }: { children: React.ReactNode })
       const headerHeight = header.offsetHeight;
       const windowHeight = window.innerHeight;
 
+      // If the document height is not larger than the viewport, skip any translation.
+      const isScrollable = document.documentElement.scrollHeight > windowHeight;
+      if (!isScrollable) {
+        header.style.transform = 'translateY(0)';
+        return;
+      }
+
       const heroHeader = document.querySelector('main header.h-screen') as HTMLElement | null;
       let heroTranslate = 0;
       if (heroHeader) {
