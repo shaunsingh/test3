@@ -14,30 +14,25 @@ export function LayoutScrollWrapper({ children }: { children: React.ReactNode })
     const handleScroll = () => {
       if (!footerRef.current) return;
 
-      // Check if the page is scrollable
-      const documentHeight = document.documentElement.scrollHeight;
+      const headerHeight = header.offsetHeight;
       const windowHeight = window.innerHeight;
-      const isScrollable = documentHeight > windowHeight;
 
-      // Only apply the effect if the page is scrollable
-      if (!isScrollable) {
-        header.style.transform = 'translateY(0)';
-        return;
+      const heroHeader = document.querySelector('main header.h-screen') as HTMLElement | null;
+      let heroTranslate = 0;
+      if (heroHeader) {
+        const heroRect = heroHeader.getBoundingClientRect();
+        const halfway = heroRect.height / 2;
+
+        const delta = halfway - heroRect.bottom;
+        heroTranslate = Math.min(Math.max(delta, 0), headerHeight);
       }
 
       const footerRect = footerRef.current.getBoundingClientRect();
-      const headerHeight = header.offsetHeight;
-
-      // Calculate how much of the footer is visible
       const footerVisibleHeight = Math.max(0, windowHeight - footerRect.top);
+      const footerTranslate = Math.min(footerVisibleHeight, headerHeight);
 
-      // Move header up by the same amount the footer is visible
-      if (footerVisibleHeight > 0) {
-        const translateY = Math.min(footerVisibleHeight, headerHeight);
-        header.style.transform = `translateY(-${translateY}px)`;
-      } else {
-        header.style.transform = 'translateY(0)';
-      }
+      const translateY = Math.max(heroTranslate, footerTranslate);
+      header.style.transform = `translateY(-${translateY}px)`;
     };
 
     // Call once to set initial state
