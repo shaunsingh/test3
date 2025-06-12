@@ -1,3 +1,5 @@
+"use client"
+
 import React, { useRef } from "react";
 import AceEditor from "react-ace";
 import { Copy, ExternalLink } from "lucide-react";
@@ -125,11 +127,11 @@ if (typeof ace !== "undefined" && ace.define && !ace.require("ace/theme/oxocarbo
   ace.define(
     "ace/theme/oxocarbon",
     ["require", "exports", "module", "ace/lib/dom"],
-    function(require: any, exports: any, module: any) {
+    function (require: any, exports: any, module: any) {
       exports.isDark = oxocarbonTheme.isDark;
       exports.cssClass = oxocarbonTheme.cssClass;
       exports.cssText = oxocarbonTheme.cssText;
-      var dom = require("ace/lib/dom");
+      const dom = require("ace/lib/dom");
       dom.importCssString(exports.cssText, exports.cssClass);
     }
   );
