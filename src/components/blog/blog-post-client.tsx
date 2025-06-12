@@ -1,8 +1,9 @@
 "use client";
 
 import Image from "next/image";
+import React, { useEffect, useState, useRef, useCallback, memo, useMemo } from "react";
 import { Github, Twitter, Linkedin, LucideIcon } from "lucide-react";
-import { useEffect, useState, useRef, useCallback, memo } from "react";
+import { HeroContentContext } from "./hero-context";
 
 interface Section {
   id: string;
@@ -92,6 +93,25 @@ export default function BlogPostClient({ metadata, children }: BlogPostClientPro
   const [activeSection, setActiveSection] = useState("");
   const [tocOffsetY, setTocOffsetY] = useState(0);
 
+  /* --------------------------------------------------
+   * Hero content driven via context set by MDX components
+   * -------------------------------------------------- */
+  const [heroTitle, setHeroTitle] = useState<string>(metadata.title);
+  const [heroDescription, setHeroDescription] = useState<string>(metadata.description);
+
+  // Memoize context value to avoid unnecessary renders
+  const heroCtxValue = useMemo(
+    () => ({
+      setTitle: (title: string) => {
+        setHeroTitle(title);
+      },
+      setDescription: (desc: string) => {
+        setHeroDescription(desc);
+      },
+    }),
+    []
+  );
+
   const heroRef = useRef<HTMLDivElement>(null);
   const footerRef = useRef<HTMLElement | null>(null);
   const headingsRef = useRef<HTMLElement[]>([]);
@@ -171,9 +191,11 @@ export default function BlogPostClient({ metadata, children }: BlogPostClientPro
               })}
             </span>
             <h1 className="text-3xl lg:text-4xl font-medium text-fg3 mb-3 leading-tight">
-              {metadata.title}
+              {heroTitle}
             </h1>
-            <p className="text-lg lg:text-xl text-fg2 leading-relaxed">{metadata.description}</p>
+            {heroDescription && (
+              <p className="text-lg lg:text-xl text-fg2 leading-relaxed">{heroDescription}</p>
+            )}
           </div>
         </div>
       </header>
@@ -188,7 +210,7 @@ export default function BlogPostClient({ metadata, children }: BlogPostClientPro
 
       {/* Main */}
       <main className="w-full max-w-[80ch] mx-auto px-4">
-        {children}
+        <HeroContentContext.Provider value={heroCtxValue}>{children}</HeroContentContext.Provider>
 
         {/* Share */}
         <h3 className="text-sm text-fg2 mt-12 mb-3">Share Article</h3>
