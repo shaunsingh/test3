@@ -3,77 +3,12 @@
 import { BlogPageCard } from "@/components/blog/grid-card";
 import { BlogListItem } from "@/components/blog/list-item";
 import { ViewCombobox, ViewType } from "@/components/blog/view-switch";
+import { getAllBlogPosts } from "@/lib/blog";
 import { useState } from "react";
-
-const blogPosts = [
-  {
-    image: "/heatmap.png",
-    title: "Blog Post Title 1",
-    description:
-      "This is a short description for blog post 1. It gives a brief overview of the content.",
-    date: new Date("2025-06-10"),
-    link: "/blog/post-1",
-  },
-  {
-    image: "/heatmap.png",
-    title: "Blog Post Title 2",
-    description:
-      "This is a short description for blog post 2. It gives a brief overview of the content.",
-    date: new Date("2025-06-15"),
-    link: "/blog/post-2",
-  },
-  {
-    image: "/heatmap.png",
-    title: "Blog Post Title 3",
-    description:
-      "This is a short description for blog post 3. It gives a brief overview of the content.",
-    date: new Date("2025-06-20"),
-    link: "/blog/post-3",
-  },
-  {
-    image: "/heatmap.png",
-    title: "Blog Post Title 4",
-    description:
-      "This is a short description for blog post 4. It gives a brief overview of the content.",
-    date: new Date("2025-06-25"),
-    link: "/blog/post-4",
-  },
-  {
-    image: "/heatmap.png",
-    title: "Blog Post Title 5",
-    description:
-      "This is a short description for blog post 1. It gives a brief overview of the content.",
-    date: new Date("2025-06-10"),
-    link: "/blog/post-5",
-  },
-  {
-    image: "/heatmap.png",
-    title: "Blog Post Title 6",
-    description:
-      "This is a short description for blog post 2. It gives a brief overview of the content.",
-    date: new Date("2025-06-15"),
-    link: "/blog/post-6",
-  },
-  {
-    image: "/heatmap.png",
-    title: "Blog Post Title 7",
-    description:
-      "This is a short description for blog post 3. It gives a brief overview of the content.",
-    date: new Date("2025-06-20"),
-    link: "/blog/post-7",
-  },
-  {
-    image: "/heatmap.png",
-    title: "Blog Post Title 8",
-    description:
-      "This is a short description for blog post 4. It gives a brief overview of the content.",
-    date: new Date("2025-06-25"),
-    link: "/blog/post-8",
-  },
-];
 
 export default function BlogPage() {
   const [view, setView] = useState<ViewType>("grid");
+  const blogPosts = getAllBlogPosts();
 
   return (
     <div className="flex flex-col ">
@@ -87,12 +22,12 @@ export default function BlogPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {blogPosts.map((post) => (
               <BlogPageCard
-                key={post.title}
+                key={post.slug}
                 image={post.image}
                 title={post.title}
                 description={post.description}
                 date={post.date}
-                link={post.link}
+                link={`/blog/${post.slug}`}
               />
             ))}
           </div>
@@ -100,11 +35,11 @@ export default function BlogPage() {
           <div className="space-y-0">
             {blogPosts.map((post, index) => (
               <BlogListItem
-                key={post.title}
+                key={post.slug}
                 title={post.title}
                 description={post.description}
                 date={post.date}
-                link={post.link}
+                link={`/blog/${post.slug}`}
                 isLast={index === blogPosts.length - 1}
               />
             ))}

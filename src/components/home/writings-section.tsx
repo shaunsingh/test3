@@ -1,43 +1,51 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
+import { getRecentBlogPosts } from "@/lib/blog";
 
 export function WritingsSection() {
+  const recentPosts = getRecentBlogPosts(3);
+
   return (
     <section id="writings" className="scroll-mt-16 pt-4 w-full max-container padding-container text-white">
       <div className="bg-card p-4">
         <div className="flex justify-between items-center mb-8">
           <div>
             <div className="text-gray-400 text-sm mb-2">WRITINGS</div>
-            <h2 className="text-3xl font-mono text-white">Thoughts On<br />Cars And Stuff</h2>
+            <h2 className="text-3xl font-mono text-white">Thoughts On<br />Tech And Nature</h2>
           </div>
-          <Link href="#" className="bg-white text-black px-4 py-2 text-sm font-medium flex items-center">
+          <Link href="/blog" className="bg-white text-black px-4 py-2 text-sm font-medium flex items-center">
             SEE ALL POSTS <ArrowRight className="ml-2 h-4 w-4" />
           </Link>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <BlogPostCard
-            image="/heatmap.png" // Placeholder image
-            title="TTILE - Title Title Title Word Word Word Word Word"
-            description="Lorem ipsum dolor sit amet, consectetur elit Lorem ipsum dolor sit amet, consectetur elit Lorem ipsum dolor sit amet, consectetur"
-            date="June 07, 2025"
-            link="#"
-          />
-          <BlogPostCard
-            image="/heatmap.png" // Placeholder image
-            title="TTILE - Title Title Title Word Word Word Word Word"
-            description="Lorem ipsum dolor sit amet, consectetur elit Lorem ipsum dolor sit amet, consectetur elit Lorem ipsum dolor sit amet, consectetur"
-            date="June 07, 2025"
-            link="#"
-          />
-          <BlogPostCard
-            image="/heatmap.png" // Placeholder image
-            title="TTILE - Title Title Title Word Word Word Word Word"
-            description="Lorem ipsum dolor sit amet, consectetur elit Lorem ipsum dolor sit amet, consectetur elit Lorem ipsum dolor sit amet, consectetur"
-            date="June 07, 2025"
-            link="#"
-          />
+          {recentPosts.map((post) => (
+            <BlogPostCard
+              key={post.slug}
+              image={post.image}
+              title={post.title}
+              description={post.description}
+              date={post.date.toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "2-digit",
+              })}
+              link={`/blog/${post.slug}`}
+            />
+          ))}
+          
+          {/* Fill remaining slots with placeholder if needed */}
+          {Array.from({ length: Math.max(0, 3 - recentPosts.length) }).map((_, index) => (
+            <BlogPostCard
+              key={`placeholder-${index}`}
+              image="/heatmap.png"
+              title="Coming Soon - New Article"
+              description="We're working on new content. Stay tuned for more interesting articles about technology, nature, and everything in between."
+              date="Coming Soon"
+              link="#"
+            />
+          ))}
         </div>
       </div>
     </section>
