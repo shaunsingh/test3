@@ -175,12 +175,12 @@ export default function BlogPostClient({ metadata, children }: BlogPostClientPro
 
   return (
     <div className="flex flex-col bg-background min-h-screen">
-      <header ref={heroRef} className="h-screen flex flex-col">
-        <div className="relative h-1/2">
+      <header ref={heroRef} className="flex flex-col">
+        <div className="relative h-[40vh] md:h-[50vh]">
           <Image src={metadata.image} alt={metadata.title} fill priority className="object-cover" />
         </div>
 
-        <div className="h-1/2 flex items-center bg-background">
+        <div className="flex items-center bg-background py-12">
           <div className="w-full max-w-[80ch] mx-auto px-4">
             <span className="text-fg3 font-medium">{metadata.category}</span>
             <span className="block text-sm opacity-60 mb-4">
@@ -194,7 +194,9 @@ export default function BlogPostClient({ metadata, children }: BlogPostClientPro
               {heroTitle}
             </h1>
             {heroDescription && (
-              <p className="text-lg lg:text-xl text-fg2 leading-relaxed">{heroDescription}</p>
+              <p className="text-lg lg:text-xl text-fg2 leading-relaxed max-w-prose">
+                {heroDescription}
+              </p>
             )}
           </div>
         </div>

@@ -146,12 +146,13 @@ export function CodeBlock({ code, language = "rust" }: CodeBlockProps) {
 
   // Calculate dynamic height based on number of lines
   const fontSize = 15;
-  const lineCount = code.split("\n").length;
-  const padding = 24; // extra space for padding/borders
-  const height = fontSize * 1.5 * lineCount + padding;
+  // Ensure there is exactly ONE trailing newline so that the editor only shows a single empty line after the code ends
+  const sanitizedCode = code.replace(/\n+$/, "") + "\n";
+  const lineCount = sanitizedCode.split("\n").length;
+  const padding = 24; // still used for extra padding in potential future styling
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(code);
+    navigator.clipboard.writeText(sanitizedCode);
   };
 
   const handleOpenInNewTab = () => {
@@ -183,7 +184,7 @@ export function CodeBlock({ code, language = "rust" }: CodeBlockProps) {
           var editor = ace.edit('editor');
           editor.setTheme('ace/theme/oxocarbon');
           editor.session.setMode('ace/mode/${language}');
-          editor.setValue(${JSON.stringify(code)}, -1);
+          editor.setValue(${JSON.stringify(sanitizedCode)}, -1);
           editor.setReadOnly(false);
           editor.setFontSize(15);
           editor.setShowPrintMargin(true);
@@ -204,7 +205,7 @@ export function CodeBlock({ code, language = "rust" }: CodeBlockProps) {
   };
 
   return (
-    <div className="relative rounded-md overflow-hidden border border-bg3 bg-bg2">
+    <div className="relative rounded-md overflow-hidden border border-bg3 bg-bg2 mb-6">
       <div className="absolute top-2 right-2 flex gap-2 z-10">
         <button
           onClick={handleCopy}
@@ -225,12 +226,13 @@ export function CodeBlock({ code, language = "rust" }: CodeBlockProps) {
         ref={editorRef}
         mode={language}
         theme="oxocarbon"
-        value={code}
+        value={sanitizedCode}
         name="codeblock"
         readOnly={false}
         fontSize={fontSize}
         width="100%"
-        height={`${height}px`}
+        minLines={lineCount + 1}
+        maxLines={lineCount + 1}
         showPrintMargin={true}
         showGutter={true}
         highlightActiveLine={true}
