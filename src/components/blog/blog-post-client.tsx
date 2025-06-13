@@ -1,14 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import React, { useEffect, useState, useRef, useCallback, memo, useMemo } from "react";
+import React, { useState, useRef, memo, useMemo } from "react";
 import { Github, Twitter, Linkedin, LucideIcon } from "lucide-react";
 import { HeroContentContext } from "./hero-context";
-
-interface Section {
-  id: string;
-  label: string;
-}
 
 interface BlogPostMetadata {
   title: string;
@@ -40,59 +35,7 @@ const ShareButton = memo(
   )
 );
 
-const TableOfContents = memo(
-  ({
-    sections,
-    active,
-    visible,
-    offsetY,
-  }: {
-    sections: Section[];
-    active: string;
-    visible: boolean;
-    offsetY: number;
-  }) => (
-    <aside
-      className={`fixed left-4 top-0 h-full w-48 flex flex-col justify-center transition-opacity ${visible ? "opacity-100" : "opacity-0 pointer-events-none"
-        }`}
-      style={{ zIndex: 40, transform: `translateY(-${offsetY}px)` }}
-    >
-      <div className="flex flex-col h-full sticky top-8">
-        <nav className="flex-1">
-          <ul className="space-y-2">
-            {sections.map(({ id, label }) => (
-              <li key={id}>
-                <a
-                  href={`#${id}`}
-                  className={`block py-1.5 px-3 text-sm transition-colors ${active === id ? "bg-bg2 text-fg3 font-medium" : "text-fg1 hover:text-fg2"
-                    }`}
-                >
-                  {label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
-
-        <div className="mt-auto pl-3 pb-4">
-          <div className="text-xs mb-1 opacity-60">contact</div>
-          <a
-            href="mailto:contact@nyoom.engineering"
-            className="text-fg1 hover:text-fg3 text-xs transition"
-          >
-            contact@nyoom.engineering
-          </a>
-        </div>
-      </div>
-    </aside>
-  )
-);
-
 export default function BlogPostClient({ metadata, children }: BlogPostClientProps) {
-  const [tocVisible, setTocVisible] = useState(false);
-  const [activeSection, setActiveSection] = useState("");
-  const [tocOffsetY, setTocOffsetY] = useState(0);
-
   /* --------------------------------------------------
    * Hero content driven via context set by MDX components
    * -------------------------------------------------- */
@@ -113,65 +56,6 @@ export default function BlogPostClient({ metadata, children }: BlogPostClientPro
   );
 
   const heroRef = useRef<HTMLDivElement>(null);
-  const footerRef = useRef<HTMLElement | null>(null);
-  const headingsRef = useRef<HTMLElement[]>([]);
-
-  /* sections list is static / mocked */
-  const sections: Section[] = [
-    { id: "introduction", label: "Introduction" },
-    { id: "gallery", label: "Gallery" },
-    { id: "science", label: "Science" },
-    { id: "creativity", label: "Creativity" },
-    { id: "tips", label: "Tips" },
-    { id: "conclusion", label: "Conclusion" },
-  ];
-
-  const handleScroll = useCallback(() => {
-    const scrollY = window.scrollY;
-    const viewportBottom = scrollY + window.innerHeight;
-
-    /* show TOC after hero */
-    const heroBottom = heroRef.current
-      ? heroRef.current.getBoundingClientRect().bottom + scrollY
-      : 0;
-    setTocVisible(scrollY > heroBottom - 80);
-
-    /* highlight active heading */
-    for (const el of headingsRef.current) {
-      const rect = el.getBoundingClientRect();
-      if (rect.top <= 100 && rect.bottom >= 100) {
-        setActiveSection(el.id);
-        break;
-      }
-    }
-
-    /* push TOC up when footer overlaps */
-    if (footerRef.current) {
-      const footerTop = footerRef.current.offsetTop;
-      const overlap = Math.max(0, viewportBottom - footerTop);
-      setTocOffsetY(overlap);
-    } else {
-      setTocOffsetY(0);
-    }
-  }, []);
-
-  useEffect(() => {
-    footerRef.current = document.querySelector("footer");
-    headingsRef.current = Array.from(
-      document.querySelectorAll<HTMLElement>("section[id], h2[id]")
-    );
-
-    /* initial calculation */
-    handleScroll();
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("resize", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", handleScroll);
-    };
-  }, [handleScroll]);
 
   return (
     <div className="flex flex-col bg-background min-h-screen">
@@ -201,14 +85,6 @@ export default function BlogPostClient({ metadata, children }: BlogPostClientPro
           </div>
         </div>
       </header>
-
-      {/* TOC */}
-      <TableOfContents
-        sections={sections}
-        active={activeSection}
-        visible={tocVisible}
-        offsetY={tocOffsetY}
-      />
 
       {/* Main */}
       <main className="w-full max-w-[80ch] mx-auto px-4">
