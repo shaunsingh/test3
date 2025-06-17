@@ -1,5 +1,5 @@
 ---
-title: "Building Modern Web Apps with Rust and WebAssembly"
+title: "Building Modern Web Apps with Rust and Web"
 description: "Explore how Rust and WebAssembly are revolutionizing web development with near-native performance and memory safety in the browser."
 image: "/heatmap.png"
 date: "2025-06-10"
@@ -12,15 +12,13 @@ tags: ["rust", "webassembly", "performance", "web-development"]
 import { ImageGallery } from '@/components/blog/image-gallery'
 import { CodeBlock } from '@/components/blog/code-block'
 
-# Building Modern Web Apps with Rust and WebAssembly
-
 The web development landscape is evolving rapidly, and Rust with WebAssembly (WASM) is at the forefront of this revolution. This powerful combination brings near-native performance to web applications while maintaining the safety guarantees that Rust is known for.
 
-## Why Rust and WebAssembly?
+# Why Rust and WebAssembly?
 
 Rust's memory safety, zero-cost abstractions, and fearless concurrency make it an ideal candidate for WebAssembly compilation. Unlike JavaScript, Rust code compiled to WASM can run at near-native speeds in the browser.
 
-### Performance Benefits
+## Performance Benefits
 
 WebAssembly modules can execute 10-20x faster than equivalent JavaScript code for computationally intensive tasks. This makes it perfect for:
 
@@ -29,7 +27,7 @@ WebAssembly modules can execute 10-20x faster than equivalent JavaScript code fo
 - Cryptographic operations
 - Scientific computing
 
-## Getting Started with Rust and WASM
+# Getting Started with Rust and WASM
 
 Let's build a simple Rust function and compile it to WebAssembly:
 
@@ -83,7 +81,7 @@ wasm-pack build --target web`}
   language="bash"
 />
 
-## Real-World Applications
+# Real-World Applications
 
 Major companies are already leveraging Rust and WebAssembly in production:
 
@@ -91,7 +89,7 @@ Major companies are already leveraging Rust and WebAssembly in production:
 - **Discord** improved performance of their client with Rust
 - **Dropbox** rewrote their file storage engine in Rust
 
-## Performance Comparison
+# Performance Comparison
 
 <ImageGallery
   images={[
@@ -108,7 +106,7 @@ Major companies are already leveraging Rust and WebAssembly in production:
   ]}
 />
 
-## Best Practices
+# Best Practices
 
 When working with Rust and WebAssembly:
 
@@ -117,7 +115,7 @@ When working with Rust and WebAssembly:
 - **Profile your code**: Not everything needs to be in WASM
 - **Handle errors gracefully**: Plan for WASM module loading failures
 
-## The Future of Web Development
+# The Future of Web Development
 
 As WebAssembly continues to evolve with features like:
 
@@ -127,7 +125,7 @@ As WebAssembly continues to evolve with features like:
 
 The combination of Rust and WebAssembly will become even more powerful, potentially reshaping how we think about web application architecture.
 
-## Conclusion
+# Conclusion
 
 Rust and WebAssembly represent a significant step forward in web development, offering the performance of native applications with the accessibility of the web. While the ecosystem is still maturing, early adopters are already seeing substantial benefits in performance-critical applications.
 

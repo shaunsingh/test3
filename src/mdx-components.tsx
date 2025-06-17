@@ -1,23 +1,22 @@
 import type { MDXComponents } from "mdx/types";
 
-// Import client MDX components that interact with hero context
-import HeroH1 from "@/components/blog/mdx-hero-h1";
-import HeroBlockquote from "@/components/blog/mdx-hero-blockquote";
-
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
-    h1: HeroH1,
-    h2: ({ children, ...props }) => (
-      <h2 className="text-2xl font-mediumtext-fg3 mb-4 scroll-mt-20" {...props}>
+    h1: ({ children, ...props }) => (
+      <h2 className="text-3xl font-mediumtext-fg3 mb-4 scroll-mt-20" {...props}>
         {children}
       </h2>
     ),
-    h3: ({ children, ...props }) => (
-      <h3 className="text-xl text-fg3 mb-4 mt-12" {...props}>
+    h2: ({ children, ...props }) => (
+      <h3 className="text-2xl font-mediumtext-fg3 mb-4 scroll-mt-20" {...props}>
         {children}
       </h3>
     ),
-    blockquote: HeroBlockquote,
+    h3: ({ children, ...props }) => (
+      <h4 className="text-xl text-fg3 mb-4 mt-12" {...props}>
+        {children}
+      </h4>
+    ),
     p: ({ children, ...props }) => (
       <p className="text-fg1 leading-relaxed mb-6" {...props}>
         {children}
