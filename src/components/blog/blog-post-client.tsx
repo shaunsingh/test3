@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { Github, Twitter, Linkedin, LucideIcon } from "lucide-react";
+import { Separator } from "@/components/ui/separator";
 
 interface BlogPostMetadata {
   title: string;
@@ -19,7 +20,15 @@ interface BlogPostClientProps {
   children: React.ReactNode;
 }
 
-const ShareButton = ({ icon: Icon, label, href }: { icon: LucideIcon; label: string; href: string }) => (
+const ShareButton = ({
+  icon: Icon,
+  label,
+  href,
+}: {
+  icon: LucideIcon;
+  label: string;
+  href: string;
+}) => (
   <a
     href={href}
     target="_blank"
@@ -32,46 +41,46 @@ const ShareButton = ({ icon: Icon, label, href }: { icon: LucideIcon; label: str
 );
 
 export default function BlogPostClient({ metadata, children }: BlogPostClientProps) {
-
   return (
     <div className="flex flex-col bg-background min-h-screen">
-      <header className="flex flex-col">
-        <div className="relative h-[40vh] md:h-[50vh]">
-          <Image
-            src={metadata.image}
-            alt={metadata.title}
-            fill
-            sizes="100vw"
-            priority
-            className="object-cover"
-          />
-        </div>
+      {/* Banner */}
+      <div className="relative w-full h-[40vh] md:h-[50vh]">
+        <Image
+          src={metadata.image}
+          alt={metadata.title}
+          fill
+          sizes="100vw"
+          priority
+          className="object-cover"
+        />
+      </div>
 
-        <div className="flex items-center bg-background py-12">
-          <div className="w-full max-w-[80ch] mx-auto px-4">
-            <span className="text-fg3 font-medium">{metadata.category}</span>
-            <span className="block text-sm opacity-60 mb-4">
-              {metadata.date.toLocaleDateString("en-US", {
-                year: "numeric",
-                month: "long",
-                day: "2-digit",
-              })}
-            </span>
-            <h1 className="text-3xl lg:text-4xl font-medium text-fg3 mb-3 leading-tight">
-              {metadata.title}
-            </h1>
-            {metadata.description && (
-              <p className="text-lg lg:text-xl text-fg2 leading-relaxed max-w-prose">
-                {metadata.description}
-              </p>
-            )}
-          </div>
-        </div>
-      </header>
-
-      {/* Main */}
+      {/* Main content */}
       <main className="w-full max-w-[80ch] mx-auto px-4">
-        {children}
+        {/* Metadata */}
+        <div className="pt-12">
+          <span className="text-fg3 font-medium">{metadata.category}</span>
+          <span className="block text-sm opacity-60 mb-4">
+            {metadata.date.toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "long",
+              day: "2-digit",
+            })}
+          </span>
+          <h1 className="text-3xl lg:text-4xl font-medium text-fg3 mb-3 leading-tight">
+            {metadata.title}
+          </h1>
+          {metadata.description && (
+            <p className="text-lg lg:text-xl text-fg2 leading-relaxed max-w-prose">
+              {metadata.description}
+            </p>
+          )}
+        </div>
+
+        <Separator className="my-6" />
+
+        {/* Article content */}
+        <div>{children}</div>
 
         {/* Share */}
         <h3 className="text-sm text-fg2 mt-12 mb-3">Share Article</h3>
@@ -108,7 +117,7 @@ export default function BlogPostClient({ metadata, children }: BlogPostClientPro
               day: "2-digit",
             })}
           </p>
-          {metadata.tags?.length && (
+          {metadata.tags?.length ? (
             <ul className="flex flex-wrap gap-2 mt-3">
               {metadata.tags.map((tag) => (
                 <li key={tag} className="px-2 py-1 bg-bg3 text-fg2 text-xs">
@@ -116,7 +125,7 @@ export default function BlogPostClient({ metadata, children }: BlogPostClientPro
                 </li>
               ))}
             </ul>
-          )}
+          ) : null}
         </section>
       </main>
     </div>
