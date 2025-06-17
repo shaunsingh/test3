@@ -42,6 +42,7 @@ export function BigMedia() {
             src="/lasers.png"
             alt="Abstract Lasers"
             fill
+            sizes="100vw"
             className="object-cover"
             priority
           />
