@@ -1,73 +1,89 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+// — Keeps the fixed <Header /> at the top.
+// — Uses pure CSS flexbox so the <Footer /> is always at the bottom of
+//   the viewport on short pages (e.g. 404) without any JS scroll listeners.
+
 import { Header } from "@/components/home/header";
 import { Footer } from "@/components/home/footer";
+import { useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 
 export function LayoutScrollWrapper({ children }: { children: React.ReactNode }) {
   const footerRef = useRef<HTMLElement>(null);
+  const pathname = usePathname();
 
   useEffect(() => {
-    const header = document.querySelector('header') as HTMLElement;
-    if (!header) return;
+    const headerEl = document.querySelector('header') as HTMLElement | null;
+    if (!headerEl) return;
 
-    const handleScroll = () => {
-      if (!footerRef.current) return;
+    const headerHeight = headerEl.offsetHeight;
 
-      const headerHeight = header.offsetHeight;
-      const windowHeight = window.innerHeight;
+    // Cache DOM references
+    const heroEl = document.querySelector<HTMLElement>('main header.h-screen');
 
-      // If the document height is not larger than the viewport, skip any translation.
-      const isScrollable = document.documentElement.scrollHeight > windowHeight;
-      if (!isScrollable) {
-        header.style.transform = 'translateY(0)';
-        return;
+    // State to avoid unnecessary DOM writes
+    let lastTranslate = -1;
+
+    const computeTranslate = () => {
+      if (!footerRef.current) return 0;
+
+      let translate = 0;
+
+      // hero
+      if (heroEl) {
+        const rect = heroEl.getBoundingClientRect();
+        const halfway = rect.height / 2;
+        const delta = halfway - rect.bottom; // >0 after scrolling past halfway
+        translate = Math.max(translate, Math.min(Math.max(delta, 0), headerHeight));
       }
 
-      const heroHeader = document.querySelector('main header.h-screen') as HTMLElement | null;
-      let heroTranslate = 0;
-      if (heroHeader) {
-        const heroRect = heroHeader.getBoundingClientRect();
-        const halfway = heroRect.height / 2;
-
-        const delta = halfway - heroRect.bottom;
-        heroTranslate = Math.min(Math.max(delta, 0), headerHeight);
-      }
-
+      // footer
       const footerRect = footerRef.current.getBoundingClientRect();
-      const footerVisibleHeight = Math.max(0, windowHeight - footerRect.top);
-      const footerTranslate = Math.min(footerVisibleHeight, headerHeight);
+      const visibleHeight = Math.max(0, window.innerHeight - footerRect.top);
+      translate = Math.max(translate, Math.min(visibleHeight, headerHeight));
 
-      const translateY = Math.max(heroTranslate, footerTranslate);
-      header.style.transform = `translateY(-${translateY}px)`;
+      return translate;
     };
 
-    // Call once to set initial state
-    handleScroll();
+    // RAF throttle
+    let ticking = false;
+    const onScrollOrResize = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const translate = computeTranslate();
+        if (translate !== lastTranslate) {
+          headerEl.style.transform = translate ? `translateY(-${translate}px)` : 'translateY(0)';
+          lastTranslate = translate;
+        }
+        ticking = false;
+      });
+    };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('resize', handleScroll);
-    
-    // Also listen for DOM changes that might affect scrollability
-    const observer = new ResizeObserver(handleScroll);
-    observer.observe(document.body);
-    
+    // Initial position
+    onScrollOrResize();
+
+    window.addEventListener('scroll', onScrollOrResize, { passive: true });
+    window.addEventListener('resize', onScrollOrResize);
+
     return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', handleScroll);
-      observer.disconnect();
+      window.removeEventListener('scroll', onScrollOrResize);
+      window.removeEventListener('resize', onScrollOrResize);
     };
-  }, []);
+  }, [pathname]);
 
   return (
     <>
       <Header />
-      <main className="pt-16">
-        {children}
-      </main>
-      <footer ref={footerRef}>
-        <Footer />
-      </footer>
+      <div className="flex flex-col min-h-screen pt-16">
+        <main className="flex-1">
+          {children}
+        </main>
+        <footer ref={footerRef}>
+          <Footer />
+        </footer>
+      </div>
     </>
   );
 } 
