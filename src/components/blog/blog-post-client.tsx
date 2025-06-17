@@ -1,8 +1,15 @@
 "use client";
 
 import Image from "next/image";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import { Github, Twitter, Linkedin, LucideIcon } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
+
+interface Section {
+  id: string;
+  label: string;
+  level: number;
+}
 
 interface BlogPostMetadata {
   title: string;
@@ -40,11 +47,143 @@ const ShareButton = ({
   </a>
 );
 
+const TableOfContents = ({
+  sections,
+  active,
+  visible,
+}: {
+  sections: Section[];
+  active: string;
+  visible: boolean;
+}) => (
+  <aside
+    className={`fixed left-4 top-1/2 -translate-y-1/2 w-56 transition-opacity duration-300 hidden xl:block ${visible ? "opacity-100" : "opacity-0 pointer-events-none"
+      }`}
+    style={{ zIndex: 40 }}
+  >
+    <div className="bg-background/80 backdrop-blur-sm border border-bg3 rounded-lg p-4">
+      <nav>
+        <div className="text-xs mb-4 opacity-60 uppercase tracking-wide">Contents</div>
+        <ul className="space-y-1">
+          {sections.map(({ id, label, level }) => (
+            <li key={id}>
+              <a
+                href={`#${id}`}
+                className={`block py-2 px-3 text-sm transition-colors rounded-sm ${level === 2 ? "ml-0" : "ml-4"
+                  } ${active === id
+                    ? "bg-bg2 text-fg3 font-medium"
+                    : "text-fg1 hover:text-fg2 hover:bg-bg1"
+                  }`}
+              >
+                {label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
+      <div className="mt-6 pt-4 border-t border-bg3">
+        <div className="text-xs mb-1 opacity-60">Contact</div>
+        <a
+          href="mailto:contact@nyoom.engineering"
+          className="text-fg1 hover:text-fg3 text-xs transition"
+        >
+          contact@nyoom.engineering
+        </a>
+      </div>
+    </div>
+  </aside>
+);
+
 export default function BlogPostClient({ metadata, children }: BlogPostClientProps) {
+  const [sections, setSections] = useState<Section[]>([]);
+  const [activeSection, setActiveSection] = useState("");
+  const [tocVisible, setTocVisible] = useState(false);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const heroRef = useRef<HTMLDivElement>(null);
+
+  // Extract headings from content
+  const extractHeadings = useCallback(() => {
+    if (!contentRef.current) return;
+
+    const headings = contentRef.current.querySelectorAll("h1, h2, h3, h4, h5, h6");
+    const extractedSections: Section[] = [];
+
+    headings.forEach((heading, index) => {
+      const level = parseInt(heading.tagName.charAt(1));
+      let id = heading.id;
+
+      // Generate ID if not present
+      if (!id) {
+        id = heading.textContent
+          ?.toLowerCase()
+          .replace(/[^a-z0-9]+/g, "-")
+          .replace(/(^-|-$)/g, "") || `heading-${index}`;
+        heading.id = id;
+      }
+
+      extractedSections.push({
+        id,
+        label: heading.textContent || "",
+        level,
+      });
+    });
+
+    setSections(extractedSections);
+  }, []);
+
+  // Handle scroll events
+  const handleScroll = useCallback(() => {
+    if (!contentRef.current) return;
+
+    const scrollY = window.scrollY;
+
+    // Show TOC after hero section
+    const heroBottom = heroRef.current
+      ? heroRef.current.getBoundingClientRect().bottom + scrollY
+      : 0;
+    setTocVisible(scrollY > heroBottom - 100);
+
+    // Find active section
+    const headings = contentRef.current.querySelectorAll("h1, h2, h3, h4, h5, h6");
+    let currentActive = "";
+
+    for (let i = headings.length - 1; i >= 0; i--) {
+      const heading = headings[i] as HTMLElement;
+      const rect = heading.getBoundingClientRect();
+
+      if (rect.top <= 150) {
+        currentActive = heading.id;
+        break;
+      }
+    }
+
+    setActiveSection(currentActive);
+  }, []);
+
+  useEffect(() => {
+    // Extract headings after content is mounted
+    const timer = setTimeout(extractHeadings, 100);
+
+    // Setup scroll listener
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll);
+
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+    };
+  }, [extractHeadings, handleScroll]);
+
   return (
     <div className="flex flex-col bg-background min-h-screen">
+      {/* TOC */}
+      <TableOfContents sections={sections} active={activeSection} visible={tocVisible} />
+
       {/* Banner */}
-      <div className="relative w-full h-[40vh] md:h-[50vh]">
+      <div ref={heroRef} className="relative w-full h-[40vh] md:h-[50vh]">
         <Image
           src={metadata.image}
           alt={metadata.title}
@@ -80,7 +219,7 @@ export default function BlogPostClient({ metadata, children }: BlogPostClientPro
         <Separator className="my-6" />
 
         {/* Article content */}
-        <div>{children}</div>
+        <div ref={contentRef}>{children}</div>
 
         {/* Share */}
         <h3 className="text-sm text-fg2 mt-12 mb-3">Share Article</h3>
