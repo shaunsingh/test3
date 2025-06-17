@@ -26,8 +26,14 @@ export function BlogPageCard({
     <div className="block bg-bg2 hover:bg-bg3 transition-colors group relative">
 
       <Link href={link}>
-        <div className="relative w-full h-48 bg-black">
-          <Image src={image} alt={title} fill className="object-cover" />
+        <div className="relative w-full aspect-video bg-black">
+          <Image
+            src={image}
+            alt={title}
+            fill
+            sizes="(max-width: 768px) 100vw, 33vw"
+            className="object-cover"
+          />
         </div>
         <div className="p-4">
           <h3 className="text-fg3 mb-2">{title}</h3>

@@ -63,8 +63,14 @@ interface BlogPostCardProps {
 function BlogPostCard({ image, title, description, date, link }: BlogPostCardProps) {
   return (
     <Link href={link} className="block bg-bg3 p-4 hover:bg-bg4 transition-colors group">
-      <div className="relative w-full h-68 mb-4">
-        <Image src={image} alt={title} fill className="object-cover bg-black" />
+      <div className="relative w-full aspect-video mb-4">
+        <Image
+          src={image}
+          alt={title}
+          fill
+          sizes="(max-width: 768px) 100vw, 33vw"
+          className="object-cover bg-black"
+        />
       </div>
       <h3 className="text-xl font-mono text-fg2 mb-2 leading-tight">{title}</h3>
       <p className="text-sm text-fg1 mb-4">{description}</p>

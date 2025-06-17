@@ -13,6 +13,7 @@ export function Section() {
             src="/heatmap.png"
             alt="lasers"
             fill
+            sizes="(max-width: 1024px) 100vw, 50vw"
             className="object-cover"
             priority={true}
           />

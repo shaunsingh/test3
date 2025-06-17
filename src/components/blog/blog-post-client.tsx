@@ -61,7 +61,14 @@ export default function BlogPostClient({ metadata, children }: BlogPostClientPro
     <div className="flex flex-col bg-background min-h-screen">
       <header ref={heroRef} className="flex flex-col">
         <div className="relative h-[40vh] md:h-[50vh]">
-          <Image src={metadata.image} alt={metadata.title} fill priority className="object-cover" />
+          <Image
+            src={metadata.image}
+            alt={metadata.title}
+            fill
+            sizes="100vw"
+            priority
+            className="object-cover"
+          />
         </div>
 
         <div className="flex items-center bg-background py-12">
