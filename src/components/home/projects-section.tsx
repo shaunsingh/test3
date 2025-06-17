@@ -4,7 +4,7 @@ import { Button } from "../ui/button";
 
 export function ProjectsSection() {
   return (
-    <section id="projects-section" className="scroll-mt-16 pt-4 w-full max-container padding-container text-white">
+    <section id="projects-section" className="scroll-mt-16 w-full max-container padding-container text-white">
       <div className="bg-card p-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           {/* Project Cards */}
