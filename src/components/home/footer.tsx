@@ -33,10 +33,10 @@ export function Footer() {
               <div>
                 <h3 className="text-sm font-medium mb-1 text-fg3">Discover</h3>
                 <ul className="space-y-0.5">
-                  <li><Link href="/solutions" className="text-xs text-fg1 hover:text-fg3 transition-colors">Solutions</Link></li>
-                  <li><Link href="/projects" className="text-xs text-fg1 hover:text-fg3 transition-colors">Projects</Link></li>
-                  <li><Link href="/research" className="text-xs text-fg1 hover:text-fg3 transition-colors">Research</Link></li>
-                  <li><Link href="/overview" className="text-xs text-fg1 hover:text-fg3 transition-colors">Overview</Link></li>
+                  <li><Link href="/#big-media" className="text-xs text-fg1 hover:text-fg3 transition-colors">Solutions</Link></li>
+                  <li><Link href="/#projects-section" className="text-xs text-fg1 hover:text-fg3 transition-colors">Projects</Link></li>
+                  <li><Link href="/#writings" className="text-xs text-fg1 hover:text-fg3 transition-colors">Research</Link></li>
+                  {/* <li><Link href="/FIXME" className="text-xs text-fg1 hover:text-fg3 transition-colors">Contact Us</Link></li> */}
                 </ul>
               </div>
 
@@ -44,10 +44,10 @@ export function Footer() {
               <div>
                 <h3 className="text-sm font-medium mb-1 text-fg3">Connect</h3>
                 <ul className="space-y-0.5">
-                  <li><Link href="/events" className="text-xs text-fg1 hover:text-fg3 transition-colors">Events</Link></li>
-                  <li><Link href="/support" className="text-xs text-fg1 hover:text-fg3 transition-colors">Support</Link></li>
-                  <li><Link href="/careers" className="text-xs text-fg1 hover:text-fg3 transition-colors">Careers</Link></li>
-                  <li><Link href="/merch" className="text-xs text-fg1 hover:text-fg3 transition-colors">Merchandise</Link></li>
+                  {/* <li><Link href="/events" className="text-xs text-fg1 hover:text-fg3 transition-colors">Events</Link></li> */}
+                  {/* <li><Link href="/support" className="text-xs text-fg1 hover:text-fg3 transition-colors">Support</Link></li> */}
+                  {/* <li><Link href="/careers" className="text-xs text-fg1 hover:text-fg3 transition-colors">Careers</Link></li> */}
+                  <li><Link href="/Merchandise" className="text-xs text-fg1 hover:text-fg3 transition-colors">Merchandise</Link></li>
                 </ul>
               </div>
 
@@ -66,9 +66,9 @@ export function Footer() {
               <div>
                 <h3 className="text-sm font-medium mb-1 text-fg3">Follow</h3>
                 <ul className="space-y-0.5">
-                  <li><Link href="https://linkedin.com" className="text-xs text-fg1 hover:text-fg3 transition-colors">LinkedIn</Link></li>
-                  <li><Link href="https://x.com" className="text-xs text-fg2 hover:text-fg3 transition-colors">X</Link></li>
-                  <li><Link href="https://youtube.com" className="text-xs text-fg2 hover:text-fg3 transition-colors">YouTube</Link></li>
+                  {/* <li><Link href="https://linkedin.com" className="text-xs text-fg1 hover:text-fg3 transition-colors">LinkedIn</Link></li> */}
+                  <li><Link href="https://x.com" className="text-xs text-fg2 hover:text-fg3 transition-colors">Twitter</Link></li>
+                  {/* <li><Link href="https://youtube.com" className="text-xs text-fg2 hover:text-fg3 transition-colors">YouTube</Link></li> */}
                   <li><Link href="https://discord.com" className="text-xs text-fg2 hover:text-fg3 transition-colors">Discord</Link></li>
                 </ul>
               </div>

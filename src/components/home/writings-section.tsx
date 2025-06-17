@@ -9,7 +9,7 @@ export function WritingsSection() {
   return (
     <section id="writings" className="scroll-mt-16 w-full max-container padding-container text-white">
       <div className="bg-card p-4">
-        <div className="flex justify-between items-center mb-8">
+        <div className="flex flex-col gap-4 sm:flex-row justify-between items-start sm:items-center mb-8">
           <div>
             <div className="text-gray-400 text-sm mb-2">WRITINGS</div>
             <h2 className="text-3xl font-mono text-white">Thoughts On<br />Tech And Nature</h2>
@@ -19,7 +19,7 @@ export function WritingsSection() {
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
           {recentPosts.map((post) => (
             <BlogPostCard
               key={post.slug}

@@ -8,7 +8,7 @@ export function BigMedia() {
     <section id="big-media" className="scroll-mt-16 w-full max-container padding-container text-white">
       <div className="bg-card border-16 border-bg2">
         {/* Top Info Bar */}
-        <div className="flex flex-col lg:flex-row justify-between pb-4 items-start lg:items-center">
+        <div className="flex flex-col gap-4 lg:flex-row lg:justify-between pb-4 items-start lg:items-center">
           {/* Left Column: Text Content */}
           <div className="flex flex-col gap-2 max-w-lg">
             <div className="text-xs text-gray-400 font-mono uppercase tracking-widest">
@@ -20,14 +20,14 @@ export function BigMedia() {
           </div>
 
           {/* Middle Column: Paragraph */}
-          <div className="flex-1 max-w-xl">
+          <div className="flex-1 w-full lg:max-w-xl">
             <p className="text-sm text-gray-300 font-mono">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
             </p>
           </div>
 
           {/* Right Column: Contact Button */}
-          <div className="flex items-start lg:items-center">
+          <div className="flex items-start lg:items-center mt-2 lg:mt-0">
             <ContactDialog>
               <Button className="bg-white text-black px-2 py-2  font-medium flex items-center">
                 CONTACT US <ArrowRight className="ml-2 h-4 w-4" />
