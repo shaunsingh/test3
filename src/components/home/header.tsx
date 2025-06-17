@@ -3,7 +3,7 @@ import { ArrowRight, Menu, X } from "lucide-react"
 import Image from "next/image";
 import { ContactDialog } from "../contact-dialog";
 import { Button } from "../ui/button";
-import { useState, useCallback } from "react";
+import { useState } from "react";
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -14,11 +14,18 @@ export function Header() {
         <div className="max-container padding-container w-full flex justify-between">
           {/* Left: logo and desktop primary nav */}
           <div className="flex gap-4 items-center">
-            <Link href="/">
-              <Image src="/logo-baked.svg" alt="Nyoom Engineering logo" width={160} height={53} priority />
+            <Link href="/" className="shrink-0">
+              <Image
+                src="/logo-baked.svg"
+                alt="Nyoom Engineering logo"
+                width={160}
+                height={53}
+                priority
+                className="h-auto w-[160px]"
+              />
             </Link>
 
-            <div className="hidden md:flex items-center space-x-4">
+            <div className="hidden lg:flex items-center space-x-4">
               <NavItem label="Solutions" number="01" href="/#big-media" />
               <NavItem label="Projects" number="02" href="/#projects-section" />
               <NavItem label="Research" number="03" href="/#writings" />
@@ -27,14 +34,14 @@ export function Header() {
 
           {/* Right: desktop secondary nav + contact or hamburger */}
           <div className="flex items-center space-x-6 font-mono text-fg1">
-            <div className="hidden md:flex items-center space-x-6">
+            <div className="hidden xl:flex items-center space-x-6">
               <Link href="/blog" className="text-sm hover:text-fg2">Blog</Link>
               <Link href="/docs" className="hover:text-fg2">Docs</Link>
               <Link href="/automotive" className="hover:text-fg2">Automotive</Link>
               <Link href="/oxocarbon" className="hover:text-fg2">Oxocarbon</Link>
             </div>
             <ContactDialog>
-              <Button className="hidden md:flex bg-white text-black px-2 py-2 font-medium items-center">
+              <Button className="hidden lg:flex bg-white text-black px-2 py-2 font-medium items-center">
                 CONTACT US <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </ContactDialog>
@@ -42,7 +49,7 @@ export function Header() {
             {/* Hamburger */}
             <button
               aria-label="Open menu"
-              className="md:hidden p-2 text-fg1 hover:text-fg3 focus:outline-none"
+              className="lg:hidden p-2 text-fg1 hover:text-fg3 focus:outline-none"
               onClick={() => setOpen(true)}
             >
               <Menu className="h-6 w-6" />
