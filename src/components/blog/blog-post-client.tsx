@@ -79,7 +79,7 @@ const TableOfContents = ({
                 }}
                 className={`block py-2 px-3 text-sm transition-colors rounded-sm ${level === 2 ? "ml-0" : "ml-4"
                   } ${active === id
-                    ? "bg-bg2 text-fg3 font-medium"
+                    ? "bg-bg2 text-fg3"
                     : "text-fg1 hover:text-fg2 hover:bg-bg1"
                   }`}
               >
