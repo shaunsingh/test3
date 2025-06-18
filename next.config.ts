@@ -6,10 +6,14 @@ import { initOpenNextCloudflareForDev } from "@opennextjs/cloudflare";
 const nextConfig: NextConfig = {
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
   output: "standalone",
+  compress: true,
 };
 
 const withMDX = createMDX({
-  // Add markdown plugins here, as desired
+  options: {
+    providerImportSource: "@mdx-js/react",
+    development: false,
+  },
 });
 
 export default withMDX(nextConfig);

@@ -8,7 +8,9 @@ main = ".open-next/worker.js"
 # Uncomment this when the domain is active in this account to auto-route.
 # routes = [ { pattern = "nyoom.engineering/*" } ]
 
-
 [assets]
 directory = ".open-next/assets"
 binding = "ASSETS" 
+
+[vars]
+NODE_ENV = "production"
