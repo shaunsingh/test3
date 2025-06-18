@@ -42,3 +42,10 @@ next-env.d.ts
 
 # common-lisp
 /common-lisp
+
+# OpenNext build artifacts
+/.open-next/
+
+# Wrangler local artifacts
+/.wrangler/
+cloudflare-env.d.ts

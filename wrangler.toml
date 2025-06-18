@@ -1,0 +1,14 @@
+name = "site-react"
+account_id = "e4e4d4672c3b96cb4316483675a57321"
+compatibility_date = "2025-06-18"
+compatibility_flags = ["nodejs_compat"]
+
+main = ".open-next/worker.js"
+
+# Uncomment this when the domain is active in this account to auto-route.
+# routes = [ { pattern = "nyoom.engineering/*" } ]
+
+
+[assets]
+directory = ".open-next/assets"
+binding = "ASSETS" 
