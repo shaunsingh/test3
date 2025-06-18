@@ -5,8 +5,8 @@ compatibility_date = "2025-06-18"
 # Learn more at https://developers.cloudflare.com/workers/runtime-apis/nodejs/
 # We recommend to always use the latest supported version of the Workers runtime.
 # https://developers.cloudflare.com/workers/platform/versions/#workers-runtime
-compatibility_flags = ["nodejs_compat"]
 main = ".open-next/worker.js"
+compatibility_flags = ["nodejs_compat", "global_fetch_strictly_public"]
 
 [site]
 bucket = ".open-next/assets"

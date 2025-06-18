@@ -18,7 +18,5 @@ const withMDX = createMDX({
 
 export default withMDX(nextConfig);
 
-// Initialize OpenNext Cloudflare dev integration for bindings
-if (process.env.NODE_ENV === "development") {
-  initOpenNextCloudflareForDev();
-}
+import { initOpenNextCloudflareForDev } from "@opennextjs/cloudflare";
+initOpenNextCloudflareForDev();
