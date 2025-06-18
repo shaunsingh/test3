@@ -4,6 +4,7 @@ import Image from "next/image";
 import React, { useEffect, useState, useRef, useCallback } from "react";
 import { Github, Twitter, Linkedin, LucideIcon } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
+import { BlogPost } from "@/lib/blog";
 
 interface Section {
   id: string;
@@ -11,19 +12,8 @@ interface Section {
   level: number;
 }
 
-interface BlogPostMetadata {
-  title: string;
-  description: string;
-  image: string;
-  date: Date;
-  category: string;
-  author: string;
-  slug: string;
-  tags?: string[];
-}
-
 interface BlogPostClientProps {
-  metadata: BlogPostMetadata;
+  metadata: BlogPost;
   children: React.ReactNode;
 }
 
