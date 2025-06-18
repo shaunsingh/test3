@@ -1,8 +1,6 @@
 "use client";
 
 // — Keeps the fixed <Header /> at the top.
-// — Uses pure CSS flexbox so the <Footer /> is always at the bottom of
-//   the viewport on short pages (e.g. 404) without any JS scroll listeners.
 
 import { Header } from "@/components/home/header";
 import { Footer } from "@/components/home/footer";
@@ -18,6 +16,15 @@ export function LayoutScrollWrapper({ children }: { children: React.ReactNode })
     if (!headerEl) return;
 
     const headerHeight = headerEl.offsetHeight;
+
+    // Early-exit for non-scrollable pages
+    const pageIsScrollable = () => document.documentElement.scrollHeight > window.innerHeight + headerHeight;
+
+    // If the page fits in the viewport, skip installing listeners entirely.
+    if (!pageIsScrollable()) {
+      headerEl.style.transform = "";
+      return;
+    }
 
     // Cache DOM references
     const heroEl = document.querySelector<HTMLElement>('main header.h-screen');
@@ -52,6 +59,15 @@ export function LayoutScrollWrapper({ children }: { children: React.ReactNode })
       if (ticking) return;
       ticking = true;
       requestAnimationFrame(() => {
+        // If the page has become non-scrollable (e.g. after a viewport resize
+        // that increased height), clean up and bail.
+        if (!pageIsScrollable()) {
+          headerEl.style.transform = "";
+          detachListeners();
+          ticking = false;
+          return;
+        }
+
         const translate = computeTranslate();
         if (translate !== lastTranslate) {
           headerEl.style.transform = translate ? `translateY(-${translate}px)` : 'translateY(0)';
@@ -61,6 +77,11 @@ export function LayoutScrollWrapper({ children }: { children: React.ReactNode })
       });
     };
 
+    const detachListeners = () => {
+      window.removeEventListener('scroll', onScrollOrResize);
+      window.removeEventListener('resize', onScrollOrResize);
+    };
+
     // Initial position
     onScrollOrResize();
 
@@ -68,8 +89,7 @@ export function LayoutScrollWrapper({ children }: { children: React.ReactNode })
     window.addEventListener('resize', onScrollOrResize);
 
     return () => {
-      window.removeEventListener('scroll', onScrollOrResize);
-      window.removeEventListener('resize', onScrollOrResize);
+      detachListeners();
     };
   }, [pathname]);
 
