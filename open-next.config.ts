@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { defineCloudflareConfig } from "@opennextjs/cloudflare";
-import { staticAssetsIncrementalCache } from "@opennextjs/cloudflare/incremental-cache";
+import staticAssetsIncrementalCache from "@opennextjs/cloudflare/overrides/incremental-cache/static-assets-incremental-cache";
 
 export default defineCloudflareConfig({
   packager: "bun",
