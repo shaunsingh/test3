@@ -32,7 +32,7 @@ export function Hero() {
       </div>
       <div className="bg-black h-[380px] lg:h-auto relative overflow-hidden">
         <Image
-          src="/planet.png"
+          src="/caida/ries-t.png"
           alt="planet"
           fill
           sizes="(max-width: 1024px) 100vw, 50vw"
