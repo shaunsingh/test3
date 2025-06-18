@@ -1,4 +1,6 @@
 import type { MDXComponents } from "mdx/types";
+import { CodeBlock } from "@/components/blog/code-block";
+import React from "react";
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -47,6 +49,22 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         {children}
       </code>
     ),
+    pre: (props) => {
+      const { children } = props;
+      const child = React.Children.toArray(children)[0];
+
+      if (React.isValidElement(child)) {
+        const { props: childProps } = child as React.ReactElement<any>;
+        const className = childProps.className || '';
+        const matches = className.match(/language-(.*)/);
+        const language = matches ? matches[1] : 'rust';
+        const code = String(childProps.children).trim();
+        
+        return <CodeBlock code={code} language={language} />;
+      }
+      
+      return <pre {...props} />;
+    },
     ...components,
   };
 }

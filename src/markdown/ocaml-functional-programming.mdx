@@ -36,8 +36,8 @@ In a world dominated by imperative languages, OCaml offers a different perspecti
 
 Pattern matching is OCaml's killer feature, allowing you to destructure data and handle different cases elegantly:
 
-<CodeBlock
-  code={`(* Define a tree data structure *)
+```ocaml
+(* Define a tree data structure *)
 type 'a tree = 
   | Leaf 
   | Node of 'a * 'a tree * 'a tree
@@ -59,7 +59,7 @@ let describe_list = function
   | [x] -> "Single element: " ^ string_of_int x
   | x :: y :: _ -> "Starts with " ^ string_of_int x ^ " and " ^ string_of_int y`}
   language="ocaml"
-/>
+```
 
 # Type System Excellence
 

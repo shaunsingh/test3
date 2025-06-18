@@ -1,16 +1,8 @@
 "use client"
 
+import React, { useEffect, useState } from "react";
 import AceEditor from "react-ace";
 import { Copy, ExternalLink } from "lucide-react";
-import "ace-builds/src-noconflict/mode-rust";
-import "ace-builds/src-noconflict/mode-javascript";
-import "ace-builds/src-noconflict/mode-python";
-import "ace-builds/src-noconflict/mode-typescript";
-import "ace-builds/src-noconflict/mode-c_cpp";
-import "ace-builds/src-noconflict/mode-json";
-import "ace-builds/src-noconflict/mode-ocaml";
-import "ace-builds/src-noconflict/mode-markdown";
-import "ace-builds/src-noconflict/keybinding-vim";
 
 // Register custom oxocarbon theme
 import ace from "ace-builds/src-noconflict/ace";
@@ -142,7 +134,17 @@ interface CodeBlockProps {
 }
 
 export function CodeBlock({ code, language = "rust" }: CodeBlockProps) {
+  const [editorReady, setEditorReady] = useState(false);
   const lineCount = code.split("\n").length;
+
+  useEffect(() => {
+    Promise.all([
+      import(`ace-builds/src-noconflict/mode-${language}`),
+      import(`ace-builds/src-noconflict/keybinding-vim`),
+    ]).then(() => {
+      setEditorReady(true);
+    });
+  }, [language]);
 
   const handleCopy = () => {
     navigator.clipboard.writeText(code);
@@ -215,37 +217,49 @@ export function CodeBlock({ code, language = "rust" }: CodeBlockProps) {
           <ExternalLink className="h-4 w-4" />
         </button>
       </div>
-      <AceEditor
-        mode={language}
-        theme="oxocarbon"
-        value={code}
-        name="codeblock"
-        readOnly={false}
-        fontSize={15}
-        width="100%"
-        minLines={lineCount + 1}
-        maxLines={lineCount + 1}
-        showPrintMargin={true}
-        showGutter={true}
-        highlightActiveLine={true}
-        wrapEnabled={true}
-        keyboardHandler="vim"
-        setOptions={{
-          cursorStyle: "wide",
-          showLineNumbers: false,
-          showPrintMargin: true,
-          wrap: true,
-          displayIndentGuides: false,
-          hScrollBarAlwaysVisible: false,
-          vScrollBarAlwaysVisible: false,
-          animatedScroll: true,
-          useSoftTabs: true,
-          highlightActiveLine: true,
-        }}
-        editorProps={{ $blockScrolling: true }}
-        className="oxocarbon"
-        style={{ borderRadius: 0, width: '100%', background: '#161616' }}
-      />
+      {editorReady ? (
+        <AceEditor
+          mode={language}
+          theme="oxocarbon"
+          value={code}
+          name="codeblock"
+          readOnly={false}
+          fontSize={15}
+          width="100%"
+          minLines={lineCount + 1}
+          maxLines={lineCount + 1}
+          showPrintMargin={true}
+          showGutter={true}
+          highlightActiveLine={true}
+          wrapEnabled={true}
+          keyboardHandler="vim"
+          setOptions={{
+            cursorStyle: "wide",
+            showLineNumbers: false,
+            showPrintMargin: true,
+            wrap: true,
+            displayIndentGuides: false,
+            hScrollBarAlwaysVisible: false,
+            vScrollBarAlwaysVisible: false,
+            animatedScroll: true,
+            useSoftTabs: true,
+            highlightActiveLine: true,
+          }}
+          editorProps={{ $blockScrolling: true }}
+          className="oxocarbon"
+          style={{ borderRadius: 0, width: '100%', background: '#161616' }}
+        />
+      ) : (
+        <div
+          style={{
+            height: `${(lineCount + 1) * 22.5}px`,
+            backgroundColor: "#161616",
+          }}
+          className="flex items-center justify-center"
+        >
+          <p className="text-fg1 animate-pulse">Loading Editor...</p>
+        </div>
+      )}
     </div>
   );
 } 
