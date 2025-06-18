@@ -130,7 +130,7 @@ export function ImageGallery({ images }: ImageGalleryProps) {
               <button
                 key={index}
                 onClick={() => transitionTo(index)}
-                className={`w-2 h-2 rounded-full transition-all ${index === currentImageIndex
+                className={`w-2 h-2 transition-all ${index === currentImageIndex
                     ? "bg-fg3 w-6"
                     : "bg-bg3 hover:bg-fg1"
                   }`}
