@@ -95,7 +95,7 @@ export function ImageGallery({ images }: ImageGalleryProps) {
               alt={currentImage.alt}
               fill
               sizes="(max-width: 100ch) 100vw, 100ch"
-              onLoadingComplete={() => {
+              onLoad={() => {
                 setIsCurrentLoaded(true);
                 setTimeout(() => setPrevImageIndex(null), 300);
               }}

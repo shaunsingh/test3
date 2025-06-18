@@ -1,10 +1,7 @@
 "use client"
 
-import React, { useRef } from "react";
 import AceEditor from "react-ace";
 import { Copy, ExternalLink } from "lucide-react";
-
-// Import Ace Editor modes and required dependencies
 import "ace-builds/src-noconflict/mode-rust";
 import "ace-builds/src-noconflict/mode-javascript";
 import "ace-builds/src-noconflict/mode-python";
@@ -125,8 +122,11 @@ const oxocarbonTheme = {
 if (typeof ace !== "undefined" && ace.define && !ace.require("ace/theme/oxocarbon")) {
   ace.define(
     "ace/theme/oxocarbon",
-    ["require", "exports", "module", "ace/lib/dom"],
-    function (require: any, exports: any, module: any) {
+    ["require", "exports"],
+    function (
+      require: (moduleName: string) => { importCssString: (cssText: string, className: string) => void },
+      exports: { isDark: boolean; cssClass: string; cssText: string },
+    ) {
       exports.isDark = oxocarbonTheme.isDark;
       exports.cssClass = oxocarbonTheme.cssClass;
       exports.cssText = oxocarbonTheme.cssText;
@@ -142,17 +142,10 @@ interface CodeBlockProps {
 }
 
 export function CodeBlock({ code, language = "rust" }: CodeBlockProps) {
-  const editorRef = useRef<any>(null);
-
-  // Calculate dynamic height based on number of lines
-  const fontSize = 15;
-  // Ensure there is exactly ONE trailing newline so that the editor only shows a single empty line after the code ends
-  const sanitizedCode = code.replace(/\n+$/, "") + "\n";
-  const lineCount = sanitizedCode.split("\n").length;
-  const padding = 24; // still used for extra padding in potential future styling
+  const lineCount = code.split("\n").length;
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(sanitizedCode);
+    navigator.clipboard.writeText(code);
   };
 
   const handleOpenInNewTab = () => {
@@ -174,7 +167,7 @@ export function CodeBlock({ code, language = "rust" }: CodeBlockProps) {
             isDark: true,
             cssClass: 'ace-oxocarbon'
           };
-          ace.define('ace/theme/oxocarbon', ['require', 'exports', 'module', 'ace/lib/dom'], function(require, exports, module) {
+          ace.define('ace/theme/oxocarbon', ['require', 'exports'], function(require, exports) {
             exports.isDark = oxocarbonTheme.isDark;
             exports.cssClass = oxocarbonTheme.cssClass;
             exports.cssText = oxocarbonTheme.cssText;
@@ -184,7 +177,7 @@ export function CodeBlock({ code, language = "rust" }: CodeBlockProps) {
           var editor = ace.edit('editor');
           editor.setTheme('ace/theme/oxocarbon');
           editor.session.setMode('ace/mode/${language}');
-          editor.setValue(${JSON.stringify(sanitizedCode)}, -1);
+          editor.setValue(${JSON.stringify(code)}, -1);
           editor.setReadOnly(false);
           editor.setFontSize(15);
           editor.setShowPrintMargin(true);
@@ -223,13 +216,12 @@ export function CodeBlock({ code, language = "rust" }: CodeBlockProps) {
         </button>
       </div>
       <AceEditor
-        ref={editorRef}
         mode={language}
         theme="oxocarbon"
-        value={sanitizedCode}
+        value={code}
         name="codeblock"
         readOnly={false}
-        fontSize={fontSize}
+        fontSize={15}
         width="100%"
         minLines={lineCount + 1}
         maxLines={lineCount + 1}
