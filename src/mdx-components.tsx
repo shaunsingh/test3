@@ -54,7 +54,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       const child = React.Children.toArray(children)[0];
 
       if (React.isValidElement(child)) {
-        const { props: childProps } = child as React.ReactElement<any>;
+        const { props: childProps } = child as React.ReactElement<{ className?: string; children?: React.ReactNode }>;
         const className = childProps.className || '';
         const matches = className.match(/language-(.*)/);
         const language = matches ? matches[1] : 'rust';
