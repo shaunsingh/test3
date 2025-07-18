@@ -1,7 +1,5 @@
-// @ts-nocheck
 import type { NextConfig } from "next";
 import createMDX from "@next/mdx";
-import { initOpenNextCloudflareForDev } from "@opennextjs/cloudflare";
 
 const nextConfig: NextConfig = {
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
@@ -12,11 +10,11 @@ const nextConfig: NextConfig = {
 const withMDX = createMDX({
   options: {
     providerImportSource: "@mdx-js/react",
-    development: false,
   },
 });
 
 export default withMDX(nextConfig);
 
-import { initOpenNextCloudflareForDev } from "@opennextjs/cloudflare";
+// added by create cloudflare to enable calling `getCloudflareContext()` in `next dev`
+import { initOpenNextCloudflareForDev } from '@opennextjs/cloudflare';
 initOpenNextCloudflareForDev();
