@@ -1,7 +1,21 @@
 @import "tailwindcss";
-@import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  }
+}
 
 :root {
   --background: oklch(1 0 0);
@@ -204,20 +218,13 @@
   --shadow-2xl: var(--shadow-2xl);
 }
 
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-}
+
 
 @layer utilities {
   .max-container {
     @apply max-w-[1440px] mx-auto;
   }
-  
+
   .padding-container {
     @apply px-5;
   }

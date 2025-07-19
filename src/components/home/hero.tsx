@@ -1,12 +1,12 @@
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import Image from "next/image"
+import { memo } from "react"
 
-export function Hero() {
+export const Hero = memo(function Hero() {
   return (
     <section className="w-full max-container padding-container grid grid-cols-1 lg:grid-cols-2 gap-0">
       <div className="bg-card p-4 lg:p-8 flex flex-col justify-between h-[400px] min-h-[500px]">
-        {/* Top Section */}
         <div>
           <div className="text-gray-400 mb-4">Nyoom Engineering</div>
           <h1 className="text-2xl md:text-3xl lg:text-4xl font-mono mb-0">
@@ -15,7 +15,6 @@ export function Hero() {
             the Modern age
           </h1>
         </div>
-        {/* Bottom Section */}
         <div>
           <p className="text-sm text-gray-400 mb-8 max-w-lg font-mono">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
@@ -24,7 +23,8 @@ export function Hero() {
           </p>
           <Link
             href="/contact"
-            className="bg-white text-black px-4 py-2 text-sm font-medium inline-flex items-center"
+            className="bg-white text-black px-4 py-2 text-sm font-medium inline-flex items-center hover:bg-gray-100 transition-colors"
+            prefetch={false}
           >
             CONTACT US <ArrowRight className="ml-2 h-4 w-4" />
           </Link>
@@ -37,9 +37,9 @@ export function Hero() {
           fill
           sizes="(max-width: 1024px) 100vw, 50vw"
           className="object-cover"
-          priority={true}
+          priority
         />
       </div>
     </section>
   )
-}
+})

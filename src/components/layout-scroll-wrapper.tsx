@@ -1,13 +1,14 @@
 "use client";
 
-// — Keeps the fixed <Header /> at the top.
-
-import { Header } from "@/components/home/header";
-import { Footer } from "@/components/home/footer";
 import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
+import { Footer } from "@/components/home/footer";
 
-export function LayoutScrollWrapper({ children }: { children: React.ReactNode }) {
+interface LayoutScrollWrapperProps {
+  children: React.ReactNode;
+}
+
+export function LayoutScrollWrapper({ children }: LayoutScrollWrapperProps) {
   const footerRef = useRef<HTMLElement>(null);
   const pathname = usePathname();
 
@@ -15,53 +16,41 @@ export function LayoutScrollWrapper({ children }: { children: React.ReactNode })
     const headerEl = document.querySelector('header') as HTMLElement | null;
     if (!headerEl) return;
 
+    // Hint browsers to optimize for transform animations
+    headerEl.style.willChange = 'transform';
     const headerHeight = headerEl.offsetHeight;
 
-    // Early-exit for non-scrollable pages
+    // Cache expensive calculations
     const pageIsScrollable = () => document.documentElement.scrollHeight > window.innerHeight + headerHeight;
-
-    // If the page fits in the viewport, skip installing listeners entirely.
-    if (!pageIsScrollable()) {
-      headerEl.style.transform = "";
-      return;
-    }
-
-    // Cache DOM references
+    let isScrollable = pageIsScrollable();
     const heroEl = document.querySelector<HTMLElement>('main header.h-screen');
-
-    // State to avoid unnecessary DOM writes
     let lastTranslate = -1;
 
+    // Optimized translate calculation with cached values
     const computeTranslate = () => {
       if (!footerRef.current) return 0;
-
       let translate = 0;
 
-      // hero
+      // Hero calculation (only if element exists)
       if (heroEl) {
         const rect = heroEl.getBoundingClientRect();
         const halfway = rect.height / 2;
-        const delta = halfway - rect.bottom; // >0 after scrolling past halfway
+        const delta = halfway - rect.bottom;
         translate = Math.max(translate, Math.min(Math.max(delta, 0), headerHeight));
       }
 
-      // footer
+      // Footer calculation
       const footerRect = footerRef.current.getBoundingClientRect();
       const visibleHeight = Math.max(0, window.innerHeight - footerRect.top);
-      translate = Math.max(translate, Math.min(visibleHeight, headerHeight));
-
-      return translate;
+      return Math.max(translate, Math.min(visibleHeight, headerHeight));
     };
 
-    // RAF throttle
     let ticking = false;
     const onScrollOrResize = () => {
       if (ticking) return;
       ticking = true;
       requestAnimationFrame(() => {
-        // If the page has become non-scrollable (e.g. after a viewport resize
-        // that increased height), clean up and bail.
-        if (!pageIsScrollable()) {
+        if (!isScrollable) {
           headerEl.style.transform = "";
           detachListeners();
           ticking = false;
@@ -70,40 +59,59 @@ export function LayoutScrollWrapper({ children }: { children: React.ReactNode })
 
         const translate = computeTranslate();
         if (translate !== lastTranslate) {
-          headerEl.style.transform = translate ? `translateY(-${translate}px)` : 'translateY(0)';
+          headerEl.style.transform = translate ? `translate3d(0, -${translate}px, 0)` : 'translate3d(0, 0, 0)';
           lastTranslate = translate;
         }
         ticking = false;
       });
     };
 
-    const detachListeners = () => {
-      window.removeEventListener('scroll', onScrollOrResize);
-      window.removeEventListener('resize', onScrollOrResize);
+    // Combined resize handler
+    const updateScrollable = () => {
+      isScrollable = pageIsScrollable();
+      onScrollOrResize();
     };
 
-    // Initial position
-    onScrollOrResize();
+    const detachListeners = () => {
+      window.removeEventListener('scroll', onScrollOrResize);
+      window.removeEventListener('resize', updateScrollable);
+    };
 
+    // Smooth scroll handler
+    const handleSmoothScroll = (targetId: string) => {
+      const element = document.getElementById(targetId);
+      if (!element) return;
+
+      const elementRect = element.getBoundingClientRect();
+      const offset = window.scrollY + elementRect.top - headerHeight;
+
+      window.scrollTo({
+        top: offset,
+        behavior: 'smooth'
+      });
+    };
+
+    (window as Window & { smoothScrollTo?: (id: string) => void }).smoothScrollTo = handleSmoothScroll;
+
+    // Initial setup
+    onScrollOrResize();
     window.addEventListener('scroll', onScrollOrResize, { passive: true });
-    window.addEventListener('resize', onScrollOrResize);
+    window.addEventListener('resize', updateScrollable);
 
     return () => {
       detachListeners();
+      delete (window as Window & { smoothScrollTo?: (id: string) => void }).smoothScrollTo;
     };
   }, [pathname]);
 
   return (
-    <>
-      <Header />
-      <div className="flex flex-col min-h-screen pt-16">
-        <main className="flex-1">
-          {children}
-        </main>
-        <footer ref={footerRef}>
-          <Footer />
-        </footer>
-      </div>
-    </>
+    <div className="flex flex-col min-h-screen pt-16">
+      <main className="flex-1">
+        {children}
+      </main>
+      <footer ref={footerRef}>
+        <Footer />
+      </footer>
+    </div>
   );
-} 
+}

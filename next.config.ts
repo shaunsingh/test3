@@ -1,19 +1,10 @@
 import type { NextConfig } from "next";
-import createMDX from "@next/mdx";
 
 const nextConfig: NextConfig = {
-  pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
-  output: "standalone",
-  compress: true,
+  /* config options here */
 };
 
-const withMDX = createMDX({
-  options: {
-    providerImportSource: "@mdx-js/react",
-  },
-});
-
-export default withMDX(nextConfig);
+export default nextConfig;
 
 // added by create cloudflare to enable calling `getCloudflareContext()` in `next dev`
 import { initOpenNextCloudflareForDev } from '@opennextjs/cloudflare';

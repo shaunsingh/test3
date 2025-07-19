@@ -49,6 +49,9 @@
           packages = with pkgsFor.${system}; [
             bun
 
+            # cloudflare ???
+            nodejs_24
+
             # CL
             (sbcl.withPackages (p: with p; [
               cl-ppcre 

@@ -1,0 +1,11 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "cloudflare deploy",
+            "type": "shell",
+            "command": "nix develop --command bun run deploy",
+            "problemMatcher": []
+        }
+    ]
+}
