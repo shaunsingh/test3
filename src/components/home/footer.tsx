@@ -24,9 +24,27 @@ const FOOTER_LINKS = {
 } as const;
 
 const TECHNOLOGIES = [
-  { src: "/technologies/ocaml-logo.svg", alt: "OCaml" },
-  { src: "/technologies/lisp-logo.svg", alt: "Lisp" },
-  { src: "/technologies/rust-logo.svg", alt: "Rust" },
+  {
+    src: "/technologies/ocaml-logo.svg",
+    alt: "OCaml",
+    href: "https://ocaml.org",
+    width: 76,
+    height: 76,
+  },
+  {
+    src: "/technologies/lisp-logo.svg",
+    alt: "Lisp",
+    href: "https://lisp-lang.org",
+    width: 24,
+    height: 24,
+  },
+  {
+    src: "/technologies/rust-logo.svg",
+    alt: "Rust",
+    href: "https://www.rust-lang.org",
+    width: 24,
+    height: 24,
+  },
 ] as const;
 
 const LEGAL_LINKS = [
@@ -61,15 +79,23 @@ export const Footer = memo(function Footer() {
               <div className="sm:ml-1 sm:pl-2 text-center sm:text-left">
                 <p className="text-xs text-fg2 mb-2">Made With</p>
                 <div className="flex justify-center sm:justify-start gap-3">
-                  {TECHNOLOGIES.map(({ src, alt }) => (
-                    <Image
+                  {TECHNOLOGIES.map(({ src, alt, href, width, height }) => (
+                    <Link
                       key={alt}
-                      src={src}
-                      alt={alt}
-                      width={24}
-                      height={24}
-                      className="opacity-70 hover:opacity-100 transition-opacity"
-                    />
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      prefetch={false}
+                      className="inline-block"
+                    >
+                      <Image
+                        src={src}
+                        alt={alt}
+                        width={width}
+                        height={height}
+                        className="opacity-70 hover:opacity-100 transition-opacity object-contain"
+                      />
+                    </Link>
                   ))}
                 </div>
               </div>
