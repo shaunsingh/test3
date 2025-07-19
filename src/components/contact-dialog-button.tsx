@@ -1,7 +1,7 @@
 'use client'
 
 import { Button } from './ui/button'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight } from '@carbon/icons-react'
 import { ContactDialog } from './contact-dialog'
 
 interface ContactDialogButtonProps extends React.ComponentPropsWithoutRef<typeof Button> {

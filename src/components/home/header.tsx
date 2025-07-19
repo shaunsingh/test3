@@ -3,7 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useCallback, useEffect, useRef, memo } from "react";
-import { ArrowRight, Menu, X } from "lucide-react";
+import { ArrowRight, Menu, Close as X } from "@carbon/icons-react";
+import { usePathname } from "next/navigation";
 
 import { ContactDialog } from "../contact-dialog";
 import { Button } from "../ui/button";
@@ -99,6 +100,8 @@ const SecondaryLinks = memo(function SecondaryLinks({ onClick }: { onClick?: () 
 export const Header = memo(function Header() {
   const headerRef = useRef<HTMLElement>(null);
   const openRef = useRef(false);
+  // exposes helpers to effects that run after mount (route change etc.)
+  const callbacks = useRef({ recompute: () => {}, update: () => {} });
   const [open, setOpen] = useState(false);
 
   const handleOpenMenu = useCallback(() => setOpen(true), []);
@@ -115,24 +118,25 @@ export const Header = memo(function Header() {
     let heroHalfway = Infinity;
     let footerTrigger = Infinity; // scrollY at which footer starts to appear
 
-    const recomputePositions = () => {
+    const recompute = () => {
       headerHeight = headerEl.offsetHeight;
-
+      
       const heroEl = document.querySelector<HTMLElement>('main header.h-screen');
       heroHalfway = heroEl ? heroEl.offsetTop + heroEl.offsetHeight / 2 : Infinity;
-
+      
       const footerEl = document.querySelector<HTMLElement>('footer');
       // trigger right when top of footer enters viewport
       footerTrigger = footerEl ? footerEl.offsetTop - window.innerHeight : Infinity;
     };
 
-    const clamp = (value: number, min: number, max: number) => Math.max(min, Math.min(max, value));
+    // expose recompute for external effects
+    callbacks.current.recompute = recompute;
 
-    // throttled scroll handler using rAF for smoother performance
-    let lastScrollY = 0;
+    // rAF throttle state
+    let lastScrollY = window.scrollY;
     let ticking = false;
 
-    const updateTranslate = () => {
+    const update = () => {
       ticking = false;
 
       if (openRef.current) {
@@ -144,38 +148,40 @@ export const Header = memo(function Header() {
 
       // hide header as hero scrolls past halfway
       if (lastScrollY + headerHeight > heroHalfway) {
-        translate = clamp(lastScrollY + headerHeight - heroHalfway, 0, headerHeight);
+        translate = Math.min(lastScrollY + headerHeight - heroHalfway, headerHeight);
       }
 
       // push header off screen as soon as footer starts entering viewport
       if (lastScrollY > footerTrigger) {
-        const overlap = lastScrollY - footerTrigger; // 0..headerHeight
-        translate = clamp(Math.max(translate, overlap), 0, headerHeight);
+        translate = Math.min(Math.max(translate, lastScrollY - footerTrigger), headerHeight);
       }
 
       headerEl.style.transform = translate
         ? `translate3d(0, -${translate}px, 0)`
-        : 'translate3d(0, 0, 0)';
+        : "translate3d(0, 0, 0)";
+      // expose update for external call
+      callbacks.current.update = update;
     };
 
     const handleScroll = () => {
       lastScrollY = window.scrollY;
       if (!ticking) {
-        requestAnimationFrame(updateTranslate);
+        requestAnimationFrame(update);
         ticking = true;
       }
     };
 
     // initial calculations and listeners
-    recomputePositions();
-    updateTranslate(); // Initial call to set correct transform
+    recompute();
+    update(); // initial transform
+    callbacks.current.update = update;
     window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('resize', () => {
-      recomputePositions();
-      // update header immediately after resize
+    const handleResize = () => {
+      recompute();
       lastScrollY = window.scrollY;
-      updateTranslate();
-    });
+      update();
+    };
+    window.addEventListener('resize', handleResize);
 
     // smooth scroll helper that accounts for fixed header height
     (window as Window & { smoothScrollTo?: (id: string) => void }).smoothScrollTo = (targetId: string) => {
@@ -187,10 +193,17 @@ export const Header = memo(function Header() {
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', recomputePositions);
+      window.removeEventListener('resize', handleResize);
       delete (window as Window & { smoothScrollTo?: (id: string) => void }).smoothScrollTo;
     };
   }, []);
+
+  // Recompute positions on route/pathname change (e.g., navigating to 404).
+  const pathname = usePathname();
+  useEffect(() => {
+    callbacks.current.recompute();
+    callbacks.current.update();
+  }, [pathname]);
 
   // keep openRef in sync with state
   useEffect(() => {
