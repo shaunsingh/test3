@@ -45,9 +45,7 @@ export const ImageTextSection = memo(function ImageTextSection({
       {/* Text block */}
       <div
         className={cn(
-          // Reduced top padding compared to the uniform p-* so the top spacing matches the side spacing
-          // p-4 / lg:p-8 gives 1rem/2rem all-around, then we override the top specifically
-          "bg-card p-4 pt-3 lg:p-8 lg:pt-6 flex flex-col justify-between min-h-[400px] lg:min-h-[500px]",
+          "bg-card p-4 lg:p-8 lg:pt-4 flex flex-col justify-between min-h-[400px] lg:min-h-[500px]",
           textOrder,
         )}
       >
