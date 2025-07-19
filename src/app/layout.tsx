@@ -1,7 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Header } from "@/components/home/header";
-import { LayoutScrollWrapper } from "@/components/layout-scroll-wrapper";
+import { Footer } from "@/components/home/footer";
 
 export const metadata: Metadata = {
   title: {
@@ -46,9 +46,12 @@ export default function RootLayout({
       <body className="antialiased dark">
         {/* Assign a stable key so React preserves the Header instance across route changes */}
         <Header key="site-header" />
-        <LayoutScrollWrapper>
-          {children}
-        </LayoutScrollWrapper>
+        <div className="flex flex-col min-h-screen pt-16">
+          <main className="flex-1">
+            {children}
+          </main>
+          <Footer />
+        </div>
       </body>
     </html>
   );
