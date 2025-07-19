@@ -9,6 +9,26 @@ import { usePathname } from "next/navigation";
 import { ContactDialog } from "../contact-dialog";
 import { Button } from "../ui/button";
 
+const Logo = memo(function Logo({ onClick }: { onClick?: () => void }) {
+  return (
+    <Link
+      href="/"
+      className="shrink-0"
+      prefetch={false}
+      onClick={onClick}
+    >
+      <Image
+        src="/logo-baked.svg"
+        alt="Nyoom Engineering logo"
+        width={160}
+        height={53}
+        priority
+        loading="eager"
+      />
+    </Link>
+  );
+});
+
 const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>) => {
   e.preventDefault();
   const targetId = e.currentTarget.getAttribute("href")?.slice(1);
@@ -205,9 +225,11 @@ export const Header = memo(function Header() {
     callbacks.current.update();
   }, [pathname]);
 
-  // keep openRef in sync with state
+  // keep openRef in sync with state and immediately recalculate header position
   useEffect(() => {
     openRef.current = open;
+    // Re-run the transform logic so the header snaps to the correct position
+    callbacks.current.update();
   }, [open]);
 
   return (
@@ -220,16 +242,7 @@ export const Header = memo(function Header() {
       >
         <div className="max-container padding-container flex justify-between items-center h-full">
           <div className="flex gap-4 items-center">
-            <Link href="/" className="shrink-0" prefetch={false}>
-              <Image
-                src="/logo-baked.svg"
-                alt="Nyoom Engineering logo"
-                width={160}
-                height={53}
-                priority
-                loading="eager"
-              />
-            </Link>
+            <Logo />
 
             <nav className="hidden lg:flex items-center space-x-4" role="navigation">
               <NavLink href="#big-media" label="Solutions" index="01" />
@@ -260,23 +273,22 @@ export const Header = memo(function Header() {
         </div>
       </header>
 
+      {/* Dim the background when mobile menu is open */}
+      {open && (
+        <div
+          className="fixed inset-0 z-[55] bg-black/50"
+          onClick={handleCloseMenu}
+        />
+      )}
+
       <div
-        className={`fixed top-0 left-0 right-0 z-[60] bg-bg1/80 backdrop-blur-xl text-fg1 px-5 pb-5 ${
+        className={`fixed top-0 left-0 right-0 z-[60] bg-bg1/80 backdrop-blur-xl text-fg1 border-b border-white/10 ${
           open ? "" : "hidden"
         }`}
       >
-        <div className="flex flex-col">
+        <div className="flex flex-col max-container padding-container px-5 pb-8">
           <div className="flex justify-between items-center h-16 mb-6">
-            <Link href="/" onClick={handleCloseMenu}>
-              <Image
-                src="/logo-baked.svg"
-                alt="Nyoom Engineering logo"
-                width={160}
-                height={53}
-                priority
-                loading="eager"
-              />
-            </Link>
+            <Logo onClick={handleCloseMenu} />
             <button aria-label="Close menu" className="p-2" onClick={handleCloseMenu}>
               <X className="h-6 w-6" />
             </button>
@@ -309,10 +321,10 @@ export const Header = memo(function Header() {
 
           <ContactDialog>
             <Button
-              className="bg-white text-black w-full py-4 font-medium flex items-center justify-between"
+              className="bg-white text-black w-full py-5 font-medium text-lg flex items-center justify-between"
               onClick={handleCloseMenu}
             >
-              CONTACT US <ArrowRight className="h-4 w-4" />
+              CONTACT US <ArrowRight className="h-5 w-5" />
             </Button>
           </ContactDialog>
         </div>
