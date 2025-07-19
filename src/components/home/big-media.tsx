@@ -29,7 +29,7 @@ export const BigMedia = memo(function BigMedia() {
 
         <div className="relative w-full h-[500px] overflow-hidden">
           <Image
-            src="/lasers.png"
+            src="/lasers.avif"
             alt="Abstract Lasers"
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw"

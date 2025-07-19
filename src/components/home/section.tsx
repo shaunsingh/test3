@@ -28,7 +28,7 @@ export const Section = memo(function Section() {
   return (
     <ImageTextSection
       textOnLeft={false}
-      imageSrc="/heatmap.png"
+      imageSrc="/caida/lar-gr-l-7.avif"
       imageAlt="heatmap visualization"
       heading={heading}
       description={description}
