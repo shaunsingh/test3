@@ -62,7 +62,7 @@ export const ImageTextSection = memo(function ImageTextSection({
       </div>
 
       {/* Image block */}
-      <div className={cn("bg-black h-[300px] sm:h-[380px] lg:h-auto relative overflow-hidden", imageOrder)}>
+      <div className={cn("bg-[#1E1E1E] h-[300px] sm:h-[380px] lg:h-auto relative overflow-hidden", imageOrder)}>
         <Image
           src={imageSrc}
           alt={imageAlt}

@@ -11,11 +11,13 @@ const FOOTER_LINKS = {
   connect: [
     { href: "/Merchandise", label: "Merchandise" },
   ],
-  relevant: [
-    { href: "/blog", label: "Blog" },
-    { href: "/docs", label: "Documentation" },
-    { href: "/automotive", label: "Automotive" },
-    { href: "/oxocarbon", label: "Oxocarbon" },
+  about: [
+    { href: "/overview", label: "Overview" },
+    { href: "/careers", label: "Careers" },
+    { href: "/investors", label: "Investor relations" },
+    { href: "/leadership", label: "Leadership" },
+    { href: "/newsroom", label: "Newsroom" },
+    { href: "/trust", label: "Security, privacy and trust" },
   ],
   follow: [
     { href: "https://x.com", label: "Twitter" },
@@ -47,10 +49,15 @@ const TECHNOLOGIES = [
   },
 ] as const;
 
-const LEGAL_LINKS = [
-  { href: "/privacy", label: "Privacy Policy" },
-  { href: "/terms", label: "Terms of Use" },
-  { href: "/accessibility", label: "Accessibility" },
+const LEGAL_GROUPS = [
+  [
+    { href: "/contact", label: "Contact" },
+    { href: "/privacy", label: "Privacy" },
+  ],
+  [
+    { href: "/terms", label: "Terms of Use" },
+    { href: "/accessibility", label: "Accessibility" },
+  ],
 ] as const;
 
 export const Footer = memo(function Footer() {
@@ -61,7 +68,7 @@ export const Footer = memo(function Footer() {
 
       <footer className="w-full bg-bg1 text-fg1">
         {/* Grid section */}
-        <div className="max-container padding-container pt-5 pb-10">
+        <div className="max-container padding-container pt-8 pb-12">
           {/* Main footer layout */}
           <div className="flex flex-col sm:flex-row gap-8 items-center sm:items-start text-center sm:text-left">
             {/* Logo and Made With Section */}
@@ -102,11 +109,11 @@ export const Footer = memo(function Footer() {
             </div>
 
             {/* Link sections */}
-            <div className="grid w-full grid-cols-2 md:grid-cols-4 gap-x-4 sm:gap-x-8 gap-y-6 justify-items-center sm:justify-items-start">
+            <div className="grid w-full grid-cols-2 md:grid-cols-3 gap-x-6 lg:gap-x-12 gap-y-8 justify-items-center sm:justify-items-start">
               {/* Discover */}
               <div>
-                <h3 className="text-sm font-medium mb-1 text-fg3">Discover</h3>
-                <ul className="space-y-0.5">
+                <h3 className="text-sm font-semibold mb-1 text-fg3">Discover</h3>
+                <ul className="space-y-1 leading-5">
                   {FOOTER_LINKS.discover.map(({ href, label }) => (
                     <li key={href}>
                       <Link href={href} className="text-xs text-fg1 hover:text-fg3 transition-colors" prefetch={false}>
@@ -119,8 +126,8 @@ export const Footer = memo(function Footer() {
 
               {/* Connect */}
               <div>
-                <h3 className="text-sm font-medium mb-1 text-fg3">Connect</h3>
-                <ul className="space-y-0.5">
+                <h3 className="text-sm font-semibold mb-1 text-fg3">Connect</h3>
+                <ul className="space-y-1 leading-5">
                   {FOOTER_LINKS.connect.map(({ href, label }) => (
                     <li key={href}>
                       <Link href={href} className="text-xs text-fg1 hover:text-fg3 transition-colors" prefetch={false}>
@@ -131,13 +138,13 @@ export const Footer = memo(function Footer() {
                 </ul>
               </div>
 
-              {/* Relevant */}
+              {/* About */}
               <div>
-                <h3 className="text-sm font-medium mb-1 text-fg3">Relevant</h3>
-                <ul className="space-y-0.5">
-                  {FOOTER_LINKS.relevant.map(({ href, label }) => (
+                <h3 className="text-sm font-semibold mb-1 text-fg3">About</h3>
+                <ul className="space-y-1 leading-5">
+                  {FOOTER_LINKS.about.map(({ href, label }) => (
                     <li key={href}>
-                      <Link href={href} className="text-xs text-fg2 hover:text-fg3 transition-colors" prefetch={false}>
+                      <Link href={href} className="text-xs text-fg1 hover:text-fg3 transition-colors" prefetch={false}>
                         {label}
                       </Link>
                     </li>
@@ -146,12 +153,12 @@ export const Footer = memo(function Footer() {
               </div>
 
               {/* Follow */}
-              <div>
-                <h3 className="text-sm font-medium mb-1 text-fg3">Follow</h3>
-                <ul className="space-y-0.5">
+              <div className="md:col-span-3">
+                <h3 className="text-sm font-semibold mb-1 text-fg3">Follow</h3>
+                <ul className="space-y-1 leading-5">
                   {FOOTER_LINKS.follow.map(({ href, label }) => (
                     <li key={href}>
-                      <Link href={href} className="text-xs text-fg2 hover:text-fg3 transition-colors" prefetch={false}>
+                      <Link href={href} className="text-xs text-fg1 hover:text-fg3 transition-colors" prefetch={false}>
                         {label}
                       </Link>
                     </li>
@@ -162,19 +169,37 @@ export const Footer = memo(function Footer() {
           </div>
         </div>
 
-        {/* Full-width divider */}
-        <div className="w-full h-[1px] bg-bg2"></div>
+        {/* Divider aligned with content (starts after logo column) */}
+        <div className="max-container padding-container">
+          <div className="flex items-center gap-8">
+            {/* placeholder matching logo width */}
+            <div className="hidden sm:block sm:w-1/3 md:w-1/4 xl:w-1/5 flex-shrink-0"></div>
+            <div className="flex-grow h-[1px] bg-bg2"></div>
+          </div>
+        </div>
 
-        {/* Bottom bar */}
-        <div className="max-container padding-container py-3 flex flex-col md:flex-row items-center md:justify-between text-xs text-fg2 font-mono">
-          <p className="mb-1 md:mb-0">© {new Date().getFullYear()} Nyoom Engineering, Inc. All rights reserved.</p>
+        {/* Bottom legal links */}
+        <div className="max-container padding-container py-6 text-xs text-fg2">
+          <div className="flex flex-col sm:flex-row gap-8">
+            {/* Invisible placeholder to match logo column widths */}
+            <div className="hidden sm:block sm:w-1/3 md:w-1/4 xl:w-1/5 flex-shrink-0"></div>
 
-          <div className="flex space-x-4">
-            {LEGAL_LINKS.map(({ href, label }) => (
-              <Link key={href} href={href} className="hover:text-fg3 transition-colors" prefetch={false}>
-                {label}
-              </Link>
-            ))}
+            {/* Legal links grid */}
+            <div className="w-full">
+              <div className="grid grid-cols-3 gap-x-6 lg:gap-x-12 gap-y-2">
+                {LEGAL_GROUPS.map((group, idx) => (
+                  <ul key={idx} className="space-y-2">
+                    {group.map(({ href, label }) => (
+                      <li key={href}>
+                        <Link href={href} className="hover:text-fg3 transition-colors" prefetch={false}>
+                          {label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </footer>

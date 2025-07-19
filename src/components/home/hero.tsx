@@ -36,7 +36,7 @@ const cta = (
 export const Hero = memo(function Hero() {
   return (
     <ImageTextSection
-      imageSrc="/caida/ries-t.png"
+      imageSrc="/caida/ries-t-re.png"
       imageAlt="planet"
       imagePriority
       heading={heading}
