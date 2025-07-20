@@ -1,24 +1,35 @@
-'use client'
+"use client";
 
-import { Button } from './ui/button'
-import { ArrowRight } from '@carbon/icons-react'
-import dynamic from 'next/dynamic'
+import React, { useState, useCallback } from "react";
+import dynamic from "next/dynamic";
+import { Button } from "./ui/button";
+import { ArrowRight } from "@carbon/icons-react";
 
-// Lazy-load the dialog so Radix UI code isn’t in the main bundle
-const ContactDialog = dynamic(() => import('./contact-dialog').then(m => m.ContactDialog), {
+const LazyContactDialog = dynamic(() => import("./contact-dialog").then((m) => m.ContactDialog), {
   ssr: false,
-})
+});
 
 interface ContactDialogButtonProps extends React.ComponentPropsWithoutRef<typeof Button> {
-  label?: string
+  label?: string;
 }
 
-export function ContactDialogButton({ label = 'CONTACT US', ...props }: ContactDialogButtonProps) {
+export function ContactDialogButton({ label = "CONTACT US", onClick: externalOnClick, ...props }: ContactDialogButtonProps) {
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
+    externalOnClick?.(e);
+    setOpen(true);
+  }, [externalOnClick]);
+
   return (
-    <ContactDialog>
-      <Button {...props}>
+    <>
+      <Button {...props} onClick={handleOpen}>
         {label} <ArrowRight className="ml-2 h-4 w-4" />
       </Button>
-    </ContactDialog>
-  )
+
+      {open && (
+        <LazyContactDialog open={open} onOpenChange={setOpen} />
+      )}
+    </>
+  );
 } 

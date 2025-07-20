@@ -3,15 +3,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useCallback, useEffect, useRef } from "react";
-import { ArrowRight, Menu, Close as X } from "@carbon/icons-react";
+import { Menu, Close as X } from "@carbon/icons-react";
 import { usePathname } from "next/navigation";
 
-import dynamic from "next/dynamic";
-
-const ContactDialog = dynamic(() => import("../contact-dialog").then(m => m.ContactDialog), {
-  ssr: false,
-});
-import { Button } from "../ui/button";
+import { ContactDialogButton } from "../contact-dialog-button";
 
 function Logo({ onClick }: { onClick?: () => void }) {
   return (
@@ -260,13 +255,7 @@ export function Header() {
               <SecondaryLinks />
             </nav>
 
-            <ContactDialog>
-              <span className="hidden sm:inline-flex">
-                <Button className="bg-white text-black px-2 py-2 font-medium items-center">
-                  CONTACT US <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </span>
-            </ContactDialog>
+            <ContactDialogButton className="bg-white text-black px-2 py-2 font-medium items-center hidden sm:inline-flex" />
 
             <button
               aria-label="Open menu"
@@ -325,14 +314,10 @@ export function Header() {
             <SecondaryLinks onClick={handleCloseMenu} />
           </div>
 
-          <ContactDialog>
-            <Button
-              className="bg-white text-black w-full py-5 font-medium text-lg flex items-center justify-between"
-              onClick={handleCloseMenu}
-            >
-              CONTACT US <ArrowRight className="h-5 w-5" />
-            </Button>
-          </ContactDialog>
+          <ContactDialogButton
+            className="bg-white text-black w-full py-5 font-medium text-lg flex items-center justify-between"
+            onClick={handleCloseMenu}
+          />
         </div>
       </div>
     </>

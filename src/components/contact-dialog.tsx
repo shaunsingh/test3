@@ -18,10 +18,19 @@ import { useState, useCallback } from "react";
 
 interface ContactDialogProps {
   /**
-   * Any React element that should act as the trigger for opening the dialog.
+   * Optional React element that should act as the trigger for opening the dialog.
+   * If omitted, the dialog can be controlled via the `open` / `onOpenChange` props.
    * The element will be rendered via `asChild` so its own props are preserved.
    */
-  children: React.ReactNode;
+  children?: React.ReactNode;
+  /**
+   * Controlled open state for the dialog. Leave undefined to let Radix manage state internally.
+   */
+  open?: boolean;
+  /**
+   * Change handler to accompany the controlled `open` prop.
+   */
+  onOpenChange?: (open: boolean) => void;
 }
 
 const INITIAL_STATE = {
@@ -30,7 +39,7 @@ const INITIAL_STATE = {
   message: "",
 } as const;
 
-export function ContactDialog({ children }: ContactDialogProps) {
+export function ContactDialog({ children, open, onOpenChange }: ContactDialogProps) {
   const [formData, setFormData] = useState(INITIAL_STATE);
 
   const reset = () => setFormData(INITIAL_STATE);
@@ -51,9 +60,11 @@ export function ContactDialog({ children }: ContactDialogProps) {
   }, []);
 
   return (
-    <Dialog>
-      {/* Use asChild so whatever is passed retains its own semantics */}
-      <DialogTrigger asChild>{children}</DialogTrigger>
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      {children && (
+        /* Use asChild so whatever is passed retains its own semantics */
+        <DialogTrigger asChild>{children}</DialogTrigger>
+      )}
       <DialogContent className="sm:max-w-md">
         <form className="space-y-4" onSubmit={handleSubmit}>
           <DialogHeader>
