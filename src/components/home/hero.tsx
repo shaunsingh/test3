@@ -36,7 +36,7 @@ export function Hero() {
   return (
     <ImageTextSection
       imageSrc="/caida/ries-t-re.avif"
-      imageAlt="planet"
+      imageAlt="Ries T-Re"
       imagePriority
       heading={heading}
       description={description}

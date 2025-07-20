@@ -28,7 +28,8 @@ export function Section() {
     <ImageTextSection
       textOnLeft={false}
       imageSrc="/caida/lar-gr-l-7.avif"
-      imageAlt="heatmap visualization"
+      imageAlt="lar-gr-l-7"
+      imagePriority
       heading={heading}
       description={description}
       cta={cta}

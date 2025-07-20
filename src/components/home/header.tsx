@@ -8,7 +8,6 @@ import { usePathname } from "next/navigation";
 
 import dynamic from "next/dynamic";
 
-// Lazy-load the ContactDialog so Radix UI stays out of the critical bundle
 const ContactDialog = dynamic(() => import("../contact-dialog").then(m => m.ContactDialog), {
   ssr: false,
 });
