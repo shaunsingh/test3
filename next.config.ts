@@ -1,11 +1,17 @@
 import type { NextConfig } from "next";
+import withBundleAnalyzer from "@next/bundle-analyzer";
+import { initOpenNextCloudflareForDev } from "@opennextjs/cloudflare";
+
+// Enable visual bundle report via `ANALYZE=true next build`
+const withAnalyze = withBundleAnalyzer({
+  enabled: process.env.ANALYZE === "true",
+});
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // config options here
 };
 
-export default nextConfig;
-
-// added by create cloudflare to enable calling `getCloudflareContext()` in `next dev`
-import { initOpenNextCloudflareForDev } from '@opennextjs/cloudflare';
+// Cloudflare dev helper
 initOpenNextCloudflareForDev();
+
+export default withAnalyze(nextConfig);

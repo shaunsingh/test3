@@ -34,7 +34,6 @@ export const BigMedia = memo(function BigMedia() {
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw"
             className="object-cover"
-            priority
           />
         </div>
       </div>
