@@ -249,7 +249,7 @@ export function Header() {
           <div className="flex gap-4 items-center">
             <Logo />
 
-            <nav className="hidden lg:flex items-center space-x-4" role="navigation">
+            <nav className="hidden xl:flex items-center space-x-4" role="navigation">
               <NavLink href="#big-media" label="Solutions" index="01" />
               <NavLink href="#projects-section" label="Projects" index="02" />
               <NavLink href="#writings" label="Research" index="03" />
@@ -257,14 +257,16 @@ export function Header() {
           </div>
 
           <div className="flex items-center space-x-6 font-mono text-fg1">
-            <nav className="hidden xl:flex items-center space-x-6" role="navigation">
+            <nav className="hidden lg:flex items-center space-x-6" role="navigation">
               <SecondaryLinks />
             </nav>
 
             <ContactDialog>
-              <Button className="hidden lg:flex bg-white text-black px-2 py-2 font-medium items-center">
-                CONTACT US <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
+              <span className="hidden sm:inline-flex">
+                <Button className="bg-white text-black px-2 py-2 font-medium items-center">
+                  CONTACT US <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </span>
             </ContactDialog>
 
             <button
