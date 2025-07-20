@@ -30,15 +30,6 @@
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: var(--primary);
 
-  /* Greys used by components */
-  --bg1: #ffffff;
-  --bg2: #f2f2f2;
-  --bg3: #d0d0d0;
-  --bg4: #161616;
-  --fg1: #37474F;
-  --fg2: #90A4AE;
-  --fg3: #525252;
-
   /* Utility */
   --border: oklch(0.922 0 0);
   --input: var(--border);

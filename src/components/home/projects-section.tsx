@@ -66,8 +66,15 @@ function ProjectCard({ title, description, link }: ProjectCardProps) {
             <Github className="h-5 w-5 mr-2" />
             <h3 className="text-lg font-medium text-fg2">{title}</h3>
           </div>
-          <Button size="icon" className="bg-bg4 group-hover:bg-white transition-colors">
-            <ArrowUpRight className="h-5 w-5 text-white group-hover:text-black transition-colors" />
+          <Button
+            size="icon"
+            variant="ghost"
+            className="bg-bg4 text-white transition-colors
+              group-hover:bg-fg1 group-hover:text-black
+              hover:!bg-fg3 hover:!text-black"
+          >
+            {/* Icon inherits currentColor so we don't need to repeat colour utilities */}
+            <ArrowUpRight className="h-5 w-5" />
           </Button>
         </div>
         <p className="text-sm text-fg1">{description}</p>

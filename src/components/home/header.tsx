@@ -243,6 +243,7 @@ export function Header() {
           <div className="flex gap-4 items-center">
             <Logo />
 
+            {/* Primary navigation: visible only on xl and above */}
             <nav className="hidden xl:flex items-center space-x-4" role="navigation">
               <NavLink href="#big-media" label="Solutions" index="01" />
               <NavLink href="#projects-section" label="Projects" index="02" />
@@ -251,12 +252,17 @@ export function Header() {
           </div>
 
           <div className="flex items-center space-x-6 font-mono text-fg1">
+            {/* Secondary navigation: visible on lg and above */}
             <nav className="hidden lg:flex items-center space-x-6" role="navigation">
               <SecondaryLinks />
             </nav>
 
-            <ContactDialogButton className="bg-white text-black px-2 py-2 font-medium items-center hidden sm:inline-flex" />
+            {/* Contact button: visible on sm and above */}
+            <div className="hidden sm:inline-flex">
+              <ContactDialogButton className="bg-white text-black px-2 py-2 font-medium items-center" />
+            </div>
 
+            {/* Hamburger menu: visible below lg */}
             <button
               aria-label="Open menu"
               className="lg:hidden p-2 text-fg1 hover:text-fg3"
