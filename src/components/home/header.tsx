@@ -6,7 +6,12 @@ import { useState, useCallback, useEffect, useRef, memo } from "react";
 import { ArrowRight, Menu, Close as X } from "@carbon/icons-react";
 import { usePathname } from "next/navigation";
 
-import { ContactDialog } from "../contact-dialog";
+import dynamic from "next/dynamic";
+
+// Lazy-load the ContactDialog so Radix UI stays out of the critical bundle
+const ContactDialog = dynamic(() => import("../contact-dialog").then(m => m.ContactDialog), {
+  ssr: false,
+});
 import { Button } from "../ui/button";
 
 const Logo = memo(function Logo({ onClick }: { onClick?: () => void }) {

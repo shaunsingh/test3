@@ -1,8 +1,6 @@
 import Link from "next/link";
 import { Button } from "../ui/button";
 import { memo } from "react";
-
-// replaced lucide-react icons with Carbon icons; alias LogoGithub as Github
 import { LogoGithub as Github, ArrowUpRight } from "@carbon/icons-react";
 
 const PROJECT_DATA = [

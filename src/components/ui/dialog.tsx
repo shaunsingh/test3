@@ -2,10 +2,7 @@
 
 import * as React from "react"
 import * as DialogPrimitive from "@radix-ui/react-dialog"
-
-// replaced lucide-react icon with Carbon Close
 import { Close } from "@carbon/icons-react"
-
 import { cn } from "@/lib/utils"
 
 function Dialog({

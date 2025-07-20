@@ -2,7 +2,12 @@
 
 import { Button } from './ui/button'
 import { ArrowRight } from '@carbon/icons-react'
-import { ContactDialog } from './contact-dialog'
+import dynamic from 'next/dynamic'
+
+// Lazy-load the dialog so Radix UI code isn’t in the main bundle
+const ContactDialog = dynamic(() => import('./contact-dialog').then(m => m.ContactDialog), {
+  ssr: false,
+})
 
 interface ContactDialogButtonProps extends React.ComponentPropsWithoutRef<typeof Button> {
   label?: string

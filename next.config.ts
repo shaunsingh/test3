@@ -8,10 +8,21 @@ const withAnalyze = withBundleAnalyzer({
 });
 
 const nextConfig: NextConfig = {
-  // config options here
+  images: {
+    formats: ["image/avif", "image/webp"],
+  },
+
+  modularizeImports: {
+    "@carbon/icons-react": {
+      transform: "@carbon/icons-react/lib/{{member}}",
+    },
+  },
+
+  experimental: {
+    optimizePackageImports: ["@carbon/icons-react"],
+  },
 };
 
 // Cloudflare dev helper
 initOpenNextCloudflareForDev();
-
 export default withAnalyze(nextConfig);
