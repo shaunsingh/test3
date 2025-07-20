@@ -1,6 +1,5 @@
 import Link from "next/link"
 import Image from "next/image"
-import { memo } from "react"
 
 const FOOTER_LINKS = {
   discover: [
@@ -60,7 +59,7 @@ const LEGAL_GROUPS = [
   ],
 ] as const;
 
-export const Footer = memo(function Footer() {
+export function Footer() {
   return (
     <>
       {/* Top separator line */}
@@ -205,4 +204,4 @@ export const Footer = memo(function Footer() {
       </footer>
     </>
   )
-});
+}

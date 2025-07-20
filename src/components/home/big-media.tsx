@@ -1,8 +1,7 @@
 import Image from "next/image"
 import { ContactDialogButton } from "../contact-dialog-button";
-import { memo } from "react"
 
-export const BigMedia = memo(function BigMedia() {
+export function BigMedia() {
   return (
     <section id="big-media" className="scroll-mt-16 w-full max-container padding-container text-white">
       <div className="bg-card border-16 border-bg2">
@@ -39,4 +38,4 @@ export const BigMedia = memo(function BigMedia() {
       </div>
     </section>
   )
-})
+}

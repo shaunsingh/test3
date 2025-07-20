@@ -1,5 +1,5 @@
 import Image from "next/image"
-import { memo, ReactNode } from "react"
+import { ReactNode } from "react"
 import { cn } from "@/lib/utils"
 
 interface ImageTextSectionProps {
@@ -25,7 +25,7 @@ interface ImageTextSectionProps {
  * Generic image + text split section used by both the Hero and the secondary feature section.
  * Keeps the visual style of the existing Hero component but allows reversing column order.
  */
-export const ImageTextSection = memo(function ImageTextSection({
+export function ImageTextSection({
   heading,
   description,
   imageSrc,
@@ -75,4 +75,4 @@ export const ImageTextSection = memo(function ImageTextSection({
       </div>
     </section>
   )
-}) 
+} 

@@ -1,6 +1,5 @@
 import Link from "next/link"
 import { ArrowRight } from "@carbon/icons-react"
-import { memo } from "react"
 import { ImageTextSection } from "./image-text-section"
 
 // Extracted static fragments to avoid recreating them on each render
@@ -33,7 +32,7 @@ const cta = (
   </Link>
 )
 
-export const Hero = memo(function Hero() {
+export function Hero() {
   return (
     <ImageTextSection
       imageSrc="/caida/ries-t-re.avif"
@@ -44,4 +43,4 @@ export const Hero = memo(function Hero() {
       cta={cta}
     />
   )
-})
+}

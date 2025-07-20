@@ -1,6 +1,5 @@
 import { ImageTextSection } from "./image-text-section"
 import { ContactDialogButton } from "../contact-dialog-button"
-import { memo } from "react"
 
 // Extracted static fragments
 const heading = (
@@ -24,7 +23,7 @@ const cta = (
   <ContactDialogButton className="bg-white text-black px-4 py-2 font-medium flex items-center hover:bg-gray-100 transition-colors" />
 )
 
-export const Section = memo(function Section() {
+export function Section() {
   return (
     <ImageTextSection
       textOnLeft={false}
@@ -35,4 +34,4 @@ export const Section = memo(function Section() {
       cta={cta}
     />
   )
-})
+}

@@ -1,8 +1,7 @@
 import Link from "next/link";
 import { ArrowRight } from "@carbon/icons-react";
-import { memo } from "react";
 
-export const MailingListSection = memo(function MailingListSection() {
+export function MailingListSection() {
   return (
     <section className="w-full max-container padding-container text-white">
       <div className="bg-card p-4 flex flex-col gap-4 sm:flex-row justify-between items-start sm:items-center">
@@ -16,4 +15,4 @@ export const MailingListSection = memo(function MailingListSection() {
       </div>
     </section>
   );
-}); 
+} 

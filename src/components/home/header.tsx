@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useCallback, useEffect, useRef, memo } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import { ArrowRight, Menu, Close as X } from "@carbon/icons-react";
 import { usePathname } from "next/navigation";
 
@@ -14,7 +14,7 @@ const ContactDialog = dynamic(() => import("../contact-dialog").then(m => m.Cont
 });
 import { Button } from "../ui/button";
 
-const Logo = memo(function Logo({ onClick }: { onClick?: () => void }) {
+function Logo({ onClick }: { onClick?: () => void }) {
   return (
     <Link
       href="/"
@@ -32,7 +32,7 @@ const Logo = memo(function Logo({ onClick }: { onClick?: () => void }) {
       />
     </Link>
   );
-});
+}
 
 const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>) => {
   e.preventDefault();
@@ -49,7 +49,7 @@ const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>) => {
   }
 };
 
-const NavLink = memo(function NavLink({
+function NavLink({
   href,
   label,
   index,
@@ -68,9 +68,9 @@ const NavLink = memo(function NavLink({
       <span className="text-[#8d8d8d] font-mono">{index}</span>
     </a>
   );
-});
+}
 
-const MobileNavLink = memo(function MobileNavLink({
+function MobileNavLink({
   href,
   label,
   index,
@@ -96,7 +96,7 @@ const MobileNavLink = memo(function MobileNavLink({
       <span className="text-fg2">{index}</span>
     </a>
   );
-});
+}
 
 const SECONDARY_LINKS = [
   { href: "/blog", label: "Blog" },
@@ -105,7 +105,7 @@ const SECONDARY_LINKS = [
   { href: "/oxocarbon", label: "Oxocarbon" },
 ] as const;
 
-const SecondaryLinks = memo(function SecondaryLinks({ onClick }: { onClick?: () => void }) {
+function SecondaryLinks({ onClick }: { onClick?: () => void }) {
   return (
     <>
       {SECONDARY_LINKS.map(({ href, label }) => (
@@ -120,9 +120,9 @@ const SecondaryLinks = memo(function SecondaryLinks({ onClick }: { onClick?: () 
       ))}
     </>
   );
-});
+}
 
-export const Header = memo(function Header() {
+export function Header() {
   const headerRef = useRef<HTMLElement>(null);
   const openRef = useRef(false);
   // exposes helpers to effects that run after mount (route change etc.)
@@ -336,4 +336,4 @@ export const Header = memo(function Header() {
       </div>
     </>
   );
-});
+}

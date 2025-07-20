@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { Button } from "../ui/button";
-import { memo } from "react";
 import { LogoGithub as Github, ArrowUpRight } from "@carbon/icons-react";
 
 const PROJECT_DATA = [
@@ -23,7 +22,7 @@ const PROJECT_DATA = [
 
 const GITHUB_LINKS = ["#", "#"] as const;
 
-export const ProjectsSection = memo(function ProjectsSection() {
+export function ProjectsSection() {
   return (
     <section id="projects-section" className="scroll-mt-16 w-full max-container padding-container text-white">
       <div className="bg-card p-4">
@@ -50,7 +49,7 @@ export const ProjectsSection = memo(function ProjectsSection() {
       </div>
     </section>
   );
-});
+}
 
 interface ProjectCardProps {
   title: string;
@@ -58,7 +57,7 @@ interface ProjectCardProps {
   link: string;
 }
 
-const ProjectCard = memo(function ProjectCard({ title, description, link }: ProjectCardProps) {
+function ProjectCard({ title, description, link }: ProjectCardProps) {
   return (
     <Link href={link} className="bg-bg3 p-4 flex flex-col justify-between hover:bg-bg4/70 transition-colors group" prefetch={false}>
       <div>
@@ -75,17 +74,17 @@ const ProjectCard = memo(function ProjectCard({ title, description, link }: Proj
       </div>
     </Link>
   );
-});
+}
 
 interface GithubCardProps {
   link: string;
 }
 
-const GithubCard = memo(function GithubCard({ link }: GithubCardProps) {
+function GithubCard({ link }: GithubCardProps) {
   return (
     <Link href={link} className="bg-bg3 p-4 flex items-center justify-center hover:bg-bg4 transition-colors text-fg2" prefetch={false}>
       <Github className="h-6 w-6 mr-2" />
       <span className="font-medium">GITHUB</span>
     </Link>
   );
-}); 
+} 

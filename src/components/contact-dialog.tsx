@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { useState, memo, useCallback } from "react";
+import { useState, useCallback } from "react";
 
 interface ContactDialogProps {
   /**
@@ -30,7 +30,7 @@ const INITIAL_STATE = {
   message: "",
 } as const;
 
-export const ContactDialog = memo(function ContactDialog({ children }: ContactDialogProps) {
+export function ContactDialog({ children }: ContactDialogProps) {
   const [formData, setFormData] = useState(INITIAL_STATE);
 
   const reset = () => setFormData(INITIAL_STATE);
@@ -108,4 +108,4 @@ export const ContactDialog = memo(function ContactDialog({ children }: ContactDi
       </DialogContent>
     </Dialog>
   );
-});
+}

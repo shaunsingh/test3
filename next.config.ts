@@ -8,19 +8,20 @@ const withAnalyze = withBundleAnalyzer({
 });
 
 const nextConfig: NextConfig = {
-  images: {
-    formats: ["image/avif", "image/webp"],
-  },
-
-  modularizeImports: {
-    "@carbon/icons-react": {
-      transform: "@carbon/icons-react/lib/{{member}}",
-    },
-  },
-
   experimental: {
     optimizePackageImports: ["@carbon/icons-react"],
+    inlineCss: true,
+    reactCompiler: true
   },
+
+  turbopack: {
+    rules: {
+      '*.svg': {
+        loaders: ['@svgr/webpack'],
+        as: '*.js',
+      },
+    },
+  }
 };
 
 // Cloudflare dev helper
