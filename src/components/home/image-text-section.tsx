@@ -3,8 +3,10 @@ import { ReactNode } from "react"
 import { cn } from "@/lib/utils"
 
 interface ImageTextSectionProps {
-  /** Heading element(s) to render at the top of the text block */
-  heading: ReactNode
+  /** Label text shown above the main heading */
+  label: string
+  /** Main heading text */
+  title: string
   /** Optional description to render under the heading */
   description?: ReactNode
   /** Absolute or relative image source */
@@ -23,7 +25,8 @@ interface ImageTextSectionProps {
  * Generic image + text split section used by both the Hero and the secondary feature section.
  */
 export function ImageTextSection({
-  heading,
+  label,
+  title,
   description,
   imageSrc,
   imageAlt,
@@ -41,24 +44,29 @@ export function ImageTextSection({
       {/* Text block */}
       <div
         className={cn(
-          "bg-bg2 p-4 lg:p-8 lg:pt-4 flex flex-col justify-between",
+          "bg-bg2 p-4 lg:p-8 lg:pt-4",
           textOrder,
         )}
       >
         {/* Top: label + title */}
-        <div>{heading}</div>
+        <div>
+          <div className="text-ignore mb-4">{label}</div>
+          <h1 className="text-2xl md:text-3xl lg:text-4xl text-fg3 font-mono mb-6">
+            {title}
+          </h1>
+        </div>
 
         {/* Bottom: description + CTA*/}
         {(description || cta) && (
           <div className="flex flex-col gap-6">
-            {description && <div className="text-sm text-fg1 max-w-lg font-mono">{description}</div>}
+            {description && <div className="text-sm text-fg1 font-mono">{description}</div>}
             {cta && <div>{cta}</div>}
           </div>
         )}
       </div>
 
       {/* Image block */}
-      <div className={cn("bg-[color-mix(in_srgb,var(--bg1),var(--bg2))] relative min-h-[400px]", imageOrder)}>
+      <div className={cn("bg-[color-mix(in_srgb,var(--bg1),var(--bg2))] relative min-h-[320px]", imageOrder)}>
         <Image
           src={imageSrc}
           alt={imageAlt}

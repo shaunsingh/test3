@@ -2,18 +2,6 @@ import Link from "next/link"
 import { ArrowRight } from "@carbon/icons-react"
 import { ImageTextSection } from "./image-text-section"
 
-// Extracted static fragments to avoid recreating them on each render
-const heading = (
-  <>
-    <div className="text-gray-400 mb-4">Nyoom Engineering</div>
-    <h1 className="text-2xl md:text-3xl lg:text-4xl font-mono leading-tight mb-6">
-      Functional Design for
-      <br />
-      the Modern age
-    </h1>
-  </>
-)
-
 const description = (
   <>
     Nyoom Engineering democratizes AI development at scale. Our platform makes it effortless to discover global
@@ -38,7 +26,8 @@ export function Hero() {
       imageSrc="/caida/ries-t-re.avif"
       imageAlt="Ries T-Re"
       imagePriority
-      heading={heading}
+      label="Nyoom Engineering"
+      title="Functional Design for the Modern age"
       description={description}
       cta={cta}
     />

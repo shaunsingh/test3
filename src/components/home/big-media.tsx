@@ -3,7 +3,7 @@ import Image from "next/image"
 export function BigMedia() {
   return (
     <section id="big-media" className="scroll-mt-16 w-full max-container padding-container text-white">
-      <div className="bg-bg2 border-16 border-bg2">
+      <div className="bg-card border-16 border-bg2">
         <div className="flex flex-col gap-4 lg:flex-row lg:justify-between pb-4 items-start lg:items-center">
           <div className="flex flex-col gap-2 max-w-lg">
             <div className="text-xs text-gray-400 font-mono uppercase tracking-widest">
