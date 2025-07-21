@@ -42,7 +42,7 @@
   --color-card: var(--bg2);
   --color-card-foreground: var(--fg1);
 
-  /* Contact button (popover/primary/secondary) */
+  /* Contact button */
   --color-popover: var(--fg2);
   --color-popover-foreground: var(--bg1);
 
