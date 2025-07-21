@@ -37,11 +37,11 @@ export function ImageTextSection({
   const gridCols = textOnLeft ? "lg:grid-cols-[9fr_11fr]" : "lg:grid-cols-[11fr_9fr]"
 
   return (
-    <section className={cn("w-full max-container padding-container grid", gridCols)}> 
+    <section className={cn("w-full max-container padding-container grid", gridCols)}>
       {/* Text block */}
       <div
         className={cn(
-          "bg-bg2 p-4 lg:p-8 lg:pt-4 flex flex-col justify-between min-h-[400px]",
+          "bg-bg2 p-4 lg:p-8 lg:pt-4 flex flex-col justify-between",
           textOrder,
         )}
       >
@@ -58,7 +58,7 @@ export function ImageTextSection({
       </div>
 
       {/* Image block */}
-      <div className={cn("bg-[color-mix(in_srgb,var(--bg1),var(--bg2))] relative", imageOrder)}>
+      <div className={cn("bg-[color-mix(in_srgb,var(--bg1),var(--bg2))] relative min-h-[400px]", imageOrder)}>
         <Image
           src={imageSrc}
           alt={imageAlt}
