@@ -1,5 +1,4 @@
 import Image from "next/image"
-import { ContactDialogButton } from "../contact-dialog-button";
 
 export function BigMedia() {
   return (
@@ -19,10 +18,6 @@ export function BigMedia() {
             <p className="text-sm text-gray-300 font-mono">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
             </p>
-          </div>
-
-          <div className="flex items-start lg:items-center mt-2 lg:mt-0">
-            <ContactDialogButton className="bg-white text-black px-2 py-2 font-medium flex items-center hover:bg-gray-100 transition-colors" />
           </div>
         </div>
 

@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { Button } from "../ui/button";
 import { LogoGithub as Github, ArrowUpRight } from "@carbon/icons-react";
 
 const PROJECT_DATA = [
@@ -24,11 +23,11 @@ const GITHUB_LINKS = ["#", "#"] as const;
 
 export function ProjectsSection() {
   return (
-    <section id="projects-section" className="scroll-mt-16 w-full max-container padding-container text-white">
+    <section id="projects-section" className="scroll-mt-16 w-full max-container padding-container">
       <div className="bg-card p-4">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div className="grid md:grid-cols-4 gap-4">
           {/* Project Cards */}
-          <div className="md:col-span-3 grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="md:col-span-3 grid md:grid-cols-3 gap-4">
             {PROJECT_DATA.map((project, index) => (
               <ProjectCard
                 key={index}
@@ -40,7 +39,7 @@ export function ProjectsSection() {
           </div>
 
           {/* GitHub Cards */}
-          <div className="md:col-span-1 grid grid-cols-1 gap-4">
+          <div className="md:col-span-1 grid gap-4">
             {GITHUB_LINKS.map((link, index) => (
               <GithubCard key={index} link={link} />
             ))}
@@ -59,23 +58,20 @@ interface ProjectCardProps {
 
 function ProjectCard({ title, description, link }: ProjectCardProps) {
   return (
-    <Link href={link} className="bg-bg3 p-4 flex flex-col justify-between hover:bg-bg4/70 transition-colors group" prefetch={false}>
+    <Link href={link} className="bg-bg3 p-4 hover:bg-bg4 transition-colors group" prefetch={false}>
       <div>
-        <div className="flex items-center justify-between mb-4">
+        <div className="flex justify-between mb-4">
           <div className="flex items-center">
             <Github className="h-5 w-5 mr-2" />
             <h3 className="text-lg font-medium text-fg2">{title}</h3>
           </div>
-          <Button
-            size="icon"
-            variant="ghost"
-            className="bg-bg4 text-white transition-colors
-              group-hover:bg-fg1 group-hover:text-black
-              hover:!bg-fg3 hover:!text-black"
+          <button
+            className="bg-bg4 text-fg p-2 transition-colors
+              group-hover:bg-fg1 group-hover:text-bg1
+              hover:!bg-fg3 hover:!text-bg1"
           >
-            {/* Icon inherits currentColor so we don't need to repeat colour utilities */}
             <ArrowUpRight className="h-5 w-5" />
-          </Button>
+          </button>
         </div>
         <p className="text-sm text-fg1">{description}</p>
       </div>

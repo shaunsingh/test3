@@ -1,5 +1,4 @@
 import { ImageTextSection } from "./image-text-section"
-import { ContactDialogButton } from "../contact-dialog-button"
 
 // Extracted static fragments
 const heading = (
@@ -20,7 +19,7 @@ const description = (
 )
 
 const cta = (
-  <ContactDialogButton className="bg-white text-black px-4 py-2 font-medium flex items-center hover:bg-gray-100 transition-colors" />
+  <></>
 )
 
 export function Section() {

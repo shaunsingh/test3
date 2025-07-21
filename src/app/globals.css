@@ -63,6 +63,7 @@
   --color-purple: var(--purple);
   --color-negative: var(--negative);
   --color-positive: var(--positive);
+  --color-ignore: var(--ignore);
 
   --font-sans: var(--font-sans);
   --font-mono: var(--font-mono);

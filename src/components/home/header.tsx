@@ -6,8 +6,6 @@ import { useState, useCallback, useEffect, useRef } from "react";
 import { Menu, Close as X } from "@carbon/icons-react";
 import { usePathname } from "next/navigation";
 
-import { ContactDialogButton } from "../contact-dialog-button";
-
 function Logo({ onClick }: { onClick?: () => void }) {
   return (
     <Link
@@ -257,11 +255,6 @@ export function Header() {
               <SecondaryLinks />
             </nav>
 
-            {/* Contact button: visible on sm and above */}
-            <div className="hidden sm:inline-flex">
-              <ContactDialogButton className="bg-white text-black px-2 py-2 font-medium items-center" />
-            </div>
-
             {/* Hamburger menu: visible below lg */}
             <button
               aria-label="Open menu"
@@ -319,11 +312,6 @@ export function Header() {
           <div className="flex flex-col space-y-4 font-mono text-base mb-8 px-2">
             <SecondaryLinks onClick={handleCloseMenu} />
           </div>
-
-          <ContactDialogButton
-            className="bg-white text-black w-full py-5 font-medium text-lg flex items-center justify-between"
-            onClick={handleCloseMenu}
-          />
         </div>
       </div>
     </>
