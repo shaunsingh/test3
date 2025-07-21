@@ -24,7 +24,7 @@ const GITHUB_LINKS = ["#", "#"] as const;
 export function ProjectsSection() {
   return (
     <section id="projects-section" className="scroll-mt-16 w-full max-container padding-container">
-      <div className="bg-card p-4">
+      <div className="bg-bg2 p-4">
         <div className="grid md:grid-cols-4 gap-4">
           {/* Project Cards */}
           <div className="md:col-span-3 grid md:grid-cols-3 gap-4">
@@ -60,10 +60,10 @@ function ProjectCard({ title, description, link }: ProjectCardProps) {
   return (
     <Link href={link} className="bg-bg3 p-4 hover:bg-bg4 transition-colors group" prefetch={false}>
       <div>
-        <div className="flex justify-between mb-4">
-          <div className="flex items-center">
+        <div className="flex justify-between mb-4 gap-4">
+          <div className="flex items-center min-w-0">
             <Github className="h-5 w-5 mr-2" />
-            <h3 className="text-lg font-medium text-fg2">{title}</h3>
+            <h3 className="text-lg font-medium text-fg2 truncate">{title}</h3>
           </div>
           <button
             className="bg-bg4 text-fg p-2 transition-colors

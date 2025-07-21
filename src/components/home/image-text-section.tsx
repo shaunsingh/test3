@@ -45,7 +45,7 @@ export function ImageTextSection({
       {/* Text block */}
       <div
         className={cn(
-          "bg-card p-4 lg:p-8 lg:pt-4 flex flex-col justify-between min-h-[400px] lg:min-h-[500px]",
+          "bg-bg2 p-4 lg:p-8 lg:pt-4 flex flex-col justify-between min-h-[400px] lg:min-h-[500px]",
           textOrder,
         )}
       >

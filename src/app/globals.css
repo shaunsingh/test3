@@ -38,14 +38,6 @@
   --color-background: var(--bg1);
   --color-foreground: var(--fg1);
 
-  /* Card */
-  --color-card: var(--bg2);
-  --color-card-foreground: var(--fg1);
-
-  /* Contact button */
-  --color-popover: var(--fg2);
-  --color-popover-foreground: var(--bg1);
-
   /* Custom Color Palette */
   --color-bg1: var(--bg1);
   --color-bg2: var(--bg2);
@@ -68,11 +60,6 @@
   --font-sans: var(--font-sans);
   --font-mono: var(--font-mono);
   --font-serif: var(--font-serif);
-
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
 }
 
 @layer utilities {

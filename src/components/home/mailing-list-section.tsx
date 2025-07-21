@@ -4,7 +4,7 @@ import { ArrowRight } from "@carbon/icons-react";
 export function MailingListSection() {
   return (
     <section className="w-full max-container padding-container text-white">
-      <div className="bg-card p-4 flex flex-col gap-4 sm:flex-row justify-between items-start sm:items-center">
+      <div className="bg-bg2 p-4 flex flex-col gap-4 sm:flex-row justify-between items-start sm:items-center">
         <div>
           <h2 className="text-xl font-mono text-white mb-2">Merchandise Coming Soon</h2>
           <p className="text-sm text-gray-400">Sign up for Notifications</p>
