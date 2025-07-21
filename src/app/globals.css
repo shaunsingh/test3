@@ -31,6 +31,7 @@
   --purple: #be95ff;
   --negative: #ee5396;
   --positive: #42be65;
+  --blend1: #1e1e1e;
   --ignore: #8d8d8d;
 }
 
@@ -38,7 +39,10 @@
   --color-background: var(--bg1);
   --color-foreground: var(--fg1);
 
-  /* Custom Color Palette */
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  --font-serif: var(--font-serif);
+
   --color-bg1: var(--bg1);
   --color-bg2: var(--bg2);
   --color-bg3: var(--bg3);
@@ -55,11 +59,8 @@
   --color-purple: var(--purple);
   --color-negative: var(--negative);
   --color-positive: var(--positive);
+  --color-blend1: var(--blend1);
   --color-ignore: var(--ignore);
-
-  --font-sans: var(--font-sans);
-  --font-mono: var(--font-mono);
-  --font-serif: var(--font-serif);
 }
 
 @layer utilities {
