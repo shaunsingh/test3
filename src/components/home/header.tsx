@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useCallback, useEffect, useRef } from "react";
+import { cn } from "@/lib/utils";
 import { Menu, Close as X } from "@carbon/icons-react";
 import { usePathname } from "next/navigation";
 
@@ -45,48 +46,54 @@ function NavLink({
   href,
   label,
   index,
-}: {
-  href: string;
-  label: string;
-  index: string;
-}) {
-  return (
-    <a
-      href={href}
-      onClick={scrollToSection}
-      className="px-2 py-2 flex items-center bg-bg3 hover:bg-bg4 transition-colors"
-    >
-      <span className="mr-6">{label}</span>
-      <span className="text-[#8d8d8d] font-mono">{index}</span>
-    </a>
-  );
-}
-
-function MobileNavLink({
-  href,
-  label,
-  index,
   onClick,
 }: {
   href: string;
   label: string;
   index: string;
-  onClick: () => void;
+  onClick?: () => void;
 }) {
-  const handleClick = useCallback((e: React.MouseEvent<HTMLAnchorElement>) => {
-    scrollToSection(e);
-    onClick();
-  }, [onClick]);
+  const handleClick = useCallback(
+    (e: React.MouseEvent<HTMLAnchorElement>) => {
+      scrollToSection(e);
+      onClick?.();
+    },
+    [onClick]
+  );
 
   return (
     <a
       href={href}
       onClick={handleClick}
-      className="bg-bg3 hover:bg-bg4 transition-colors px-4 py-3 font-mono text-base flex justify-between items-center"
+      className="flex bg-bg3 hover:bg-bg4 transition-colors items-center justify-between px-4 py-3 xl:justify-start xl:px-2 xl:py-2"
     >
-      <span className="uppercase tracking-wide font-medium">{label}</span>
-      <span className="text-fg2">{index}</span>
+      <span className="uppercase font-medium mr-6">{label}</span>
+      <span className="text-ignore">{index}</span>
     </a>
+  );
+}
+
+const PRIMARY_LINKS = [
+  { href: "#big-media", label: "Solutions", index: "01" },
+  { href: "#projects-section", label: "Projects", index: "02" },
+  { href: "#writings", label: "Research", index: "03" },
+] as const;
+
+const HEADER_POS = "fixed top-0 left-0 right-0 border-b";
+
+function PrimaryLinks({ onClick }: { onClick?: () => void }) {
+  return (
+    <>
+      {PRIMARY_LINKS.map(({ href, label, index }) => (
+        <NavLink
+          key={href}
+          href={href}
+          label={label}
+          index={index}
+          onClick={onClick}
+        />
+      ))}
+    </>
   );
 }
 
@@ -105,7 +112,7 @@ function SecondaryLinks({ onClick }: { onClick?: () => void }) {
           key={href}
           href={href}
           onClick={onClick}
-          className="hover:text-fg2"
+          className="hover:text-fg3"
         >
           {label}
         </Link>
@@ -118,7 +125,7 @@ export function Header() {
   const headerRef = useRef<HTMLElement>(null);
   const openRef = useRef(false);
   // exposes helpers to effects that run after mount (route change etc.)
-  const callbacks = useRef({ recompute: () => {}, update: () => {} });
+  const callbacks = useRef({ recompute: () => { }, update: () => { } });
   const [open, setOpen] = useState(false);
 
   const handleOpenMenu = useCallback(() => setOpen(true), []);
@@ -137,10 +144,10 @@ export function Header() {
 
     const recompute = () => {
       headerHeight = headerEl.offsetHeight;
-      
+
       const heroEl = document.querySelector<HTMLElement>('main header.h-screen');
       heroHalfway = heroEl ? heroEl.offsetTop + heroEl.offsetHeight / 2 : Infinity;
-      
+
       const footerEl = document.querySelector<HTMLElement>('footer');
       // trigger right when top of footer enters viewport
       footerTrigger = footerEl ? footerEl.offsetTop - window.innerHeight : Infinity;
@@ -233,32 +240,32 @@ export function Header() {
     <>
       <header
         ref={headerRef}
-        className={`fixed top-0 left-0 right-0 z-50 border-b border-white/10 h-16 shadow-lg shadow-black/5 ${
-          open ? "" : "bg-bg1/80 backdrop-blur-xl"
-        }`}
+        className={cn(
+          HEADER_POS,
+          "z-50 h-16 border-bg2",
+          open ? undefined : "bg-bg1/80 backdrop-blur-xl"
+        )}
       >
         <div className="max-container padding-container flex justify-between items-center h-full">
-          <div className="flex gap-4 items-center">
+          <div className="flex gap-4">
             <Logo />
 
             {/* Primary navigation: visible only on xl and above */}
-            <nav className="hidden xl:flex items-center space-x-4" role="navigation">
-              <NavLink href="#big-media" label="Solutions" index="01" />
-              <NavLink href="#projects-section" label="Projects" index="02" />
-              <NavLink href="#writings" label="Research" index="03" />
+            <nav className="hidden xl:flex items-center gap-4" role="navigation">
+              <PrimaryLinks />
             </nav>
           </div>
 
-          <div className="flex items-center space-x-6 font-mono text-fg1">
+          <div>
             {/* Secondary navigation: visible on lg and above */}
-            <nav className="hidden lg:flex items-center space-x-6" role="navigation">
+            <nav className="hidden lg:flex gap-4" role="navigation">
               <SecondaryLinks />
             </nav>
 
             {/* Hamburger menu: visible below lg */}
             <button
               aria-label="Open menu"
-              className="lg:hidden p-2 text-fg1 hover:text-fg3"
+              className="lg:hidden text-fg1 hover:text-fg3"
               onClick={handleOpenMenu}
             >
               <Menu className="h-6 w-6" />
@@ -270,15 +277,17 @@ export function Header() {
       {/* Dim the background when mobile menu is open */}
       {open && (
         <div
-          className="fixed inset-0 z-[55] bg-black/50"
+          className="fixed inset-0 bg-bg1/50"
           onClick={handleCloseMenu}
         />
       )}
 
       <div
-        className={`fixed top-0 left-0 right-0 z-[60] bg-bg1/80 backdrop-blur-xl text-fg1 border-b border-white/10 ${
-          open ? "" : "hidden"
-        }`}
+        className={cn(
+          HEADER_POS,
+          "z-[55] bg-bg1/80 backdrop-blur-xl text-fg1 border-white/10",
+          open ? undefined : "hidden"
+        )}
       >
         <div className="flex flex-col max-container padding-container px-5 pb-8">
           <div className="flex justify-between items-center h-16 mb-6">
@@ -288,28 +297,12 @@ export function Header() {
             </button>
           </div>
 
-          <div className="space-y-2 mb-8">
-            <MobileNavLink
-              href="#big-media"
-              label="Solutions"
-              index="01"
-              onClick={handleCloseMenu}
-            />
-            <MobileNavLink
-              href="#projects-section"
-              label="Projects"
-              index="02"
-              onClick={handleCloseMenu}
-            />
-            <MobileNavLink
-              href="#writings"
-              label="Research"
-              index="03"
-              onClick={handleCloseMenu}
-            />
-          </div>
+          {/* Primary links for mobile menu */}
+          <nav className="space-y-2 mb-8" role="navigation">
+            <PrimaryLinks onClick={handleCloseMenu} />
+          </nav>
 
-          <div className="flex flex-col space-y-4 font-mono text-base mb-8 px-2">
+          <div className="flex flex-col space-y-4 mb-8 px-2">
             <SecondaryLinks onClick={handleCloseMenu} />
           </div>
         </div>

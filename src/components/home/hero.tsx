@@ -1,5 +1,4 @@
-import Link from "next/link"
-import { ArrowRight } from "@carbon/icons-react"
+import { ButtonLink } from "../ui/button-link"
 import { ImageTextSection } from "./image-text-section"
 
 const description = (
@@ -8,16 +7,6 @@ const description = (
     compute resources and train state-of-the-art models through distributed clusters. Collectively own the resulting
     open AI innovations – from language models to scientific breakthroughs.
   </>
-)
-
-const cta = (
-  <Link
-    href="/contact"
-    className="bg-white text-black px-4 py-2 text-sm font-medium inline-flex items-center hover:bg-gray-100 transition-colors"
-    prefetch={false}
-  >
-    GET STARTED <ArrowRight className="ml-2 h-4 w-4" />
-  </Link>
 )
 
 export function Hero() {
@@ -29,7 +18,7 @@ export function Hero() {
       label="Nyoom Engineering"
       title="Functional Design for the Modern age"
       description={description}
-      cta={cta}
+      cta={<ButtonLink href="/contact">GET STARTED</ButtonLink>}
     />
   )
 }
