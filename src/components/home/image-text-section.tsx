@@ -44,7 +44,7 @@ export function ImageTextSection({
       {/* Text block */}
       <div
         className={cn(
-          "bg-bg2 p-4 lg:p-8 lg:pt-4",
+          "bg-bg2 p-4 lg:p-8 lg:pt-4 flex flex-col justify-between",
           textOrder,
         )}
       >
@@ -66,7 +66,7 @@ export function ImageTextSection({
       </div>
 
       {/* Image block */}
-      <div className={cn("bg-[color-mix(in_srgb,var(--bg1),var(--bg2))] relative min-h-[320px]", imageOrder)}>
+      <div className={cn("bg-[color-mix(in_srgb,var(--bg1),var(--bg2))] relative min-h-[320px] lg:min-h-[400px]", imageOrder)}>
         <Image
           src={imageSrc}
           alt={imageAlt}
