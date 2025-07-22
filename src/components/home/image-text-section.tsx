@@ -1,6 +1,7 @@
 import Image from "next/image"
 import { ReactNode } from "react"
 import { cn } from "@/lib/utils"
+// heading utility class defined in globals.css
 
 interface ImageTextSectionProps {
   /** Label text shown above the main heading */
@@ -50,10 +51,8 @@ export function ImageTextSection({
       >
         {/* Top: label + title */}
         <div>
-          <div className="text-ignore mb-4">{label}</div>
-          <h1 className="text-2xl md:text-3xl lg:text-4xl text-fg3 font-mono mb-6">
-            {title}
-          </h1>
+          <div className="label-frontmatter">{label}</div>
+          <h1 className="heading-frontmatter">{title}</h1>
         </div>
 
         {/* Bottom: description + CTA*/}
