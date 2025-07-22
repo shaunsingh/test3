@@ -40,7 +40,7 @@ export function ImageTextSection({
   const gridCols = textOnLeft ? "lg:grid-cols-[9fr_11fr]" : "lg:grid-cols-[11fr_9fr]"
 
   return (
-    <section className={cn("w-full max-container padding-container grid", gridCols)}>
+    <section className={cn("max-container padding-container grid", gridCols)}>
       {/* Text block */}
       <div
         className={cn(
