@@ -3,9 +3,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useCallback, useEffect, useRef } from "react";
-import { cn } from "@/lib/utils";
 import { Menu, Close as X } from "@carbon/icons-react";
 import { usePathname } from "next/navigation";
+import { ButtonLink } from "../ui/button-link";
 
 function Logo({ onClick }: { onClick?: () => void }) {
   return (
@@ -79,8 +79,6 @@ const PRIMARY_LINKS = [
   { href: "#writings", label: "Research", index: "03" },
 ] as const;
 
-const HEADER_POS = "fixed top-0 left-0 right-0 border-b";
-
 function PrimaryLinks({ onClick }: { onClick?: () => void }) {
   return (
     <>
@@ -112,7 +110,7 @@ function SecondaryLinks({ onClick }: { onClick?: () => void }) {
           key={href}
           href={href}
           onClick={onClick}
-          className="hover:text-fg3"
+          className="hover:text-fg3 transition-colors"
         >
           {label}
         </Link>
@@ -240,13 +238,9 @@ export function Header() {
     <>
       <header
         ref={headerRef}
-        className={cn(
-          HEADER_POS,
-          "z-50 h-16 border-bg2",
-          open ? undefined : "bg-bg1/80 backdrop-blur-xl"
-        )}
+        className="fixed top-0 left-0 right-0 border-b border-bg2 bg-bg1/80 backdrop-blur-xl z-10 font-mono"
       >
-        <div className="max-container padding-container flex justify-between items-center h-full">
+        <div className="padding-container flex justify-between items-center h-16">
           <div className="flex gap-4">
             <Logo />
 
@@ -258,55 +252,55 @@ export function Header() {
 
           <div>
             {/* Secondary navigation: visible on lg and above */}
-            <nav className="hidden lg:flex gap-4" role="navigation">
+            <nav className="hidden lg:flex gap-4 items-center" role="navigation">
               <SecondaryLinks />
+              <span className="hidden xl:inline-flex">
+                <ButtonLink href="/get-started">GET STARTED</ButtonLink>
+              </span>
             </nav>
 
             {/* Hamburger menu: visible below lg */}
             <button
-              aria-label="Open menu"
+              aria-label={open ? "Close menu" : "Open menu"}
               className="lg:hidden text-fg1 hover:text-fg3"
-              onClick={handleOpenMenu}
+              onClick={open ? handleCloseMenu : handleOpenMenu}
             >
-              <Menu className="h-6 w-6" />
+              {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
           </div>
         </div>
+
+        {/* Mobile navigation overlay*/}
+        {open && (
+          <div className="py-8 flex flex-col padding-container">
+            {/* Primary links TODO */}
+            <nav className="space-y-2 mb-8" role="navigation">
+              <PrimaryLinks onClick={handleCloseMenu} />
+            </nav>
+
+            {/* Secondary links */}
+            <div className="flex flex-col space-y-4 mb-8">
+              <SecondaryLinks onClick={handleCloseMenu} />
+            </div>
+
+            {/* TODO */}
+            <ButtonLink
+              href="/get-started"
+              className="padding-container justify-center py-3 bg-fg2 text-bg1"
+            >
+              GET STARTED
+            </ButtonLink>
+          </div>
+        )}
       </header>
 
       {/* Dim the background when mobile menu is open */}
       {open && (
         <div
-          className="fixed inset-0 bg-bg1/50"
+          className="fixed inset-0 bg-bg1/50 z-5 lg:hidden"
           onClick={handleCloseMenu}
         />
       )}
-
-      <div
-        className={cn(
-          HEADER_POS,
-          "z-[55] bg-bg1/80 backdrop-blur-xl text-fg1 border-white/10",
-          open ? undefined : "hidden"
-        )}
-      >
-        <div className="flex flex-col max-container padding-container px-5 pb-8">
-          <div className="flex justify-between items-center h-16 mb-6">
-            <Logo onClick={handleCloseMenu} />
-            <button aria-label="Close menu" className="p-2" onClick={handleCloseMenu}>
-              <X className="h-6 w-6" />
-            </button>
-          </div>
-
-          {/* Primary links for mobile menu */}
-          <nav className="space-y-2 mb-8" role="navigation">
-            <PrimaryLinks onClick={handleCloseMenu} />
-          </nav>
-
-          <div className="flex flex-col space-y-4 mb-8 px-2">
-            <SecondaryLinks onClick={handleCloseMenu} />
-          </div>
-        </div>
-      </div>
     </>
   );
 }
