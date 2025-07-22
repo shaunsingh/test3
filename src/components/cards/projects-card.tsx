@@ -14,7 +14,7 @@ interface ProjectsCardProps {
 
 export function ProjectsCard({ projects, githubLinks = [] }: ProjectsCardProps) {
   return (
-    <section className="max-container padding-container">
+    <section className="w-full max-container padding-container">
       <div className="bg-bg2 p-4">
         <div className="grid md:grid-cols-4 gap-4">
           {/* Project Cards */}

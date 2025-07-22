@@ -12,7 +12,7 @@ export function MailingListCard({ heading, subtext, buttonHref, buttonLabel }: M
     <section className="w-full max-container padding-container">
       <div className="justify-between bg-bg2 p-4 flex flex-col gap-4 sm:flex-row sm:items-center">
         <div className="flex flex-col gap-2">
-          <h1 className="text-2xl font-mono text-fg3">{heading}</h1>
+          <h1 className="text-2xl font-mono text-fg2">{heading}</h1>
           <p className="text-sm">{subtext}</p>
         </div>
         <ButtonLink href={buttonHref} className="flex w-full sm:w-auto justify-center">

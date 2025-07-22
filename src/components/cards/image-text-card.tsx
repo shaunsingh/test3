@@ -52,13 +52,13 @@ export function ImageTextSection({
         {/* Top: label + title */}
         <div className="flex flex-col gap-4">
           <div className="text-ignore">{label}</div>
-          <h1 className="heading-frontmatter">{title}</h1>
+          <h1 className="text-2xl md:text-3xl lg:text-4xl font-medium text-fg2">{title}</h1>
         </div>
 
         {/* Bottom: description + CTA*/}
         {(description || cta) && (
           <div className="flex flex-col gap-6">
-            {description && <div className="text-sm text-fg1 font-mono">{description}</div>}
+            {description && <div className="text-sm text-fg1">{description}</div>}
             {cta && <div>{cta}</div>}
           </div>
         )}

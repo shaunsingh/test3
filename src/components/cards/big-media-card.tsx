@@ -19,7 +19,7 @@ export function BigMediaCard({ label, title, description, cta, imageSrc, imageAl
 
         {/* Main content grid */}
         <div className="grid md:grid-cols-3 gap-4 mb-4">
-          <h1 className="heading-frontmatter">{title}</h1>
+          <h1 className="text-2xl md:text-3xl lg:text-4xl text-medium text-fg2 font-mono">{title}</h1>
 
           {description && <p className="flex text-sm font-mono">{description}</p>}
 

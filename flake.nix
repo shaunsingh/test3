@@ -50,7 +50,7 @@
             bun
 
             # cloudflare ???
-            nodejs_24
+            # nodejs_24
 
             # CL
             (sbcl.withPackages (p: with p; [

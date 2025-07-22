@@ -71,8 +71,4 @@
   .padding-container {
     @apply px-5;
   }
-
-  .heading-frontmatter {
-    @apply text-2xl md:text-3xl lg:text-4xl text-fg3 font-mono;
-  }
 }
