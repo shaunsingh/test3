@@ -1,5 +1,5 @@
 import { ButtonLink } from "../ui/button-link"
-import { ImageTextSection } from "./image-text-section"
+import { ImageTextSection } from "../cards/image-text-card"
 
 const description = (
   <>

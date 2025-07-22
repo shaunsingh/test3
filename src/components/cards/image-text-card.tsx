@@ -45,13 +45,13 @@ export function ImageTextSection({
       {/* Text block */}
       <div
         className={cn(
-          "bg-bg2 p-4 lg:p-8 lg:pt-4 flex flex-col justify-between",
+          "bg-bg2 p-4 lg:p-8 lg:pt-4 flex flex-col gap-6 justify-between",
           textOrder,
         )}
       >
         {/* Top: label + title */}
-        <div>
-          <div className="label-frontmatter">{label}</div>
+        <div className="flex flex-col gap-4">
+          <div className="text-ignore">{label}</div>
           <h1 className="heading-frontmatter">{title}</h1>
         </div>
 
@@ -65,7 +65,7 @@ export function ImageTextSection({
       </div>
 
       {/* Image block */}
-      <div className={cn("bg-[color-mix(in_srgb,var(--bg1),var(--bg2))] relative min-h-[320px] lg:min-h-[400px]", imageOrder)}>
+      <div className={cn("bg-[color-mix(in_srgb,var(--bg1),var(--bg2))] relative min-h-[320px]", imageOrder)}>
         <Image
           src={imageSrc}
           alt={imageAlt}

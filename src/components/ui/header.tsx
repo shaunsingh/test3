@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useState, useCallback, useEffect, useRef } from "react";
 import { Menu, Close as X } from "@carbon/icons-react";
 import { usePathname } from "next/navigation";
-import { ButtonLink } from "../ui/button-link";
+import { ButtonLink } from "./button-link";
 
 function Logo({ onClick }: { onClick?: () => void }) {
   return (

@@ -72,11 +72,7 @@
     @apply px-5;
   }
 
-  .label-frontmatter {
-    @apply text-ignore mb-4;
-  }
-
   .heading-frontmatter {
-    @apply text-2xl md:text-3xl lg:text-4xl text-fg3 mb-6 font-mono;
+    @apply text-2xl md:text-3xl lg:text-4xl text-fg3 font-mono;
   }
 }
