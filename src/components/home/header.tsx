@@ -240,7 +240,7 @@ export function Header() {
         ref={headerRef}
         className="fixed top-0 left-0 right-0 border-b border-bg2 bg-bg1/80 backdrop-blur-xl z-10 font-mono"
       >
-        <div className="padding-container flex justify-between items-center h-16">
+        <div className="max-container padding-container flex justify-between items-center h-16">
           <div className="flex gap-4">
             <Logo />
 
@@ -286,7 +286,7 @@ export function Header() {
             {/* TODO */}
             <ButtonLink
               href="/get-started"
-              className="padding-container justify-center py-3 bg-fg2 text-bg1"
+              className="padding-container justify-center py-3 bg-fg2"
             >
               GET STARTED
             </ButtonLink>
