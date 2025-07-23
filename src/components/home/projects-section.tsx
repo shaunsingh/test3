@@ -22,6 +22,6 @@ const GITHUB_LINKS = ["#", "#"] as const;
 
 export function ProjectsSection() {
   return (
-    <ProjectsCard projects={PROJECT_DATA} githubLinks={GITHUB_LINKS} />
+    <ProjectsCard id="projects-section" projects={PROJECT_DATA} githubLinks={GITHUB_LINKS} />
   );
 } 

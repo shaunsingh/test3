@@ -8,13 +8,14 @@ export interface Project {
 }
 
 interface ProjectsCardProps {
+  id?: string;
   projects: readonly Project[];
   githubLinks?: readonly string[];
 }
 
-export function ProjectsCard({ projects, githubLinks = [] }: ProjectsCardProps) {
+export function ProjectsCard({ id, projects, githubLinks = [] }: ProjectsCardProps) {
   return (
-    <section className="w-full max-container padding-container">
+    <section id={id} className="w-full max-container padding-container scroll-mt-16">
       <div className="bg-bg2 p-4">
         <div className="grid md:grid-cols-4 gap-4">
           {/* Project Cards */}

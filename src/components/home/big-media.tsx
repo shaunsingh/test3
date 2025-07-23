@@ -4,6 +4,7 @@ import { BigMediaCard } from "../cards/big-media-card";
 export function BigMedia() {
     return (
         <BigMediaCard
+            id="big-media"
             label="Nyoom Engineering"
             title={
                 <>

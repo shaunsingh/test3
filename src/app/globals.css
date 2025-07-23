@@ -3,6 +3,9 @@
 @custom-variant dark (&:is(.dark *));
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-sans);
@@ -70,5 +73,13 @@
 
   .padding-container {
     @apply px-5;
+  }
+
+  .section-heading {
+    @apply text-2xl md:text-3xl font-mono font-medium text-fg2;
+  }
+
+  .section-image {
+    @apply bg-[#1E1E1E] relative min-h-[320px];
   }
 }

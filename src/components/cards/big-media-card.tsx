@@ -2,6 +2,7 @@ import Image from "next/image";
 import { ReactNode } from "react";
 
 interface BigMediaCardProps {
+  id?: string;
   label: string;
   title: ReactNode;
   description?: ReactNode;
@@ -10,23 +11,23 @@ interface BigMediaCardProps {
   imageAlt: string;
 }
 
-export function BigMediaCard({ label, title, description, cta, imageSrc, imageAlt }: BigMediaCardProps) {
+export function BigMediaCard({ id, label, title, description, cta, imageSrc, imageAlt }: BigMediaCardProps) {
   return (
-    <section className="max-container padding-container">
-      <div className="bg-bg2 p-4">
+    <section id={id} className="max-container padding-container scroll-mt-16">
+      <div className="bg-bg2 p-4 flex flex-col gap-4">
         {/* Section label */}
-        <div className="text-ignore mb-4">{label}</div>
+        <div className="text-ignore">{label}</div>
 
         {/* Main content grid */}
-        <div className="grid md:grid-cols-3 gap-4 mb-4">
-          <h1 className="text-2xl md:text-3xl lg:text-4xl text-medium text-fg2 font-mono">{title}</h1>
+        <div className="grid md:grid-cols-[max-content_1fr_auto] gap-6 gap-x-18">
+          <h1 className="section-heading">{title}</h1>
 
-          {description && <p className="flex text-sm font-mono">{description}</p>}
+          {description && <p>{description}</p>}
 
-          {cta && <div className="flex-initial">{cta}</div>}
+          {cta && <div>{cta}</div>}
         </div>
 
-        <div className="relative min-h-[500px]">
+        <div className="section-image">
           <Image src={imageSrc} alt={imageAlt} fill className="object-cover" />
         </div>
       </div>
