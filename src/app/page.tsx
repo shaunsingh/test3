@@ -6,7 +6,7 @@ import { ProjectsSection } from "@/components/home/projects-section";
 
 export default function Home() {
   return (
-    <div className="flex flex-col gap-5 py-5">
+    <div className="flex flex-col gap-4 py-4">
       <Hero/>
       <Section/>
       <BigMedia/>

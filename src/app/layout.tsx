@@ -14,34 +14,15 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
-  openGraph: {
-    type: "website",
-    locale: "en_US",
-    title: "Nyoom Engineering",
-    description: "Functional Design for the Modern age",
-    siteName: "Nyoom Engineering",
-  },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <head>
-        <link rel="preload" href="/logo-baked.svg" as="image" type="image/svg+xml" />
-      </head>
-      <body className="antialiased dark">
-        {/* Assign a stable key so React preserves the Header instance across route changes */}
-        <Header key="site-header" />
-        <div className="flex flex-col min-h-screen pt-16">
-          <main className="flex-1">
-            {children}
-          </main>
-          <Footer />
-        </div>
+      <body className="max-w-[1440px] mx-auto px-4 pb-4">
+        <Header />
+        <main>{children}</main>
+        <Footer />
       </body>
     </html>
   );

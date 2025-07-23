@@ -15,7 +15,7 @@ interface ProjectsCardProps {
 
 export function ProjectsCard({ id, projects, githubLinks = [] }: ProjectsCardProps) {
   return (
-    <section id={id} className="w-full max-container padding-container scroll-mt-16">
+    <section id={id} className="w-full scroll-mt-20">
       <div className="bg-bg2 p-4">
         <div className="grid md:grid-cols-4 gap-4">
           {/* Project Cards */}
@@ -50,7 +50,7 @@ interface ProjectCardProps {
 
 function ProjectCard({ title, description, link }: ProjectCardProps) {
   return (
-    <Link href={link} className="bg-bg3 p-4 hover:bg-bg4 transition-colors group" prefetch={false}>
+    <Link href={link} className="bg-bg3 p-4 hover:bg-bg4 group">
       <div className="flex flex-col gap-4">
         <div className="flex justify-between gap-4">
           <div className="flex items-center min-w-0">
@@ -58,14 +58,14 @@ function ProjectCard({ title, description, link }: ProjectCardProps) {
             <h3 className="text-lg font-medium text-fg2 truncate">{title}</h3>
           </div>
           <button
-            className="bg-bg4 text-fg p-2 transition-colors
+            className="bg-bg4 p-2
               group-hover:bg-fg1 group-hover:text-bg1
               hover:!bg-fg3 hover:!text-bg1"
           >
             <ArrowUpRight className="h-5 w-5" />
           </button>
         </div>
-        <p className="text-sm text-fg1">{description}</p>
+        <p className="text-fg2">{description}</p>
       </div>
     </Link>
   );
@@ -79,8 +79,7 @@ function GithubCard({ link }: GithubCardProps) {
   return (
     <Link
       href={link}
-      className="bg-bg3 p-4 flex items-center justify-center hover:bg-bg4 transition-colors text-fg2"
-      prefetch={false}
+      className="bg-bg3 p-4 flex items-center justify-center hover:bg-bg4 text-fg2"
     >
       <Github className="h-6 w-6 mr-2" />
       <span className="font-medium">GITHUB</span>

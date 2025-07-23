@@ -41,7 +41,7 @@ export function ImageTextSection({
   const gridCols = textOnLeft ? "lg:grid-cols-[9fr_11fr]" : "lg:grid-cols-[11fr_9fr]"
 
   return (
-    <section className={cn("max-container padding-container grid", gridCols)}>
+    <section className={cn("grid", gridCols)}>
       {/* Text block */}
       <div
         className={cn(
@@ -58,7 +58,7 @@ export function ImageTextSection({
         {/* Bottom: description + CTA*/}
         {(description || cta) && (
           <div className="flex flex-col gap-6">
-            {description && <p className="text-fg1">{description}</p>}
+            {description && <p>{description}</p>}
             {cta && <div>{cta}</div>}
           </div>
         )}
@@ -72,6 +72,8 @@ export function ImageTextSection({
           fill
           className="object-cover"
           priority={imagePriority}
+          fetchPriority={imagePriority ? "high" : undefined}
+          sizes="(min-width: 1024px) 55vw, 100vw"
         />
       </div>
     </section>

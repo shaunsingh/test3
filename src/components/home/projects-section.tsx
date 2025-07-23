@@ -3,17 +3,17 @@ import { ProjectsCard } from "../cards/projects-card";
 const PROJECT_DATA = [
   {
     title: "Project Name",
-    description: "Lorem ipsum dolor sit amet, consectetur elit",
+    description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
     link: "#"
   },
   {
     title: "Project Name",
-    description: "Lorem ipsum dolor sit amet, consectetur elit",
+    description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
     link: "#"
   },
   {
     title: "Project Name",
-    description: "Lorem ipsum dolor sit amet, consectetur elit",
+    description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
     link: "#"
   }
 ] as const;

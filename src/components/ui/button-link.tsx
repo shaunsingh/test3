@@ -14,10 +14,9 @@ export function ButtonLink({ href, children, className }: ButtonLinkProps) {
     <Link
       href={href}
       className={cn(
-        "bg-fg2 text-bg1 px-4 py-2 text-sm font-medium inline-flex items-center hover:bg-fg3 transition-colors",
+        "bg-fg2 text-bg1 px-4 py-2 font-medium inline-flex items-center hover:bg-fg3 hover:text-bg1 transition-colors",
         className
       )}
-      prefetch={false}
     >
       {children} <ArrowRight className="ml-2 h-4 w-4" />
     </Link>

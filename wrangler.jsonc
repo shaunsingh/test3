@@ -18,4 +18,8 @@
 	"observability": {
 		"enabled": true
 	},
+	"placement": {
+		"mode": "smart"
+	},
+	"minify": true
 }

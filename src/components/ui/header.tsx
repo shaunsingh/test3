@@ -10,8 +10,6 @@ function Logo({ onClick }: { onClick?: () => void }) {
   return (
     <Link
       href="/"
-      className="shrink-0"
-      prefetch={false}
       onClick={onClick}
     >
       <Image
@@ -38,14 +36,14 @@ function NavLink({
   onClick?: () => void;
 }) {
   return (
-    <a
+    <Link
       href={href}
       onClick={onClick}
-      className="flex bg-bg3 hover:bg-bg4 transition-colors items-center justify-between px-4 py-3 xl:justify-start xl:px-2 xl:py-2"
+      className="flex bg-bg3 hover:bg-bg4 items-center justify-between gap-6 px-4 py-3 xl:justify-start xl:px-2 xl:py-2"
     >
-      <span className="uppercase font-medium mr-6">{label}</span>
+      <span className="uppercase font-medium">{label}</span>
       <span className="text-ignore">{index}</span>
-    </a>
+    </Link>
   );
 }
 
@@ -72,10 +70,10 @@ function PrimaryLinks({ onClick }: { onClick?: () => void }) {
 }
 
 const SECONDARY_LINKS = [
-  { href: "/blog", label: "Blog" },
-  { href: "/docs", label: "Docs" },
-  { href: "/automotive", label: "Automotive" },
-  { href: "/oxocarbon", label: "Oxocarbon" },
+  { href: "/", label: "Blog" },
+  { href: "/", label: "Docs" },
+  { href: "/", label: "Automotive" },
+  { href: "/", label: "Oxocarbon" },
 ] as const;
 
 function SecondaryLinks({ onClick }: { onClick?: () => void }) {
@@ -83,10 +81,9 @@ function SecondaryLinks({ onClick }: { onClick?: () => void }) {
     <>
       {SECONDARY_LINKS.map(({ href, label }) => (
         <Link
-          key={href}
+          key={label}
           href={href}
           onClick={onClick}
-          className="hover:text-fg3 transition-colors"
         >
           {label}
         </Link>
@@ -97,16 +94,15 @@ function SecondaryLinks({ onClick }: { onClick?: () => void }) {
 
 export function Header() {
   const [open, setOpen] = useState(false);
-
   const toggleMenu = () => setOpen(prev => !prev);
   const closeMenu = () => setOpen(false);
 
   return (
     <>
       <header
-        className="fixed top-0 left-0 right-0 min-h-16 border-b border-bg2 bg-bg1/80 backdrop-blur-xl z-10 font-mono"
+        className="sticky top-0 relative bg-bg1/80 backdrop-blur-xl z-10 font-mono"
       >
-        <div className="max-container padding-container flex justify-between items-center h-16">
+        <div className="flex justify-between items-center py-1">
           <div className="flex gap-4">
             <Logo />
 
@@ -128,7 +124,7 @@ export function Header() {
             {/* Hamburger menu: visible below lg */}
             <button
               aria-label={open ? "Close menu" : "Open menu"}
-              className="lg:hidden text-fg1 hover:text-fg3"
+              className="lg:hidden"
               onClick={toggleMenu}
             >
               {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -138,31 +134,36 @@ export function Header() {
 
         {/* Mobile navigation overlay*/}
         {open && (
-          <div className="py-8 flex flex-col padding-container">
-            {/* Primary links TODO */}
-            <nav className="space-y-2 mb-8" role="navigation">
+          <div className="py-4 flex flex-col gap-8 padding-container">
+            {/* Primary links */}
+            <nav className="flex flex-col gap-2" role="navigation">
               <PrimaryLinks onClick={closeMenu} />
             </nav>
 
             {/* Secondary links */}
-            <div className="flex flex-col space-y-4 mb-8">
+            <div className="flex flex-col gap-4">
               <SecondaryLinks onClick={closeMenu} />
             </div>
 
             <ButtonLink
               href="/get-started"
-              className="padding-container justify-center py-3 bg-fg2"
+              className="justify-center py-3"
             >
               GET STARTED
             </ButtonLink>
           </div>
         )}
+        {/* Full-width bottom border */}
+        <span
+          aria-hidden="true"
+          className="pointer-events-none absolute left-1/2 -translate-x-1/2 w-screen border-b border-bg2"
+        />
       </header>
 
       {/* Dim the background when mobile menu is open */}
       {open && (
         <div
-          className="fixed inset-0 bg-bg1/50 z-5 lg:hidden"
+          className="fixed inset-0 bg-bg1/50"
           onClick={closeMenu}
         />
       )}

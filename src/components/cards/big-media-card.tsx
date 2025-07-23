@@ -13,7 +13,7 @@ interface BigMediaCardProps {
 
 export function BigMediaCard({ id, label, title, description, cta, imageSrc, imageAlt }: BigMediaCardProps) {
   return (
-    <section id={id} className="max-container padding-container scroll-mt-16">
+    <section id={id} className="scroll-mt-20">
       <div className="bg-bg2 p-4 flex flex-col gap-4">
         {/* Section label */}
         <div className="text-ignore">{label}</div>
@@ -28,7 +28,13 @@ export function BigMediaCard({ id, label, title, description, cta, imageSrc, ima
         </div>
 
         <div className="section-image">
-          <Image src={imageSrc} alt={imageAlt} fill className="object-cover" />
+          <Image
+            src={imageSrc}
+            alt={imageAlt}
+            fill
+            className="object-cover"
+            sizes="(min-width: 1024px) 50vw, 100vw"
+          />
         </div>
       </div>
     </section >

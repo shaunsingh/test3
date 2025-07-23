@@ -18,7 +18,7 @@ export function Hero() {
       label="Nyoom Engineering"
       title="Functional Design for the Modern age"
       description={description}
-      cta={<ButtonLink href="/contact">GET STARTED</ButtonLink>}
+      cta={<ButtonLink href="/">GET STARTED</ButtonLink>}
     />
   )
 }

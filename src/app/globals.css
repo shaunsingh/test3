@@ -1,7 +1,5 @@
 @import "tailwindcss";
 
-@custom-variant dark (&:is(.dark *));
-
 @layer base {
   html {
     scroll-behavior: smooth;
@@ -10,32 +8,39 @@
     @apply bg-background text-foreground;
     font-family: var(--font-sans);
   }
-}
 
-.dark {
-  --font-sans: system-ui, sans-serif;
-  --font-serif: ui-serif, serif;
-  --font-mono: ui-monospace, monospace;
+  a, button {
+    @apply transition-colors;
+  }
+  a:hover, button:hover {
+    @apply text-fg3;
+  }
 
-  /* Oxocarbon Dark Palette */
-  --bg1: #161616;
-  --bg2: #262626;
-  --bg3: #393939;
-  --bg4: #525252;
-  --fg1: #dde1e6;
-  --fg2: #f2f4f8;
-  --fg3: #ffffff;
-  --accent1: #ff7eb6;
-  --accent2: #3ddbd9;
-  --blue1: #78a9ff;
-  --blue2: #82cfff;
-  --blue3: #33b1ff;
-  --blue4: #08bdba;
-  --purple: #be95ff;
-  --negative: #ee5396;
-  --positive: #42be65;
-  --blend1: #1e1e1e;
-  --ignore: #8d8d8d;
+  :root {
+    --font-sans: system-ui, sans-serif;
+    --font-serif: ui-serif, serif;
+    --font-mono: ui-monospace, monospace;
+
+    /* Oxocarbon (dark) */
+    --bg1: #161616;
+    --bg2: #262626;
+    --bg3: #393939;
+    --bg4: #525252;
+    --fg1: #dde1e6;
+    --fg2: #f2f4f8;
+    --fg3: #ffffff;
+    --accent1: #ff7eb6;
+    --accent2: #3ddbd9;
+    --blue1: #78a9ff;
+    --blue2: #82cfff;
+    --blue3: #33b1ff;
+    --blue4: #08bdba;
+    --purple: #be95ff;
+    --negative: #ee5396;
+    --positive: #42be65;
+    --blend1: #1e1e1e;
+    --ignore: #8d8d8d;
+  }
 }
 
 @theme inline {
@@ -67,16 +72,8 @@
 }
 
 @layer utilities {
-  .max-container {
-    @apply max-w-[1440px] mx-auto;
-  }
-
-  .padding-container {
-    @apply px-5;
-  }
-
   .section-heading {
-    @apply text-2xl md:text-3xl font-mono font-medium text-fg2;
+    @apply text-2xl md:text-3xl font-medium text-fg2;
   }
 
   .section-image {
