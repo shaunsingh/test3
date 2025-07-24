@@ -14,16 +14,18 @@ interface BigMediaCardProps {
 export function BigMediaCard({ id, label, title, description, cta, imageSrc, imageAlt }: BigMediaCardProps) {
   return (
     <section id={id} className="scroll-mt-20">
-      <div className="bg-bg2 p-4 flex flex-col gap-8">
+      <div className="bg-bg2 p-4 flex flex-col gap-6">
         <div className="flex flex-col gap-4">
           {/* Section label */}
           <div className="text-ignore">{label}</div>
 
           {/* Main content grid */}
-          <div className="grid lg:grid-cols-[max-content_1fr_auto] gap-6 gap-x-18">
+          <div className="flex flex-col lg:flex-row gap-4">
             <h1 className="section-heading">{title}</h1>
-            {description && <p>{description}</p>}
-            {cta && <div>{cta}</div>}
+            <div className="gap-6">
+              {description && <p>{description}</p>}
+              {cta && <div>{cta}</div>}
+            </div>
           </div>
         </div>
 
