@@ -8,12 +8,6 @@ const withAnalyze = withBundleAnalyzer({
 });
 
 const nextConfig: NextConfig = {
-  experimental: {
-    optimizePackageImports: ["@carbon/icons-react"],
-    inlineCss: true,
-    reactCompiler: true
-  },
-
   turbopack: {
     rules: {
       '*.svg': {
@@ -21,7 +15,13 @@ const nextConfig: NextConfig = {
         as: '*.js',
       },
     },
-  }
+  },
+
+  experimental: {
+    optimizePackageImports: ["@carbon/icons-react"],
+    inlineCss: true,
+    reactCompiler: true
+  },
 };
 
 // Cloudflare dev helper
