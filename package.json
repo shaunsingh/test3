@@ -2,6 +2,10 @@
 	"name": "site-react",
 	"version": "0.1.0",
 	"private": true,
+	"browserslist": [
+		"defaults and fully supports es6-module",
+		"maintained node versions"
+	],
 	"scripts": {
 		"dev": "next dev --turbopack",
 		"build": "next build",

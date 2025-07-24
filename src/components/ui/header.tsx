@@ -1,28 +1,10 @@
 "use client"
 
-import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { Menu, Close as X } from "@carbon/icons-react";
 import { ButtonLink } from "./button-link";
-
-function Logo({ onClick }: { onClick?: () => void }) {
-  return (
-    <Link
-      href="/"
-      onClick={onClick}
-    >
-      <Image
-        src="/logo-baked.svg"
-        alt="Nyoom Engineering logo"
-        width={160}
-        height={53}
-        priority
-        loading="eager"
-      />
-    </Link>
-  );
-}
+import { Logo } from "./logo";
 
 function NavLink({
   href,
@@ -102,7 +84,7 @@ export function Header() {
       <header
         className="sticky top-0 relative bg-bg1/80 backdrop-blur-xl z-10 font-mono"
       >
-        <div className="flex justify-between items-center py-1">
+        <div className="flex justify-between items-center py-2">
           <div className="flex gap-4">
             <Logo />
 

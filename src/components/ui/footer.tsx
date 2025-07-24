@@ -1,5 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
+import { Logo } from "./logo"
 
 const FOOTER_LINKS = {
   discover: [
@@ -33,22 +34,16 @@ const TECHNOLOGIES = [
     src: "/technologies/ocaml-logo.svg",
     alt: "OCaml",
     href: "https://ocaml.org",
-    width: 100,
-    height: 100,
   },
   {
     src: "/technologies/lisp-logo.svg",
     alt: "Lisp",
     href: "https://lisp-lang.org",
-    width: 32,
-    height: 32,
   },
   {
     src: "/technologies/rust-logo.svg",
     alt: "Rust",
     href: "https://www.rust-lang.org",
-    width: 32,
-    height: 32,
   },
 ] as const;
 
@@ -104,19 +99,11 @@ export function Footer() {
         <div className="flex flex-col md:flex-row gap-8">
           {/* Logo and Made With Section */}
           <div className="w-full md:w-1/3 flex flex-col gap-4 items-center md:items-start text-center md:text-left">
-            <Link href="/">
-              <Image
-                src="/logo-baked.svg"
-                alt="Nyoom Engineering"
-                width={240}
-                height={30}
-                title="Nyoom Engineering"
-              />
-            </Link>
+            <Logo />
             <div className="flex flex-col gap-2">
               <p className="text-xs">Made With</p>
               <div className="flex flex-row gap-2">
-                {TECHNOLOGIES.map(({ src, alt, href, width, height }) => (
+                {TECHNOLOGIES.map(({ src, alt, href }) => (
                   <Link
                     key={alt}
                     href={href}
@@ -124,8 +111,9 @@ export function Footer() {
                     <Image
                       src={src}
                       alt={alt}
-                      width={width}
-                      height={height}
+                      width={0}
+                      height={0}
+                      className="h-[32px] w-auto"
                     />
                   </Link>
                 ))}

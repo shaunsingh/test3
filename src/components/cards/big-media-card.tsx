@@ -9,9 +9,10 @@ interface BigMediaCardProps {
   cta?: ReactNode;
   imageSrc: string;
   imageAlt: string;
+  imagePriority?: boolean;
 }
 
-export function BigMediaCard({ id, label, title, description, cta, imageSrc, imageAlt }: BigMediaCardProps) {
+export function BigMediaCard({ id, label, title, description, cta, imageSrc, imageAlt, imagePriority }: BigMediaCardProps) {
   return (
     <section id={id} className="scroll-mt-20">
       <div className="bg-bg2 p-4 flex flex-col gap-4">
@@ -33,7 +34,7 @@ export function BigMediaCard({ id, label, title, description, cta, imageSrc, ima
             alt={imageAlt}
             fill
             className="object-cover"
-            sizes="(min-width: 1024px) 50vw, 100vw"
+            priority={imagePriority}
           />
         </div>
       </div>
