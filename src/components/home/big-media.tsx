@@ -17,7 +17,6 @@ export function BigMedia() {
             cta={<ButtonLink href="/">GET STARTED</ButtonLink>}
             imageSrc="/caida/ries-t-re.avif"
             imageAlt="Ries T-Re"
-            imagePriority
         />
     );
 }

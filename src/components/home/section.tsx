@@ -13,7 +13,6 @@ export function Section() {
       textOnLeft={false}
       imageSrc="/caida/lar-gr-l-7.avif"
       imageAlt="lar-gr-l-7"
-      imagePriority
       label="Nyoom Engineering"
       title="Functional Design for the Modern age"
       description={description}

@@ -14,7 +14,6 @@ export function Hero() {
     <ImageTextSection
       imageSrc="/caida/ries-t-re.avif"
       imageAlt="Ries T-Re"
-      imagePriority
       label="Nyoom Engineering"
       title="Functional Design for the Modern age"
       description={description}

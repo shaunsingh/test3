@@ -55,12 +55,13 @@ function ProjectCard({ title, description, link }: ProjectCardProps) {
         <div className="flex justify-between gap-4">
           <div className="flex items-center min-w-0">
             <Github className="h-5 w-5 mr-2" />
-            <h3 className="text-lg font-medium text-fg2 truncate">{title}</h3>
+            <h1 className="text-lg font-medium text-fg2 truncate">{title}</h1>
           </div>
           <button
             className="bg-bg4 p-2
               group-hover:bg-fg1 group-hover:text-bg1
               hover:!bg-fg3 hover:!text-bg1"
+            aria-label={`Open ${title} project`}
           >
             <ArrowUpRight className="h-5 w-5" />
           </button>

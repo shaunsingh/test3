@@ -98,9 +98,7 @@ export function Header() {
             {/* Secondary navigation: visible on lg and above */}
             <nav className="hidden lg:flex gap-4 items-center" role="navigation">
               <SecondaryLinks />
-              <span className="hidden xl:inline-flex">
-                <ButtonLink href="/get-started">GET STARTED</ButtonLink>
-              </span>
+              <ButtonLink href="/">GET STARTED</ButtonLink>
             </nav>
 
             {/* Hamburger menu: visible below lg */}
@@ -128,7 +126,7 @@ export function Header() {
             </div>
 
             <ButtonLink
-              href="/get-started"
+              href="/"
               className="justify-center py-3"
             >
               GET STARTED

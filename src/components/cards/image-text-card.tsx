@@ -4,27 +4,15 @@ import { cn } from "@/lib/utils"
 // heading utility class defined in globals.css
 
 interface ImageTextSectionProps {
-  /** Label text shown above the main heading */
   label: string
-  /** Main heading text */
   title: string
-  /** Optional description to render under the heading */
   description?: ReactNode
-  /** Absolute or relative image source */
   imageSrc: string
-  /** Alt text for the image */
   imageAlt: string
-  /** If true, text is shown on the left on large screens. Defaults to true */
   textOnLeft?: boolean
-  /** Optional call-to-action element rendered at the bottom of the text block */
   cta?: ReactNode
-  /** Forwarded to next/image priority prop – useful for the hero */
-  imagePriority?: boolean
 }
 
-/**
- * Generic image + text split section used by both the Hero and the secondary feature section.
- */
 export function ImageTextSection({
   label,
   title,
@@ -33,7 +21,6 @@ export function ImageTextSection({
   imageAlt,
   textOnLeft = true,
   cta,
-  imagePriority = false,
 }: ImageTextSectionProps) {
   // Mobile: image first (order-1), text second (order-2)
   const textOrder = textOnLeft ? "order-2 lg:order-1" : "order-2 lg:order-2"
@@ -71,9 +58,9 @@ export function ImageTextSection({
           alt={imageAlt}
           fill
           className="object-cover"
-          priority={imagePriority}
-          fetchPriority={imagePriority ? "high" : undefined}
-          sizes="(min-width: 1024px) 55vw, 100vw"
+          priority
+          fetchPriority='high'
+          sizes="(max-width: 768px) 100vw, 50vw"
         />
       </div>
     </section>
