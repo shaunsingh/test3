@@ -11,7 +11,7 @@ export function Section() {
   return (
     <ImageTextSection
       textOnLeft={false}
-      imageSrc="/caida/lar-gr-l-7.avif"
+      imageSrc="/caida/lar-gr-l-7.png"
       imageAlt="lar-gr-l-7"
       label="Nyoom Engineering"
       title="Functional Design for the Modern age"

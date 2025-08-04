@@ -12,8 +12,8 @@ const description = (
 export function Hero() {
   return (
     <ImageTextSection
-      imageSrc="/caida/ries-t-re.avif"
-      imageAlt="Ries T-Re"
+      imageSrc="/caida/ries-t.png"
+      imageAlt="ries-t"
       label="Nyoom Engineering"
       title="Functional Design for the Modern age"
       description={description}

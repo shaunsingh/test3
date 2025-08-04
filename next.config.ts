@@ -17,6 +17,11 @@ const nextConfig: NextConfig = {
     },
   },
 
+  images: {
+    loader: 'custom',
+    loaderFile: './src/lib/imageLoader.ts',
+  },
+
   experimental: {
     optimizePackageImports: ["@carbon/icons-react"],
     inlineCss: true,

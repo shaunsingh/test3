@@ -21,7 +21,7 @@ function NavLink({
     <Link
       href={href}
       onClick={onClick}
-      className="flex bg-bg3 hover:bg-bg4 items-center justify-between gap-6 px-4 py-3 xl:justify-start xl:px-2 xl:py-2"
+      className="flex bg-bg3 hover:bg-bg4 justify-between gap-6 px-4 py-3 text-xl xl:text-base xl:p-2"
     >
       <span className="uppercase font-medium">{label}</span>
       <span className="text-ignore">{index}</span>
@@ -85,26 +85,23 @@ export function Header() {
         className="sticky top-0 relative bg-bg1/80 backdrop-blur-xl z-10 font-mono"
       >
         <div className="flex justify-between items-center py-2">
-          <div className="flex gap-4">
+          <div className="flex gap-6">
             <Logo />
 
-            {/* Primary navigation: visible only on xl and above */}
             <nav className="hidden xl:flex items-center gap-4" role="navigation">
               <PrimaryLinks />
             </nav>
           </div>
 
           <div>
-            {/* Secondary navigation: visible on lg and above */}
-            <nav className="hidden lg:flex gap-4 items-center" role="navigation">
+            <nav className="hidden md:flex gap-6 items-center" role="navigation">
               <SecondaryLinks />
               <ButtonLink href="/">GET STARTED</ButtonLink>
             </nav>
 
-            {/* Hamburger menu: visible below lg */}
             <button
               aria-label={open ? "Close menu" : "Open menu"}
-              className="lg:hidden"
+              className="md:hidden"
               onClick={toggleMenu}
             >
               {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -114,7 +111,7 @@ export function Header() {
 
         {/* Mobile navigation overlay*/}
         {open && (
-          <div className="py-4 flex flex-col gap-8 padding-container">
+          <div className="py-4 flex flex-col gap-6 padding-container">
             {/* Primary links */}
             <nav className="flex flex-col gap-2" role="navigation">
               <PrimaryLinks onClick={closeMenu} />
@@ -125,12 +122,7 @@ export function Header() {
               <SecondaryLinks onClick={closeMenu} />
             </div>
 
-            <ButtonLink
-              href="/"
-              className="justify-center py-3"
-            >
-              GET STARTED
-            </ButtonLink>
+            <ButtonLink href="/">GET STARTED</ButtonLink>
           </div>
         )}
         {/* Full-width bottom border */}

@@ -77,6 +77,6 @@
   }
 
   .section-image {
-    @apply bg-[#1E1E1E] relative min-h-[320px];
+    @apply bg-[#1E1E1E];
   }
 }

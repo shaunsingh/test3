@@ -19,13 +19,13 @@ export function BigMediaCard({ id, label, title, description, cta, imageSrc, ima
           {/* Section label */}
           <div className="text-ignore">{label}</div>
 
-          {/* Main content grid */}
-          <div className="flex flex-col lg:flex-row gap-4">
-            <h1 className="section-heading">{title}</h1>
-            <div className="gap-6">
+          {/* Main content */}
+          <div className="flex flex-col gap-6 lg:grid lg:grid-cols-[max-content_1fr_auto]">
+            <div className="flex flex-col gap-4 lg:contents">
+              <h1 className="section-heading">{title}</h1>
               {description && <p>{description}</p>}
-              {cta && <div>{cta}</div>}
             </div>
+            {cta && <div>{cta}</div>}
           </div>
         </div>
 
@@ -33,10 +33,12 @@ export function BigMediaCard({ id, label, title, description, cta, imageSrc, ima
           <Image
             src={imageSrc}
             alt={imageAlt}
-            fill
-            className="object-cover"
+            width={1200}
+            height={500}
+            sizes="(max-width: 768px) 100vw, 100vw"
+            style={{ width: "100%", height: 500, objectFit: "cover", objectPosition: "center" }}
             priority
-            fetchPriority='high'
+            fetchPriority="high"
           />
         </div>
       </div>

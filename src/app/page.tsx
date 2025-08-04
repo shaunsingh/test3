@@ -3,6 +3,7 @@ import { MailingListSection } from "@/components/home/mailing-list-section";
 import { BigMedia } from "@/components/home/big-media";
 import { Section } from "@/components/home/section";
 import { ProjectsSection } from "@/components/home/projects-section";
+import { WritingsSection } from "@/components/home/writings-section";
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
       <Section/>
       <BigMedia/>
       <ProjectsSection/>
+      <WritingsSection/>
       <MailingListSection/>
     </div>
   );

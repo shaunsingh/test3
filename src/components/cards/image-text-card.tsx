@@ -56,11 +56,12 @@ export function ImageTextSection({
         <Image
           src={imageSrc}
           alt={imageAlt}
-          fill
-          className="object-cover"
+          width={800}
+          height={400}
+          sizes="(max-width: 768px) 100vw, 33vw"
+          style={{ width: "100%", height: 400, objectFit: "cover", objectPosition: "center" }}
           priority
-          fetchPriority='high'
-          sizes="(max-width: 768px) 100vw, 50vw"
+          fetchPriority="high"
         />
       </div>
     </section>

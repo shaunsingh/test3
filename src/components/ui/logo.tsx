@@ -12,7 +12,7 @@ export function Logo({ onClick }: { onClick?: () => void }) {
         alt="Nyoom Engineering logo"
         width={0}
         height={0}
-        className="h-full w-auto"
+        className="h-auto w-[160px]"
         priority
         loading="eager"
       />

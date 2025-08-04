@@ -15,8 +15,8 @@ export function BigMedia() {
             }
             description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut"
             cta={<ButtonLink href="/">GET STARTED</ButtonLink>}
-            imageSrc="/caida/ries-t-re.avif"
-            imageAlt="Ries T-Re"
+            imageSrc="/caida/med-gr-l-4.png"
+            imageAlt="med-gr-l-4"
         />
     );
 }
