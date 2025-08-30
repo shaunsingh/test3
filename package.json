@@ -19,7 +19,7 @@
 	"dependencies": {
 		"@carbon/icons-react": "^11.63.0",
 		"babel-plugin-react-compiler": "^19.1.0-rc.2",
-		"next": "15.3.5",
+		"next": "15.4.7",
 		"react": "^19.0.0",
 		"react-dom": "^19.0.0"
 	},
